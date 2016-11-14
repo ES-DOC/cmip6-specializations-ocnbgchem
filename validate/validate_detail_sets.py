@@ -41,7 +41,7 @@ def _validate_detail_set(errors, enums, associated, name, defn):
     """
     # Verify hierachical name is correct.
     if ":" in name and not ":".join((name.split(":")[0:-1])) in associated:
-        errors.append("must be associated with a parent detail set")
+        errors.append("{}: must be associated with a parent detail set".format(name))
         return
 
     # description = mandatory string.
