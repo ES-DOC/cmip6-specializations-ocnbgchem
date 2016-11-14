@@ -28,6 +28,9 @@ def validate_std(ctx, module, sections=[]):
     """Validates a module's standard attributes.
 
     """
+    # Set current specializations module being processed.
+    ctx.module = module
+
     # Validate expected fields.
     for field in {'AUTHORS', 'CONTACT', 'DESCRIPTION', 'QC_STATUS'}:
         if not hasattr(module, field):
