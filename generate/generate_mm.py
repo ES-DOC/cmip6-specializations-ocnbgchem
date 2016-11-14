@@ -9,18 +9,24 @@
 
 
 """
+import collections
 import json
 
 import xml.etree.ElementTree as ET
 
-from utils_model import Process
-from utils_model import SpecializationModule
+from utils_model import CIM_PROFILE
+from utils_model import DetailSpecialization
+from utils_model import GridSpecialization
+from utils_model import KeyPropertiesSpecialization
+from utils_model import ProcessSpecialization
+from utils_model import SubProcessSpecialization
+
 from utils_parser import Parser
 
 
 
 # HTML snippet for a set of notes.
-_NOTES = """
+_NOTES_HTML = """
 <html>
   <head></head>
   <body>
@@ -32,20 +38,18 @@ _NOTES = """
 """
 
 # HTML snippet for a note.
-_NOTE = "<dt><b>{}</b></dt><dd>{}</dd>"
+_NOTE_HTML = "<dt><b>{}</b></dt><dd>{}</dd>"
 
-# Set of configuration sections.
-_CONFIG_SECTIONS = [
-    "realm",
-    "grid",
-    "key-properties",
-    "process",
-    "sub-process",
-    "detail",
-    "detail-property",
-    "enum-choice"
-    ]
-
+# Mind-map sections.
+_SECTIONS = collections.OrderedDict()
+_SECTIONS['realm'] = "science.realm"
+_SECTIONS['process'] = "science.process"
+_SECTIONS['sub-process'] = "science.sub_process"
+_SECTIONS['key-properties'] = "science.key_properties"
+_SECTIONS['grid'] = "science.grid"
+_SECTIONS['detail'] = "science.detail"
+_SECTIONS['detail-property'] = None
+_SECTIONS['enum-choice'] = None
 
 
 class _Configuration(object):
@@ -97,6 +101,7 @@ class Generator(Parser):
         self.mmap = ET.Element('map', {})
         self._emit_node(self.mmap, realm, style="fork")
         self._emit_legend(realm)
+        self._emit_cim_profile(realm)
 
 
     def on_grid_parse(self, realm, grid):
@@ -106,25 +111,11 @@ class Generator(Parser):
         self._emit_node(realm, grid)
 
 
-    def on_grid_discretisation_parse(self, realm, grid, discretisation):
-        """On grid discretisation parse event handler.
-
-        """
-        self._emit_node(grid, discretisation, cfg_section="grid")
-
-
     def on_key_properties_parse(self, realm, key_properties):
         """On key_properties parse event handler.
 
         """
         self._emit_node(realm, key_properties)
-
-
-    def on_key_properties_conservation_parse(self, realm, key_properties, conservation):
-        """On grid discretisation parse event handler.
-
-        """
-        self._emit_node(key_properties, conservation, cfg_section="key-properties")
 
 
     def on_process_parse(self, realm, process):
@@ -142,23 +133,23 @@ class Generator(Parser):
         self._emit_node(process, subprocess)
 
 
-    def on_detail_parse(self, owner, detail):
-        """On process detail parse event handler.
+    def on_detail_set_parse(self, owner, detail_set):
+        """On process detail set parse event handler.
 
         """
-        self._emit_node(owner, detail)
+        self._emit_node(owner, detail_set)
 
 
-    def on_detail_property_parse(self, detail, detail_property):
+    def on_detail_parse(self, detail_set, detail):
         """On detail property parse event handler.
 
         """
-        self._emit_node(detail, detail_property)
-        self._emit_notes(detail_property)
+        self._emit_node(detail_set, detail)
+        self._emit_notes(detail)
 
-        if detail_property.enum:
-            for choice in detail_property.enum.choices:
-                self._emit_node(detail_property, choice, text=choice.value)
+        if detail.enum:
+            for choice in detail.enum.choices:
+                self._emit_node(detail, choice, text=choice.value)
 
 
     def _emit_node(
@@ -220,25 +211,27 @@ class Generator(Parser):
 
         """
         # Set parent mm node.
-        if not isinstance(owner, ET.Element):
-            parent = self.nodes[owner]
-        else:
-            parent = owner
+        parent = owner if isinstance(owner, ET.Element) else \
+                 self.nodes[owner]
 
         # Set notes.
-        if not notes:
-            try:
-                notes = owner.notes
-            except AttributeError:
-                return
+        notes = notes or _get_notes(owner)
 
         # Convert to HTML.
-        notes = [_NOTE.format(k, v) for k, v in notes if v]
-        notes = _NOTES.format("".join(notes))
+        html = []
+        for k, value in notes:
+            try:
+                owner.id
+            except AttributeError:
+                pass
+            else:
+                value = value(owner)
+            html.append(_NOTE_HTML.format(k, value))
+        html = _NOTES_HTML.format("".join(html))
 
         # Extend mindmap.
-        content = ET.SubElement(parent, 'richcontent', {"TYPE": "NOTE"})
-        content.append(ET.fromstring(notes))
+        node = ET.SubElement(parent, 'richcontent', {"TYPE": "NOTE"})
+        node.append(ET.fromstring(html))
 
 
     def _emit_legend(self, realm):
@@ -248,10 +241,10 @@ class Generator(Parser):
         cfg = self.cfg.get_section
         legend = ET.SubElement(self.nodes[realm], 'node', {
             'STYLE': "bubble",
-            'TEXT': "legend",
+            'TEXT': "LEGEND",
             'POSITION': "left"
             })
-        for section in _CONFIG_SECTIONS:
+        for section in _SECTIONS:
             node = ET.SubElement(legend, 'node', {
                 'BACKGROUND_COLOR': cfg(section)['bg-color'],
                 'COLOR': cfg(section)['font-color'],
@@ -261,3 +254,62 @@ class Generator(Parser):
             self._emit_notes(node, notes=[
                 ('Description', cfg(section)['description']),
                 ])
+
+
+    def _emit_cim_profile(self, realm):
+        """Emits mindmap cim profile.
+
+        """
+        cfg = self.cfg.get_section
+        constraints = ET.SubElement(self.nodes[realm], 'node', {
+            'STYLE': "bubble",
+            'TEXT': "CIM v2 PROFILE",
+            'POSITION': "left"
+            })
+
+        # Iterate each section within profile.
+        for section, cim_type in _SECTIONS.iteritems():
+            if cim_type not in CIM_PROFILE:
+                continue
+
+            node = ET.SubElement(constraints, 'node', {
+                'BACKGROUND_COLOR': cfg(section)['bg-color'],
+                'COLOR': cfg(section)['font-color'],
+                'STYLE': "bubble",
+                'TEXT': section
+                })
+            for name in CIM_PROFILE[cim_type]['include']:
+                ET.SubElement(node, 'node', {
+                    'BACKGROUND_COLOR': cfg(section)['bg-color'],
+                    'COLOR': cfg(section)['font-color'],
+                    'STYLE': "bubble",
+                    'TEXT': name
+                    })
+
+
+def _get_notes(spec):
+    """Returns notes to be appended to a mindmap node.
+
+    """
+    # EnumChoice: [
+    #     ("Description", self.description.replace("&", "and")),
+    #     ("Specialization ID", self.id.lower().replace(" ", "-").replace("_", "-"))
+    # ],
+    result = [
+        ("Description", lambda i: None if i.description is None else i.description.replace("&", "and")),
+        ("Specialization ID", lambda i: i.id)
+    ]
+    if isinstance(spec, DetailSpecialization):
+        result += [
+            ("Type", lambda i: i.typeof),
+            ("Cardinality", lambda i: i.cardinality)
+        ]
+    elif isinstance(spec, (GridSpecialization, KeyPropertiesSpecialization, ProcessSpecialization)):
+        result += [
+            ("QC status", lambda i: i.qc_status),
+            ("Contact", lambda i: i.contact),
+            ("Authors", lambda i: i.authors),
+            ("Contributors", lambda i: i.contributors)
+        ]
+
+    return result

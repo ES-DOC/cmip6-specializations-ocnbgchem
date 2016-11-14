@@ -17,25 +17,11 @@ class Generator(IdentifierGenerator):
     """Specialization to mindmap generator.
 
     """
-    def on_grid_discretisation_parse(self, realm, grid, discretisation):
-        """On grid discretisation parse event handler.
+    def on_detail_set_parse(self, owner, detail_set):
+        """On process detail set parse event handler.
 
         """
-        self.set_id(discretisation, "{}.discretisation".format(grid.id))
-
-
-    def on_key_properties_conservation_parse(self, realm, grid, conservation):
-        """On key-properties conservation parse event handler.
-
-        """
-        self.set_id(conservation, "{}.conservation".format(grid.id))
-
-
-    def on_detail_parse(self, owner, detail):
-        """On process detail parse event handler.
-
-        """
-        self.set_id(detail)
+        self.set_id(detail_set)
 
 
     def on_grid_parsed(self, realm, grid):

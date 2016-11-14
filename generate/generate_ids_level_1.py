@@ -33,26 +33,12 @@ class Generator(IdentifierGenerator):
         self.set_id(grid)
 
 
-    def on_grid_discretisation_parse(self, realm, grid, discretisation):
-        """On grid discretisation parse event handler.
-
-        """
-        self.set_id(discretisation, "{}.discretisation".format(grid.id))
-
-
     def on_key_properties_parse(self, realm, key_properties):
         """On key_properties parse event handler.
 
         """
         self.emit_null_row(key_properties)
         self.set_id(key_properties)
-
-
-    def on_key_properties_conservation_parse(self, realm, grid, conservation):
-        """On key-properties conservation parse event handler.
-
-        """
-        self.set_id(conservation, "{}.conservation".format(grid.id))
 
 
     def on_process_parse(self, realm, process):

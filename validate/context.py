@@ -11,9 +11,7 @@
 """
 import collections
 
-from utils import set_default
-from validate_grid import validate as validate_grid
-from validate_key_properties import validate as validate_key_properties
+from validate_topic import validate as validate_topic
 from validate_process import validate as validate_process
 from validate_realm import validate as validate_realm
 
@@ -65,20 +63,13 @@ class ValidationContext(object):
         """Validates the specialization set.
 
         """
-        self.module = self.realm
-        validate_realm(self)
-
+        validate_realm(self, self.realm)
         if self.grid:
-            self.module = self.grid
-            validate_grid(self)
-
+            validate_topic(self, self.grid)
         if self.key_properties:
-            self.module = self.key_properties
-            validate_key_properties(self)
-
+            validate_topic(self, self.key_properties)
         for process in self.processes:
-            self.module = self.process = process
-            validate_process(self)
+            validate_topic(self, process)
 
 
     def get_errors(self):
