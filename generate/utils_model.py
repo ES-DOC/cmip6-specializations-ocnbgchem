@@ -92,7 +92,7 @@ class SubProcessSpecialization(object):
         self.name_camel_case_spaced = to_camel_case_spaced(self.name)
 
         # Append own detail set.
-        if defn['properties']:
+        if defn.get('properties', []):
             self.detail_sets.append(DetailSetSpecialization("default", defn, self, process.defn.ENUMERATIONS))
 
         # Append child detail sets.
@@ -122,7 +122,7 @@ class DetailSetSpecialization(object):
             self.id = "{}.{}".format(container.id, self.name)
         except AttributeError:
             self.id = None
-        self.properties = [DetailSpecialization(i, self, enumerations) for i in defn['properties']]
+        self.properties = [DetailSpecialization(i, self, enumerations) for i in defn.get('properties', [])]
 
 
 class DetailSpecialization(object):

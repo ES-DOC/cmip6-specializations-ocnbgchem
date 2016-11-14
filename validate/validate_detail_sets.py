@@ -51,15 +51,14 @@ def _validate_detail_set(errors, enums, associated, name, defn):
         errors.append("description must be a string")
 
     # properties = mandatory collection.
-    if "properties" not in defn:
-        errors.append("must have properties")
-    elif not isinstance(defn['properties'], list):
-        errors.append("properties must defined as a list")
-    elif [p for p in defn['properties'] if not isinstance(p, tuple) or len(p) != 4]:
-        errors.append("all properties must be 4 member tuples")
-    else:
-        for detail in defn['properties']:
-            errors += ["{}.{}".format(name, i) for i in _validate_detail(detail, enums)]
+    if "properties" in defn:
+        if not isinstance(defn['properties'], list):
+            errors.append("properties must defined as a list")
+        elif [p for p in defn['properties'] if not isinstance(p, tuple) or len(p) != 4]:
+            errors.append("all properties must be 4 member tuples")
+        else:
+            for detail in defn['properties']:
+                errors += ["{}.{}".format(name, i) for i in _validate_detail(detail, enums)]
 
 
 def _validate_detail(detail, enums):
