@@ -12,7 +12,6 @@
 import collections
 
 from validate_topic import validate as validate_topic
-from validate_process import validate as validate_process
 from validate_realm import validate as validate_realm
 
 
