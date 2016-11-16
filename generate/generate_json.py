@@ -75,6 +75,7 @@ class Generator(Parser):
         """
         obj = self._map_module(process)
         obj['subProcesses'] = []
+        obj['details'] = []
 
         self._maps[realm]['processes'].append(obj)
 
@@ -87,6 +88,7 @@ class Generator(Parser):
         obj['label'] = get_label(subprocess.name)
         obj['description'] = subprocess.description
         obj['id'] = subprocess.id
+        obj['details'] = []
 
         self._maps[process]['subProcesses'].append(obj)
         self._maps[subprocess] = obj
@@ -113,7 +115,7 @@ class Generator(Parser):
         self._maps[detail_set] = obj
 
 
-    def on_detail_parse(self, detail_set, detail):
+    def on_detail_parse(self, container, detail):
         """On detail parse event handler.
 
         """
@@ -121,7 +123,7 @@ class Generator(Parser):
         obj['label'] = get_label(detail.name)
         obj['description'] = detail.description
         obj['id'] = detail.id
-        obj['uiOrdinal'] = len(self._maps[detail_set]['details']) + 1
+        obj['uiOrdinal'] = len(self._maps[container]['details']) + 1
         obj['cardinality'] = detail.cardinality
         obj['type'] = "enum" if detail.typeof.find("ENUM") >= 0 else detail.typeof
         if detail.enum:
@@ -132,7 +134,7 @@ class Generator(Parser):
                 'choices': []
             }
 
-        self._maps[detail_set]['details'].append(obj)
+        self._maps[container]['details'].append(obj)
         self._maps[detail] = obj
 
 

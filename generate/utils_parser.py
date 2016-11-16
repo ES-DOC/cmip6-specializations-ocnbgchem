@@ -188,6 +188,9 @@ class Parser(object):
             log("parsing: {}".format(process.id))
         self.on_process_parse(realm, process)
         self._parse_detail_sets(process)
+        for detail in process.details:
+            print detail
+            # self._parse_subprocess(realm, process, sub_process)
         for sub_process in process.sub_processes:
             self._parse_subprocess(realm, process, sub_process)
         self.on_process_parsed(realm, process)
@@ -200,6 +203,8 @@ class Parser(object):
         if self.verbose:
             log("parsing: {}".format(sub_process.id))
         self.on_subprocess_parse(process, sub_process)
+        for detail in sub_process.details:
+            self._parse_detail(sub_process, detail)
         self._parse_detail_sets(sub_process)
         self.on_subprocess_parsed(process, sub_process)
 
@@ -210,6 +215,7 @@ class Parser(object):
         """
         for detail_set in [i for i in owner.detail_sets if i.name != "CIM"]:
             self._parse_detail_set(owner, detail_set)
+            self._parse_detail_sets(detail_set)
 
 
     def _parse_detail_set(self, owner, detail_set):
@@ -219,30 +225,30 @@ class Parser(object):
         if self.verbose:
             log("parsing: {}".format(detail_set.id))
         self.on_detail_set_parse(owner, detail_set)
-        for detail in detail_set.properties:
+        for detail in detail_set.details:
             self._parse_detail(detail_set, detail)
         self.on_detail_set_parsed(owner, detail_set)
 
 
-    def _parse_detail(self, detail_set, detail):
+    def _parse_detail(self, container, detail):
         """Parses a set of details.
 
         """
         if self.verbose:
             log("parsing: {}".format(detail.id))
-        self.on_detail_parse(detail_set, detail)
+        self.on_detail_parse(container, detail)
         if detail.enum:
-            self._parse_enum(detail_set, detail, detail.enum)
-        self.on_detail_parsed(detail_set, detail)
+            self._parse_enum(container, detail, detail.enum)
+        self.on_detail_parsed(container, detail)
 
 
-    def _parse_enum(self, detail_set, detail, enum):
+    def _parse_enum(self, container, detail, enum):
         """Parses an enumeration associated with a detail.
 
         """
         for item in enum.choices:
-            self.on_enum_item_parse(detail_set, detail, item)
-            self.on_enum_item_parsed(detail_set, detail, item)
+            self.on_enum_item_parse(container, detail, item)
+            self.on_enum_item_parsed(container, detail, item)
 
 
 def log(msg):

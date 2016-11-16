@@ -26,7 +26,6 @@ CIM_PROFILE["science.model"] = {
 		"name",
 		"long_name",
 		"processes",
-		"specialization_id",
 		"version"
 	],
 	"exclude": [
@@ -44,12 +43,8 @@ CIM_PROFILE["science.model"] = {
 CIM_PROFILE["science.realm"] = {
 	"include": [
 	   "citations",
-	   "grid",
-	   "key_properties",
-	   "name",
-	   "overview",
-	   "processes",
-	   "specialization_id",
+	   "keywords",
+	   "overview"
 	],
 	"exclude": []
 }
@@ -58,13 +53,8 @@ CIM_PROFILE["science.realm"] = {
 CIM_PROFILE["science.process"] = {
 	"include": [
 	   "citations",
-	   "detail_sets",
-	   "description",
-	   "overview",
 	   "keywords",
-	   "short_name",
-	   "specialization_id",
-	   "sub_processes"
+	   "overview"
 	],
 	"exclude": []
 }
@@ -73,11 +63,8 @@ CIM_PROFILE["science.process"] = {
 CIM_PROFILE["science.sub_process"] = {
 	"include": [
 	   "citations",
-	   "detail_sets",
-	   "description",
-	   "specialization_id",
-	   "overview",
-	   "short_name"
+	   "keywords",
+	   "overview"
 	],
 	"exclude": []
 }
@@ -86,20 +73,15 @@ CIM_PROFILE["science.sub_process"] = {
 CIM_PROFILE["science.key_properties"] = {
 	"include": [
 	   "citations",
-	   "detail_sets",
-	   "description",
 	   "keywords",
-	   "short_name",
-	   "specialization_id",
-	   "sub_processes",
-	   "tuning_applied"
 	],
 	"exclude": [
 		"extent",
 		"extra_conservation_properties",
-		"overview",
+		"implementation_overview",
 		"keywords",
-		"resolution"
+		"resolution",
+		"tuning_applied"
 	]
 }
 
@@ -113,13 +95,12 @@ CIM_PROFILE["science.realm[ocean].key_properties"] = {
 		"keywords",
 		"resolution",
 		"short_name",
-		"specialization_id",
 		"sub_processes",
 		"tuning_applied"
 	],
 	"exclude": [
 		"extent",
-		"overview",
+		"implementation_overview",
 		"keywords",
 	]
 }

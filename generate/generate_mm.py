@@ -47,8 +47,8 @@ _SECTIONS['process'] = "science.process"
 _SECTIONS['sub-process'] = "science.sub_process"
 _SECTIONS['key-properties'] = "science.key_properties"
 _SECTIONS['grid'] = "science.grid"
-_SECTIONS['detail'] = "science.detail"
-_SECTIONS['detail-property'] = None
+_SECTIONS['detail-set'] = "science.detail"
+_SECTIONS['detail'] = None
 _SECTIONS['enum-choice'] = None
 
 
@@ -100,6 +100,7 @@ class Generator(Parser):
         """
         self.mmap = ET.Element('map', {})
         self._emit_node(self.mmap, realm, style="fork")
+        self._emit_change_history(realm)
         self._emit_legend(realm)
         self._emit_cim_profile(realm)
 
@@ -239,13 +240,14 @@ class Generator(Parser):
 
         """
         cfg = self.cfg.get_section
-        legend = ET.SubElement(self.nodes[realm], 'node', {
+        root_node = ET.SubElement(self.nodes[realm], 'node', {
+            'FOLDED': "true",
             'STYLE': "bubble",
             'TEXT': "LEGEND",
             'POSITION': "left"
             })
         for section in _SECTIONS:
-            node = ET.SubElement(legend, 'node', {
+            node = ET.SubElement(root_node, 'node', {
                 'BACKGROUND_COLOR': cfg(section)['bg-color'],
                 'COLOR': cfg(section)['font-color'],
                 'STYLE': "bubble",
@@ -261,48 +263,66 @@ class Generator(Parser):
 
         """
         cfg = self.cfg.get_section
-        constraints = ET.SubElement(self.nodes[realm], 'node', {
+        root_node = ET.SubElement(self.nodes[realm], 'node', {
+            'FOLDED': "true",
             'STYLE': "bubble",
-            'TEXT': "CIM v2 PROFILE",
+            'TEXT': "DETAILS INHERITED FROM CIM",
             'POSITION': "left"
             })
-
-        # Iterate each section within profile.
         for section, cim_type in _SECTIONS.iteritems():
-            if cim_type not in CIM_PROFILE:
-                continue
-
-            node = ET.SubElement(constraints, 'node', {
-                'BACKGROUND_COLOR': cfg(section)['bg-color'],
-                'COLOR': cfg(section)['font-color'],
-                'STYLE': "bubble",
-                'TEXT': section
-                })
-            for name in CIM_PROFILE[cim_type]['include']:
-                ET.SubElement(node, 'node', {
+            if cim_type in CIM_PROFILE:
+                node = ET.SubElement(root_node, 'node', {
                     'BACKGROUND_COLOR': cfg(section)['bg-color'],
                     'COLOR': cfg(section)['font-color'],
                     'STYLE': "bubble",
-                    'TEXT': name
+                    'TEXT': section
                     })
+                for name in CIM_PROFILE[cim_type]['include']:
+                    ET.SubElement(node, 'node', {
+                        'BACKGROUND_COLOR': cfg(section)['bg-color'],
+                        'COLOR': cfg(section)['font-color'],
+                        'STYLE': "bubble",
+                        'TEXT': name
+                        })
+
+
+    def _emit_change_history(self, realm):
+        """Emits mindmap realm change history.
+
+        """
+        root_node = ET.SubElement(self.nodes[realm], 'node', {
+            'FOLDED': "true",
+            'STYLE': "bubble",
+            'TEXT': "CHANGE HISTORY",
+            'POSITION': "left"
+            })
+        for version, date, person, comment in realm.defn.CHANGE_HISTORY:
+            node = ET.SubElement(root_node, 'node', {
+                # 'BACKGROUND_COLOR': cfg(section)['bg-color'],
+                # 'COLOR': cfg(section)['font-color'],
+                'STYLE': "bubble",
+                'TEXT': version
+                })
+            self._emit_notes(node, [
+                ("Version", version),
+                ("Date", date),
+                ("Person", person),
+                ("Comment", comment),
+            ])
 
 
 def _get_notes(spec):
     """Returns notes to be appended to a mindmap node.
 
     """
-    # EnumChoice: [
-    #     ("Description", self.description.replace("&", "and")),
-    #     ("Specialization ID", self.id.lower().replace(" ", "-").replace("_", "-"))
-    # ],
     result = [
-        ("Description", lambda i: None if i.description is None else i.description.replace("&", "and")),
-        ("Specialization ID", lambda i: i.id)
+        ("Description", lambda i: None if i.description is None else i.description.replace("&", "and"))
     ]
     if isinstance(spec, DetailSpecialization):
         result += [
             ("Type", lambda i: i.typeof),
-            ("Cardinality", lambda i: i.cardinality)
+            ("Cardinality", lambda i: i.cardinality),
+            ("Specialization ID", lambda i: i.id)
         ]
     elif isinstance(spec, (GridSpecialization, KeyPropertiesSpecialization, ProcessSpecialization)):
         result += [

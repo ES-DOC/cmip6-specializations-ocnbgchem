@@ -9,6 +9,8 @@
 
 
 """
+from collections import OrderedDict
+
 from cim_profile import CIM_PROFILE
 
 
@@ -24,10 +26,10 @@ class RealmSpecialization(object):
 
         """
         mixin_topic(self, defn[0], "realm", None)
+        self.details = []
         self.grid = GridSpecialization(self, defn[1]) if defn[1] else None
         self.key_properties = KeyPropertiesSpecialization(self, defn[2]) if defn[2] else None
         self.processes = [ProcessSpecialization(self, i) for i in defn[3]]
-
 
 
 class GridSpecialization(object):
@@ -67,6 +69,7 @@ class ProcessSpecialization(object):
         """
         mixin_topic(self, defn, "process", realm)
         mixin_detail_sets(self, defn)
+        self.details = []
         self.sub_processes = [SubProcessSpecialization(i, defn.SUB_PROCESSES[i], self)
                               for i in defn.SUB_PROCESSES if len(i.split(":")) == 1]
 
@@ -85,19 +88,17 @@ class SubProcessSpecialization(object):
         """
         self.cfg_section = "sub-process"
         self.description = defn['description']
+        self.details = [DetailSpecialization(i, self, process.defn.ENUMERATIONS) for i in defn.get('properties', [])]
         self.detail_sets = []
         self.id = "{}.{}".format(process.id, name)
         self.name = name
         self.name_camel_case = to_camel_case(self.name)
         self.name_camel_case_spaced = to_camel_case_spaced(self.name)
 
-        # Append own detail set.
-        if defn.get('properties', []):
-            self.detail_sets.append(DetailSetSpecialization("default", defn, self, process.defn.ENUMERATIONS))
-
-        # Append child detail sets.
+        # Set associated detail sets.
+        # TODO wire hierachy
         for i, j in process.defn.SUB_PROCESSES.items():
-            if len(i.split(":")) > 1 and i.startswith("{}:".format(name)):
+            if i.startswith("{}:".format(name)):
                 self.detail_sets.append(DetailSetSpecialization(i, j, self, process.defn.ENUMERATIONS))
 
 
@@ -115,14 +116,16 @@ class DetailSetSpecialization(object):
 
         """
         self.name = name.split(":")[-1]
+        self.cfg_section = "detail-set"
         self.defn = defn
-        self.cfg_section = "detail"
         self.description = defn['description']
+        self.detail_sets = []
+        self.parent = None
         try:
             self.id = "{}.{}".format(container.id, self.name)
         except AttributeError:
             self.id = None
-        self.properties = [DetailSpecialization(i, self, enumerations) for i in defn.get('properties', [])]
+        self.details = [DetailSpecialization(i, self, enumerations) for i in defn.get('properties', [])]
 
 
 class DetailSpecialization(object):
@@ -135,7 +138,7 @@ class DetailSpecialization(object):
         """
         self.name, self.typeof, self.cardinality, self.description = defn
         self.container = container
-        self.cfg_section = "detail-property"
+        self.cfg_section = "detail"
         if self.typeof.startswith("ENUM"):
             enum_name = self.typeof.split(":")[-1]
             self.enum = EnumSpecialization(enum_name, enumerations[enum_name])
@@ -146,7 +149,7 @@ class DetailSpecialization(object):
 
     @property
     def id(self):
-        """Gets id associated with detail-property.
+        """Gets detail id - very important when building a comparator.
 
         """
         return "{}.{}".format(self.container.id, self.name)
@@ -265,13 +268,30 @@ def mixin_topic(spec, defn, cfg_section, owner):
         spec.description = spec.name
 
 
-def mixin_detail_sets(spec, defn):
+def mixin_detail_sets(spec, defn, target="DETAILS"):
     """Detail sets mixin to extend specialization wrappers.
 
     """
-    spec.detail_sets = [DetailSetSpecialization(i, j, spec, defn.ENUMERATIONS)
-                        for i, j in defn.DETAILS.items()
-                        if isinstance(j, dict)]
+    # Set master collection.
+    detail_sets = OrderedDict()
+    for i, j in getattr(defn, target).items():
+        detail_sets[i] = DetailSetSpecialization(i, j, spec, defn.ENUMERATIONS)
+    # detail_sets = {i: DetailSetSpecialization(i, j, spec, defn.ENUMERATIONS)
+    #                for i, j in getattr(defn, target).items()
+    #                if isinstance(j, dict)}
+
+    # Wire hierarchy.
+    for i in defn.DETAILS:
+        if not i.split(":")[0:-1]:
+            continue
+        child = detail_sets[i]
+        parent = detail_sets[":".join(i.split(":")[0:-1])]
+        child.parent = parent
+        child.parent.detail_sets.append(child)
+        del detail_sets[i]
+
+    # Set parsed collection.
+    spec.detail_sets = detail_sets.values()
 
 
 def to_camel_case_spaced(name, separator='_'):
