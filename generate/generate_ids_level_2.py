@@ -17,30 +17,29 @@ class Generator(IdentifierGenerator):
     """Specialization to mindmap generator.
 
     """
-    def on_detail_set_parse(self, owner, detail_set):
-        """On process detail set parse event handler.
-
-        """
-        self.set_id(detail_set)
-
-
-    def on_grid_parsed(self, realm, grid):
+    def on_grid_parsed(self, grid):
         """On grid parsed event handler.
 
         """
         self.emit_null_row(grid)
 
 
-    def on_key_properties_parsed(self, realm, key_properties):
+    def on_keyproperties_parsed(self, key_properties):
         """On key_properties parsed event handler.
 
         """
         self.emit_null_row(key_properties)
 
 
-    def on_process_parsed(self, realm, process):
+    def on_process_parsed(self, process):
         """On process parsed event handler.
 
         """
         self.emit_null_row(process)
 
+
+    def on_detailset_parse(self, detail_set):
+        """On process detail set parse event handler.
+
+        """
+        self.set_id(detail_set)

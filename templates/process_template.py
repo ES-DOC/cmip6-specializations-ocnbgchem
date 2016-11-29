@@ -9,7 +9,6 @@ For further information goto http://wordpress.es-doc.org/cmip6-model-specializat
 # --------------------------------------------------------------------
 from collections import OrderedDict
 DETAILS = OrderedDict()
-SUB_PROCESSES = OrderedDict()
 ENUMERATIONS = OrderedDict()
 
 # --------------------------------------------------------------------
@@ -33,16 +32,10 @@ QC_STATUS = 'draft'
 DESCRIPTION = ''
 
 # --------------------------------------------------------------------
-# DETAILS : Process level details.
+# DETAILS : Process details.
 # --------------------------------------------------------------------
 
 # Details go here
-
-# --------------------------------------------------------------------
-# SUB PROCESSES: Sets of discrete portions of the process
-# --------------------------------------------------------------------
-
-# Sub-processes go here
 
 # --------------------------------------------------------------------
 # ENUMERATIONS

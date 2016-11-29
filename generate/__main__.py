@@ -17,7 +17,7 @@ from generate_ids_level_1 import Generator as Level1IdentifierGenerator
 from generate_ids_level_2 import Generator as Level2IdentifierGenerator
 from generate_ids_level_3 import Generator as Level3IdentifierGenerator
 from utils_loader import get_specializations
-from utils_model import RealmSpecialization
+from utils_factory import create_specialization
 
 
 
@@ -111,7 +111,7 @@ for generator_type, generator_cls in targets.iteritems():
             fname = fname.replace("-", "_")
 
     # Set realm.
-    realm = RealmSpecialization(get_specializations(_ARGS.input_dir, _ARGS.realm))
+    realm = create_specialization(get_specializations(_ARGS.input_dir, _ARGS.realm))
 
     # Run generator.
     generator = generator_cls(realm)

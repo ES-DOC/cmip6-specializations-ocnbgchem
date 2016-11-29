@@ -14,12 +14,9 @@ import json
 
 import xml.etree.ElementTree as ET
 
-from utils_model import CIM_PROFILE
+from cim_profile import CIM_PROFILE
 from utils_model import DetailSpecialization
-from utils_model import GridSpecialization
-from utils_model import KeyPropertiesSpecialization
-from utils_model import ProcessSpecialization
-from utils_model import SubProcessSpecialization
+from utils_model import TopicSpecialization
 
 from utils_parser import Parser
 
@@ -105,74 +102,70 @@ class Generator(Parser):
         self._emit_cim_profile(realm)
 
 
-    def on_grid_parse(self, realm, grid):
+    def on_grid_parse(self, grid):
         """On grid parse event handler.
 
         """
-        self._emit_node(realm, grid)
+        self._emit_node(self.realm, grid)
 
 
-    def on_key_properties_parse(self, realm, key_properties):
+    def on_keyproperties_parse(self, key_properties):
         """On key_properties parse event handler.
 
         """
-        self._emit_node(realm, key_properties)
+        self._emit_node(self.realm, key_properties)
 
 
-    def on_process_parse(self, realm, process):
+    def on_process_parse(self, process):
         """On process parse event handler.
 
         """
-        self._emit_node(realm, process)
+        self._emit_node(self.realm, process)
         self._emit_notes(process)
 
 
-    def on_subprocess_parse(self, process, subprocess):
+    def on_subprocess_parse(self, subprocess):
         """On sub-process parse event handler.
 
         """
-        self._emit_node(process, subprocess)
+        self._emit_node(subprocess.parent, subprocess)
 
 
-    def on_detail_set_parse(self, owner, detail_set):
+    def on_detailset_parse(self, detailset):
         """On process detail set parse event handler.
 
         """
-        self._emit_node(owner, detail_set)
+        self._emit_node(detailset.owner, detailset)
 
 
-    def on_detail_parse(self, detail_set, detail):
+    def on_detail_parse(self, detail):
         """On detail property parse event handler.
 
         """
-        self._emit_node(detail_set, detail)
+        self._emit_node(detail.owner, detail)
         self._emit_notes(detail)
 
-        if detail.enum:
-            for choice in detail.enum.choices:
-                self._emit_node(detail, choice, text=choice.value)
+
+    def on_enumchoice_parse(self, choice):
+        """On enum property parse event handler.
+
+        """
+        self._emit_node(choice.enum.detail, choice, text=choice.value)
 
 
-    def _emit_node(
-        self,
-        parent,
-        owner,
-        text=None,
-        style=None,
-        cfg_section=None
-        ):
+    def _emit_node(self, parent, owner, text=None, style="bubble"):
         """Sets a mindmap node.
 
         """
         # Get section style config.
-        cfg = self.cfg.get_section(cfg_section if cfg_section else owner.cfg_section)
+        cfg = self.cfg.get_section(owner.cfg_section)
 
         # Initialise mindmap node attributes.
         atts = {
             'FOLDED': str(cfg['is-collapsed']).lower(),
             'COLOR': cfg['font-color'],
             'BACKGROUND_COLOR': cfg['bg-color'],
-            'STYLE': style or "bubble",
+            'STYLE': style,
             'TEXT': text if text else owner.name
         }
 
@@ -296,10 +289,8 @@ class Generator(Parser):
             'TEXT': "CHANGE HISTORY",
             'POSITION': "left"
             })
-        for version, date, person, comment in realm.defn.CHANGE_HISTORY:
+        for version, date, person, comment in realm.change_history:
             node = ET.SubElement(root_node, 'node', {
-                # 'BACKGROUND_COLOR': cfg(section)['bg-color'],
-                # 'COLOR': cfg(section)['font-color'],
                 'STYLE': "bubble",
                 'TEXT': version
                 })
@@ -316,7 +307,7 @@ def _get_notes(spec):
 
     """
     result = [
-        ("Description", lambda i: None if i.description is None else i.description.replace("&", "and"))
+        ("Description", lambda i: "N/A" if i.description is None else i.description.replace("&", "and"))
     ]
     if isinstance(spec, DetailSpecialization):
         result += [
@@ -324,7 +315,7 @@ def _get_notes(spec):
             ("Cardinality", lambda i: i.cardinality),
             ("Specialization ID", lambda i: i.id)
         ]
-    elif isinstance(spec, (GridSpecialization, KeyPropertiesSpecialization, ProcessSpecialization)):
+    elif isinstance(spec, TopicSpecialization):
         result += [
             ("QC status", lambda i: i.qc_status),
             ("Contact", lambda i: i.contact),

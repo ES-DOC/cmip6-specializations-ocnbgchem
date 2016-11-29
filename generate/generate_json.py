@@ -14,19 +14,7 @@ import json
 
 
 from utils import get_label
-from utils_model import ProcessSpecialization
-from utils_model import RealmSpecialization
 from utils_parser import Parser
-
-
-
-# Map of output types to keys.
-_JSON_KEYS = {
-    ProcessSpecialization: "process"
-}
-
-# Type that are to be emitted as JSON.
-_JSON_TYPES = tuple(_JSON_KEYS.keys())
 
 
 
@@ -41,115 +29,11 @@ class Generator(Parser):
         super(Generator, self).__init__(realm)
 
         self._maps = collections.OrderedDict()
-
-
-    def on_realm_parse(self, realm):
-        """On realm parse event handler.
-
-        """
-        obj = self._map_module(realm)
-        obj['processes'] = []
-
-
-    def on_grid_parse(self, realm, grid):
-        """On grid parse event handler.
-
-        """
-        obj = self._map_module(grid)
-
-        self._maps[realm]['grid'] = obj
-
-
-    def on_key_properties_parse(self, realm, key_properties):
-        """On key_properties parse event handler.
-
-        """
-        obj = self._map_module(key_properties)
-
-        self._maps[realm]['keyProperties'] = obj
-
-
-    def on_process_parse(self, realm, process):
-        """On process parse event handler.
-
-        """
-        obj = self._map_module(process)
-        obj['subProcesses'] = []
-        obj['details'] = []
-
-        self._maps[realm]['processes'].append(obj)
-
-
-    def on_subprocess_parse(self, process, subprocess):
-        """On sub-process parse event handler.
-
-        """
-        obj = collections.OrderedDict()
-        obj['label'] = get_label(subprocess.name)
-        obj['description'] = subprocess.description
-        obj['id'] = subprocess.id
-        obj['details'] = []
-
-        self._maps[process]['subProcesses'].append(obj)
-        self._maps[subprocess] = obj
-
-
-    def on_detail_set_parse(self, owner, detail_set):
-        """On process detail set parse event handler.
-
-        """
-        if owner not in self._maps:
-            return
-
-        obj = collections.OrderedDict()
-        obj['label'] = get_label(detail_set.name)
-        obj['description'] = detail_set.description
-        if detail_set.id is None:
-            detail_set.id = "{}.{}".format(owner.id, detail_set.name)
-        obj['id'] = detail_set.id
-        obj['details'] = []
-
-        owner = self._maps[owner]
-        owner['detailSets'] = owner.get('detailSets', [])
-        owner['detailSets'].append(obj)
-        self._maps[detail_set] = obj
-
-
-    def on_detail_parse(self, container, detail):
-        """On detail parse event handler.
-
-        """
-        obj = collections.OrderedDict()
-        obj['label'] = get_label(detail.name)
-        obj['description'] = detail.description
-        obj['id'] = detail.id
-        obj['uiOrdinal'] = len(self._maps[container]['details']) + 1
-        obj['cardinality'] = detail.cardinality
-        obj['type'] = "enum" if detail.typeof.find("ENUM") >= 0 else detail.typeof
-        if detail.enum:
-            obj['enum'] = {
-                'label': detail.enum.name,
-                'description': detail.enum.description,
-                'isOpen': True,
-                'choices': []
-            }
-
-        self._maps[container]['details'].append(obj)
-        self._maps[detail] = obj
-
-
-    def on_enum_item_parse(self, detail_set, detail, item):
-        """On process detail property choice parse event handler.
-
-        """
-        if item.is_other:
-            return
-
-        obj = collections.OrderedDict()
-        obj['label'] = item.value
-        obj['description'] = item.description
-
-        self._maps[detail]['enum']['choices'].append(obj)
+        self.on_realm_parse = self._on_topic_parse
+        self.on_grid_parse = self._on_topic_parse
+        self.on_keyproperties_parse = self._on_topic_parse
+        self.on_process_parse = self._on_topic_parse
+        self.on_subprocess_parse = self._on_topic_parse
 
 
     def get_output(self):
@@ -159,15 +43,179 @@ class Generator(Parser):
         return json.dumps(self._maps[self.realm], indent=4)
 
 
-    def _map_module(self, mod):
-        """Maps a specialization module to a dictionary.
+    def _on_topic_parse(self, topic):
+        """On topic parse event handler.
+
+        """
+        self._map_topic(topic)
+
+
+    def on_detailset_parse(self, detailset):
+        """On process detail set parse event handler.
 
         """
         obj = collections.OrderedDict()
-        obj['label'] = get_label(mod.name)
-        obj['description'] = mod.description
-        obj['id'] = mod.id
-        obj['contact'] = mod.contact
-        self._maps[mod] = obj
+        obj['label'] = get_label(detailset.name)
+        obj['description'] = detailset.description
+        obj['id'] = detailset.id
+        obj['details'] = []
+        obj['detailSets'] = []
+
+        self._maps[detailset] = obj
+
+
+    def on_detail_parse(self, detail):
+        """On detail parse event handler.
+
+        """
+        obj = collections.OrderedDict()
+        obj['label'] = get_label(detail.name)
+        obj['description'] = detail.description
+        obj['id'] = detail.id
+        obj['cardinality'] = detail.cardinality
+        obj['type'] = "enum" if detail.enum else detail.typeof
+
+        self._maps[detail] = obj
+
+
+    def on_enum_parse(self, enum):
+        """On enum parse event handler.
+
+        """
+        obj = collections.OrderedDict()
+        obj['label'] = get_label(enum.name)
+        obj['description'] = enum.description
+        obj['isOpen'] = enum.is_open
+        obj['choices'] = []
+
+        self._maps[enum] = obj
+
+
+    def on_enumchoice_parse(self, choice):
+        """On process detail property enum choice parse event handler.
+
+        """
+        if choice.is_other:
+            return
+
+        obj = collections.OrderedDict()
+        obj['label'] = choice.value
+        obj['description'] = choice.description
+
+        self._maps[choice] = obj
+
+
+    def on_realm_parsed(self, realm):
+        """On realm parsed event handler.
+
+        """
+        obj = self._maps[realm]
+        obj['grid'] = self._maps[realm.grid]
+        obj['keyProperties'] = self._maps[realm.key_properties]
+        obj['processes'] = [self._maps[i] for i in realm.processes]
+        self._strip(obj)
+
+
+    def on_grid_parsed(self, grid):
+        """On grid parsed event handler.
+
+        """
+        self._strip(self._maps[grid])
+
+
+    def on_keyproperties_parsed(self, keyproperties):
+        """On key properties parsed event handler.
+
+        """
+        self._strip(self._maps[keyproperties])
+
+
+    def on_process_parsed(self, process):
+        """On process parse event handler.
+
+        """
+        obj = self._maps[process]
+        self._strip(obj)
+
+        realm = self._maps[self.realm]
+        realm['processes'] = realm.get('processes', [])
+        realm['processes'].append(obj)
+
+
+    def on_subprocess_parsed(self, subprocess):
+        """On sub-process parsed event handler.
+
+        """
+        obj = self._maps[subprocess]
+        self._strip(obj)
+
+        process = self._maps[subprocess.parent]
+        process['subProcesses'] = process.get('subProcesses', [])
+        process['subProcesses'].append(obj)
+
+
+    def on_detailset_parsed(self, detailset):
+        """On process detail set parse event handler.
+
+        """
+        obj = self._maps[detailset]
+        self._strip(obj)
+
+        owner = self._maps[detailset.owner]
+        owner['detailSets'] = owner.get('detailSets', [])
+        owner['detailSets'].append(obj)
+
+
+    def on_detail_parsed(self, detail):
+        """On detail parse event handler.
+
+        """
+        owner = self._maps[detail.owner]
+        owner['details'] = owner.get('details', [])
+        owner['details'].append(self._maps[detail])
+        self._maps[detail]['uiOrdinal'] = len(owner['details'])
+
+
+    def on_enum_parsed(self, enum):
+        """On enum parsed event handler.
+
+        """
+        detail = self._maps[enum.detail]
+        detail['enum'] = self._maps[enum]
+
+
+    def on_enumchoice_parsed(self, choice):
+        """On process detail property enum choice parse event handler.
+
+        """
+        if choice.is_other:
+            return
+
+        enum = self._maps[choice.enum]
+        enum['choices'].append(self._maps[choice])
+
+
+    def _map_topic(self, topic):
+        """Maps a specialization topic to a dictionary.
+
+        """
+        obj = collections.OrderedDict()
+        obj['label'] = get_label(topic.name)
+        obj['description'] = topic.description
+        obj['id'] = topic.id
+        obj['contact'] = topic.contact
+        obj['details'] = []
+        obj['detailSets'] = []
+        self._maps[topic] = obj
 
         return obj
+
+
+    def _strip(self, obj):
+        """Strips null keys from mapped objects.
+
+        """
+        if not obj['details']:
+            del obj['details']
+        if not obj['detailSets']:
+            del obj['detailSets']

@@ -49,11 +49,16 @@ def _validate_enum(name, obj):
     elif not isinstance(obj['description'], str):
         errors.append("description must be a string")
 
+    # Validate is_open
+    if "is_open" not in obj:
+        errors.append("is_open is required")
+    elif not isinstance(obj['is_open'], bool):
+        errors.append("is_open must be a boolean")
+
     # Validate members.
     if "members" not in obj:
         errors.append("members is required")
     elif not isinstance(obj['members'], list) or \
-         not len(obj['members']) or \
          [m for m in obj['members'] if not isinstance(m, tuple) or len(m) != 2]:
         errors.append("members must defined as a list of tuples: (name, description)")
     else:

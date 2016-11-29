@@ -21,11 +21,10 @@ class Generator(IdentifierGenerator):
         """On realm parse event handler.
 
         """
-        super(Generator, self).on_realm_parse(realm)
         self.set_id(realm)
 
 
-    def on_grid_parse(self, realm, grid):
+    def on_grid_parse(self, grid):
         """On grid parse event handler.
 
         """
@@ -33,7 +32,7 @@ class Generator(IdentifierGenerator):
         self.set_id(grid)
 
 
-    def on_key_properties_parse(self, realm, key_properties):
+    def on_keyproperties_parse(self, key_properties):
         """On key_properties parse event handler.
 
         """
@@ -41,7 +40,7 @@ class Generator(IdentifierGenerator):
         self.set_id(key_properties)
 
 
-    def on_process_parse(self, realm, process):
+    def on_process_parse(self, process):
         """On process parse event handler.
 
         """
@@ -49,7 +48,7 @@ class Generator(IdentifierGenerator):
         self.set_id(process)
 
 
-    def on_subprocess_parse(self, process, subprocess):
+    def on_subprocess_parse(self, subprocess):
         """On sub-process parse event handler.
 
         """

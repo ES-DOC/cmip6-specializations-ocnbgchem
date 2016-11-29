@@ -10,31 +10,8 @@
 
 """
 from utils import get_label
-from utils_model import DetailSpecialization
-from utils_model import DetailSetSpecialization
-from utils_model import EnumSpecialization
-from utils_model import EnumChoiceSpecialization
-from utils_model import GridSpecialization
-from utils_model import KeyPropertiesSpecialization
-from utils_model import ProcessSpecialization
-from utils_model import RealmSpecialization
-from utils_model import SubProcessSpecialization
 from utils_parser import Parser
 
-
-
-# Map of specialization types to identifier types.
-_ID_TYPES = {
-    DetailSpecialization: "detail",
-    DetailSetSpecialization: "detail-set",
-    EnumSpecialization: "enum",
-    EnumChoiceSpecialization: "enum-choice",
-    ProcessSpecialization: "process",
-    SubProcessSpecialization: "process",
-    RealmSpecialization: "realm",
-    GridSpecialization: "grid",
-    KeyPropertiesSpecialization: "key-properties"
-}
 
 
 class Generator(Parser):
@@ -92,10 +69,5 @@ class Generator(Parser):
         label = " > ".join([get_label(i) for i in identifier.split(".")[1:]])
 
         # Append to managed collection.
-        try:
-             _ID_TYPES[type(owner)]
-        except KeyError:
-            print type(owner)
-            print _ID_TYPES.keys()
-        self._ids.append((identifier, label, _ID_TYPES[type(owner)], identifier))
+        self._ids.append((identifier, label, owner.cfg_section, identifier))
 

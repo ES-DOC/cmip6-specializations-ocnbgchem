@@ -47,8 +47,6 @@ def validate_std(ctx, module, sections=[]):
             ctx.error("{} must be an OrderedDict".format(section))
         else:
             for key, obj in getattr(module, section).items():
-                if key == 'CIM':
-                    continue
                 if not isinstance(key, (str, unicode)):
                     err = "{}: all keys must be strings".format(section)
                 elif len(key.strip()) == 0:

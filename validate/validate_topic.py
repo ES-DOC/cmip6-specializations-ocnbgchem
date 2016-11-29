@@ -27,9 +27,6 @@ def validate(ctx, topic):
 
     # Set expected sections.
     sections = ['ENUMERATIONS', 'DETAILS']
-    if not topic.__name__.endswith("grid") and \
-       not topic.__name__.endswith("key_properties"):
-        sections.append('SUB_PROCESSES')
 
     # Level-1 validation.
     validate_std(ctx, topic, sections)
