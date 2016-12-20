@@ -8,11 +8,11 @@
 
 
 """
-from utils_model import DetailSpecialization
-from utils_model import DetailSetSpecialization
-from utils_model import EnumSpecialization
-from utils_model import EnumChoiceSpecialization
-from utils_model import TopicSpecialization
+from model import DetailSpecialization
+from model import DetailSetSpecialization
+from model import EnumSpecialization
+from model import EnumChoiceSpecialization
+from model import TopicSpecialization
 
 
 

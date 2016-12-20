@@ -10,7 +10,7 @@
 
 """
 from utils import get_label
-from utils_parser import Parser
+from parser import Parser
 
 
 
