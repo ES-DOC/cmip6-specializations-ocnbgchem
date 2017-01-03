@@ -69,5 +69,5 @@ class Generator(Parser):
         label = " > ".join([get_label(i) for i in identifier.split(".")[1:]])
 
         # Append to managed collection.
-        self._ids.append((identifier, label, owner.cfg_section, identifier))
+        self._ids.append((identifier, label, owner.type_key, identifier))
 

@@ -157,7 +157,7 @@ class Generator(Parser):
 
         """
         # Get section style config.
-        cfg = self.cfg.get_section(owner.cfg_section)
+        cfg = self.cfg.get_section(owner.type_key)
 
         # Initialise mindmap node attributes.
         atts = {
