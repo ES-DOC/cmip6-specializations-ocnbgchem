@@ -22,16 +22,15 @@ class TopicSpecialization(object):
         self.contact = None
         self.contributors = None
         self.description = None
-        self.details = []
-        self.detailsets = []
         self.id = None
         self.qc_status = None
         self.name = None
         self.name_camel_case = None
         self.name_camel_case_spaced = None
         self.parent = None
+        self.properties = []
+        self.property_sets = []
         self.spec = None
-        self.subtopics = []
         self.type_key = None
 
 
@@ -46,38 +45,38 @@ class TopicSpecialization(object):
                 return []
 
 
-class DetailSetSpecialization(object):
-    """Wraps a detail set specialization.
+class TopicPropertySetSpecialization(object):
+    """Wraps a property set specialization.
 
     """
     def __init__(self):
         """Instance initializer.
 
         """
-        super(DetailSetSpecialization, self).__init__()
+        super(TopicPropertySetSpecialization, self).__init__()
 
-        self.cfg_section = "detail-set"
+        self.cfg_section = "property-set"
         self.description = None
-        self.details = []
-        self.detailsets = []
         self.id = None
         self.name = None
         self.owner = None
+        self.properties = []
+        self.property_sets = []
         self.topic = None
 
 
-class DetailSpecialization(object):
-    """Wraps a detail specialization.
+class TopicPropertySpecialization(object):
+    """Wraps a property specialization.
 
     """
     def __init__(self):
         """Instance initializer.
 
         """
-        super(DetailSpecialization, self).__init__()
+        super(TopicPropertySpecialization, self).__init__()
 
         self.cardinality = None
-        self.cfg_section = "detail"
+        self.cfg_section = "property"
         self.description = None
         self.enum = None
         self.id = None
@@ -155,3 +154,29 @@ class EnumChoiceSpecialization(object):
         self.id = None
         self.value = None
         self.is_other = None
+
+
+class RealmSpecialization(TopicSpecialization):
+    """Wraps a realm specialization.
+
+    """
+    def __init__(self):
+        """Instance initializer.
+
+        """
+        super(RealmSpecialization, self).__init__()
+        self.grid = None
+        self.key_properties = None
+        self.processes = None
+
+
+class ProcessSpecialization(TopicSpecialization):
+    """Wraps a process specialization.
+
+    """
+    def __init__(self):
+        """Instance initializer.
+
+        """
+        super(ProcessSpecialization, self).__init__()
+        self.sub_processes = []

@@ -50,32 +50,32 @@ class Generator(Parser):
         self._map_topic(topic)
 
 
-    def on_detailset_parse(self, detailset):
-        """On process detail set parse event handler.
+    def on_topic_property_set_parse(self, prop_set):
+        """On topic property set parse event handler.
 
         """
         obj = collections.OrderedDict()
-        obj['label'] = get_label(detailset.name)
-        obj['description'] = detailset.description
-        obj['id'] = detailset.id
-        obj['details'] = []
-        obj['detailSets'] = []
+        obj['label'] = get_label(prop_set.name)
+        obj['description'] = prop_set.description
+        obj['id'] = prop_set.id
+        obj['properties'] = []
+        obj['propertySets'] = []
 
-        self._maps[detailset] = obj
+        self._maps[prop_set] = obj
 
 
-    def on_detail_parse(self, detail):
-        """On detail parse event handler.
+    def on_topic_property_parse(self, prop):
+        """On property parse event handler.
 
         """
         obj = collections.OrderedDict()
-        obj['label'] = get_label(detail.name)
-        obj['description'] = detail.description
-        obj['id'] = detail.id
-        obj['cardinality'] = detail.cardinality
-        obj['type'] = "enum" if detail.enum else detail.typeof
+        obj['label'] = get_label(prop.name)
+        obj['description'] = prop.description
+        obj['id'] = prop.id
+        obj['cardinality'] = prop.cardinality
+        obj['type'] = "enum" if prop.enum else prop.typeof
 
-        self._maps[detail] = obj
+        self._maps[prop] = obj
 
 
     def on_enum_parse(self, enum):
@@ -154,26 +154,26 @@ class Generator(Parser):
         process['subProcesses'].append(obj)
 
 
-    def on_detailset_parsed(self, detailset):
-        """On process detail set parse event handler.
+    def on_topic_property_set_parsed(self, prop_set):
+        """On topic property set parsed event handler.
 
         """
-        obj = self._maps[detailset]
+        obj = self._maps[prop_set]
         self._strip(obj)
 
-        owner = self._maps[detailset.owner]
-        owner['detailSets'] = owner.get('detailSets', [])
-        owner['detailSets'].append(obj)
+        owner = self._maps[prop_set.owner]
+        owner['propertySets'] = owner.get('propertySets', [])
+        owner['propertySets'].append(obj)
 
 
-    def on_detail_parsed(self, detail):
-        """On detail parse event handler.
+    def on_topic_property_parsed(self, prop):
+        """On property parsed event handler.
 
         """
-        owner = self._maps[detail.owner]
-        owner['details'] = owner.get('details', [])
-        owner['details'].append(self._maps[detail])
-        self._maps[detail]['uiOrdinal'] = len(owner['details'])
+        owner = self._maps[prop.owner]
+        owner['properties'] = owner.get('properties', [])
+        owner['properties'].append(self._maps[prop])
+        self._maps[prop]['uiOrdinal'] = len(owner['properties'])
 
 
     def on_enum_parsed(self, enum):
@@ -204,8 +204,8 @@ class Generator(Parser):
         obj['description'] = topic.description
         obj['id'] = topic.id
         obj['contact'] = topic.contact
-        obj['details'] = []
-        obj['detailSets'] = []
+        obj['properties'] = []
+        obj['propertySets'] = []
         self._maps[topic] = obj
 
         return obj
@@ -215,7 +215,7 @@ class Generator(Parser):
         """Strips null keys from mapped objects.
 
         """
-        if not obj['details']:
-            del obj['details']
-        if not obj['detailSets']:
-            del obj['detailSets']
+        if not obj['properties']:
+            del obj['properties']
+        if not obj['propertySets']:
+            del obj['propertySets']

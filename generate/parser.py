@@ -32,48 +32,55 @@ class Parser(object):
 
         """
         self.on_realm_parse(r)
-        self._parse_details(r)
+        self._parse_property_container(r)
 
         if r.grid:
             self.on_grid_parse(r.grid)
-            self._parse_details(r.grid)
+            self._parse_property_container(r.grid)
             self.on_grid_parsed(r.grid)
 
         if r.key_properties:
             self.on_keyproperties_parse(r.key_properties)
-            self._parse_details(r.key_properties)
+            self._parse_property_container(r.key_properties)
             self.on_keyproperties_parsed(r.key_properties)
 
         for p in r.processes:
-            self.on_process_parse(p)
-            self._parse_details(p)
-            for sp in p.subtopics:
-                self.on_subprocess_parse(sp)
-                self._parse_details(sp)
-                self.on_subprocess_parsed(sp)
-            self.on_process_parsed(p)
+            self._parse_process(p)
 
         self.on_realm_parsed(r)
 
 
-    def _parse_details(self, container):
-        """Parses a set of details.
+    def _parse_process(self, p):
+        """Parses a realm process.
 
         """
-        for d in container.details:
-            self.on_detail_parse(d)
-            if d.enum:
-                self.on_enum_parse(d.enum)
-                for ec in d.enum.choices:
+        self.on_process_parse(p)
+        self._parse_property_container(p)
+        for sp in p.sub_processes:
+            self.on_subprocess_parse(sp)
+            self._parse_property_container(sp)
+            self.on_subprocess_parsed(sp)
+        self.on_process_parsed(p)
+
+
+    def _parse_property_container(self, container):
+        """Parses a property container.
+
+        """
+        for p in container.properties:
+            self.on_topic_property_parse(p)
+            if p.enum:
+                self.on_enum_parse(p.enum)
+                for ec in p.enum.choices:
                     self.on_enumchoice_parse(ec)
                     self.on_enumchoice_parsed(ec)
-                self.on_enum_parsed(d.enum)
-            self.on_detail_parsed(d)
+                self.on_enum_parsed(p.enum)
+            self.on_topic_property_parsed(p)
 
-        for ds in container.detailsets:
-            self.on_detailset_parse(ds)
-            self._parse_details(ds)
-            self.on_detailset_parsed(ds)
+        for ps in container.property_sets:
+            self.on_topic_property_set_parse(ps)
+            self._parse_property_container(ps)
+            self.on_topic_property_set_parsed(ps)
 
 
     def on_realm_parse(self, realm):
@@ -146,29 +153,29 @@ class Parser(object):
         pass
 
 
-    def on_detailset_parse(self, detail_set):
-        """On detail set parse event handler.
+    def on_topic_property_set_parse(self, prop_set):
+        """On topic property set parse event handler.
 
         """
         pass
 
 
-    def on_detailset_parsed(self, detail_set):
-        """On detail set parsed event handler.
+    def on_topic_property_set_parsed(self, prop_set):
+        """On topic property set parsed event handler.
 
         """
         pass
 
 
-    def on_detail_parse(self, detail):
-        """On detail parse event handler.
+    def on_topic_property_parse(self, prop):
+        """On topic property parse event handler.
 
         """
         pass
 
 
-    def on_detail_parsed(self, detail):
-        """On detail parsed event handler.
+    def on_topic_property_parsed(self, prop):
+        """On topic property parsed event handler.
 
         """
         pass

@@ -8,10 +8,12 @@
 
 
 """
-from model import DetailSpecialization
-from model import DetailSetSpecialization
+from model import TopicPropertySpecialization
+from model import TopicPropertySetSpecialization
 from model import EnumSpecialization
 from model import EnumChoiceSpecialization
+from model import RealmSpecialization
+from model import ProcessSpecialization
 from model import TopicSpecialization
 
 
@@ -19,25 +21,25 @@ from model import TopicSpecialization
 def create_specialization(spec):
     """Returns a realm specialization wrapper.
 
-    :param spec: 4 member tuple: realm, grid, key-properties, processes.
+    :param spec: 4 member tuple of python modules: realm, grid, key-properties, processes.
 
     :returns: A realm specialization wrapper.
     :rtype: TopicSpecialization
 
     """
-    r = _create_topic(None, spec[0], "realm")
-    r.grid = _create_topic(r, spec[1], "grid")
-    r.key_properties = _create_topic(r, spec[2], "key-properties")
-    r.processes = [_create_topic(r, i, "process") for i in spec[3]]
+    r = _create_topic(None, spec[0], "realm", typeof=RealmSpecialization)
+    r.grid = _create_topic(r, spec[1], "grid", typeof=ProcessSpecialization)
+    r.key_properties = _create_topic(r, spec[2], "key-properties", typeof=ProcessSpecialization)
+    r.processes = [_create_topic(r, i, "process", typeof=ProcessSpecialization) for i in spec[3]]
 
     return r
 
 
-def _create_topic(parent, spec, type_key, key=None):
+def _create_topic(parent, spec, type_key, key=None, typeof=TopicSpecialization):
     """Creates & returns a topic specialization wrapper.
 
     """
-    topic = TopicSpecialization()
+    topic = typeof()
     topic.cfg_section = type_key
     topic.type_key = type_key
     topic.spec = spec
@@ -51,7 +53,12 @@ def _create_topic(parent, spec, type_key, key=None):
     topic.name_camel_case_spaced = _to_camel_case_spaced(topic.name)
     if parent:
         topic.parent = parent
-        parent.subtopics.append(topic)
+        try:
+            parent.sub_processes
+        except AttributeError:
+            pass
+        else:
+            parent.sub_processes.append(topic)
 
     return topic
 
@@ -79,32 +86,32 @@ def _set_topic_from_module(parent, topic):
     for key, obj in topic.spec.DETAILS.items():
         # ... topic toplevel details
         if key == "toplevel":
-            _set_details(topic, key, obj, topic.spec.ENUMERATIONS)
+            _set_property_collection(topic, key, obj, topic.spec.ENUMERATIONS)
 
         # ... topic toplevel detail sets
         elif key.startswith("toplevel"):
-            _set_detailset(topic, key, obj, topic.spec.ENUMERATIONS)
+            _set_property_set(topic, key, obj, topic.spec.ENUMERATIONS)
 
         # ... sub-process
         elif topic.type_key == "process" and len(key.split(":")) == 1:
-            _create_topic(topic, obj, "sub-process", key)
-            _set_details(topic.subtopics[-1], key, obj, topic.spec.ENUMERATIONS)
+            _create_topic(topic, obj, "sub-process", key, typeof=ProcessSpecialization)
+            _set_property_collection(topic.sub_processes[-1], key, obj, topic.spec.ENUMERATIONS)
 
         # ... sub-process detail set
         elif topic.type_key == "process" and len(key.split(":")) == 2:
-            for t in topic.subtopics:
-                if t.name == key.split(":")[0]:
-                    _set_detailset(t, key, obj, topic.spec.ENUMERATIONS)
+            for sp in topic.sub_processes:
+                if sp.name == key.split(":")[0]:
+                    _set_property_set(sp, key, obj, topic.spec.ENUMERATIONS)
 
-        # ... grid / key-properties details
+        # ... grid / key-properties top-level property set
         elif len(key.split(":")) == 1:
-            _set_detailset(topic, key, obj, topic.spec.ENUMERATIONS)
+            _set_property_set(topic, key, obj, topic.spec.ENUMERATIONS)
 
-        # ... grid / key-properties detail set
+        # ... grid / key-properties property set
         elif len(key.split(":")) == 2:
-            for ds in topic.detailsets:
-                if ds.name == key.split(":")[0]:
-                    _set_detailset(ds, key, obj, topic.spec.ENUMERATIONS)
+            for ps in topic.property_sets:
+                if ps.name == key.split(":")[0]:
+                    _set_property_set(ps, key, obj, topic.spec.ENUMERATIONS)
 
 
 def _set_topic_from_dict(parent, topic, name):
@@ -121,27 +128,27 @@ def _set_topic_from_dict(parent, topic, name):
     topic.qc_status = parent.qc_status
 
 
-def _set_detailset(owner, key, obj, enumerations):
-    """Set detail set attributes from a dictionary.
+def _set_property_set(owner, key, obj, enumerations):
+    """Set attributes of a property-set attributes from a dictionary.
 
     """
-    ds = DetailSetSpecialization()
-    ds.description = obj['description']
-    ds.id = "{}.{}".format(owner.id, key.split(":")[-1])
-    ds.key = key
-    ds.name = key.split(":")[-1]
-    ds.owner = owner
-    _set_details(ds, key, obj, enumerations)
+    ps = TopicPropertySetSpecialization()
+    ps.description = obj['description']
+    ps.id = "{}.{}".format(owner.id, key.split(":")[-1])
+    ps.key = key
+    ps.name = key.split(":")[-1]
+    ps.owner = owner
+    _set_property_collection(ps, key, obj, enumerations)
 
-    owner.detailsets.append(ds)
+    owner.property_sets.append(ps)
 
 
-def _set_details(owner, key, obj, enumerations):
-    """Set detail attributes from a dictionary.
+def _set_property_collection(owner, key, obj, enumerations):
+    """Set a collection of topic properties from a dictionary.
 
     """
     for name, typeof, cardinality, description in obj['properties']:
-        d = DetailSpecialization()
+        d = TopicPropertySpecialization()
         d.cardinality = cardinality
         d.description = description
         d.enum = _create_enum(d, typeof, enumerations) if typeof.startswith("ENUM:") else None
@@ -151,7 +158,7 @@ def _set_details(owner, key, obj, enumerations):
         d.owner = owner
         d.typeof = typeof
 
-        owner.details.append(d)
+        owner.properties.append(d)
 
 
 def _create_enum(detail, typeof, enumerations):

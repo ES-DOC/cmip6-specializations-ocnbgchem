@@ -15,7 +15,7 @@ import json
 import xml.etree.ElementTree as ET
 
 from cim_profile import CIM_PROFILE
-from model import DetailSpecialization
+from model import TopicPropertySpecialization
 from model import TopicSpecialization
 from parser import Parser
 
@@ -43,8 +43,8 @@ _SECTIONS['process'] = "science.process"
 _SECTIONS['sub-process'] = "science.sub_process"
 _SECTIONS['key-properties'] = "science.key_properties"
 _SECTIONS['grid'] = "science.grid"
-_SECTIONS['detail-set'] = "science.detail"
-_SECTIONS['detail'] = None
+_SECTIONS['property-set'] = "science.detail_set"
+_SECTIONS['property'] = None
 _SECTIONS['enum-choice'] = None
 
 
@@ -130,19 +130,19 @@ class Generator(Parser):
         self._emit_node(subprocess.parent, subprocess)
 
 
-    def on_detailset_parse(self, detailset):
-        """On process detail set parse event handler.
+    def on_topic_property_set_parse(self, prop_set):
+        """On topic property set parse event handler.
 
         """
-        self._emit_node(detailset.owner, detailset)
+        self._emit_node(prop_set.owner, prop_set)
 
 
-    def on_detail_parse(self, detail):
-        """On detail property parse event handler.
+    def on_topic_property_parse(self, prop):
+        """On property parse event handler.
 
         """
-        self._emit_node(detail.owner, detail)
-        self._emit_notes(detail)
+        self._emit_node(prop.owner, prop)
+        self._emit_notes(prop)
 
 
     def on_enumchoice_parse(self, choice):
@@ -308,7 +308,7 @@ def _get_notes(spec):
     result = [
         ("Description", lambda i: "N/A" if i.description is None else i.description.replace("&", "and"))
     ]
-    if isinstance(spec, DetailSpecialization):
+    if isinstance(spec, TopicPropertySpecialization):
         result += [
             ("Type", lambda i: i.typeof),
             ("Cardinality", lambda i: i.cardinality),
