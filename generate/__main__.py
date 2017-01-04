@@ -16,8 +16,8 @@ from generate_json import Generator as JsonGenerator
 from generate_ids_level_1 import Generator as Level1IdentifierGenerator
 from generate_ids_level_2 import Generator as Level2IdentifierGenerator
 from generate_ids_level_3 import Generator as Level3IdentifierGenerator
-from loader import get_specializations
-from factory import create_specialization
+from utils_loader import get_realm_specializations
+from utils_factory import create_realm_specialization
 
 
 
@@ -111,7 +111,9 @@ for generator_type, generator_cls in targets.iteritems():
             fname = fname.replace("-", "_")
 
     # Set realm.
-    realm = create_specialization(get_specializations(_ARGS.input_dir, _ARGS.realm))
+    realm = create_realm_specialization(
+        get_realm_specializations(_ARGS.input_dir, _ARGS.realm)
+        )
 
     # Run generator.
     generator = generator_cls(realm)

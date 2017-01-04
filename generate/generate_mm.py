@@ -15,9 +15,9 @@ import json
 import xml.etree.ElementTree as ET
 
 from cim_profile import CIM_PROFILE
-from model import TopicPropertySpecialization
-from model import TopicSpecialization
-from parser import Parser
+from utils_model import TopicPropertySpecialization
+from utils_model import TopicSpecialization
+from utils_parser import RealmSpecializationParser
 
 
 
@@ -39,11 +39,11 @@ _NOTE_HTML = "<dt><b>{}</b></dt><dd>{}</dd>"
 # Mind-map sections.
 _SECTIONS = collections.OrderedDict()
 _SECTIONS['realm'] = "science.realm"
-_SECTIONS['process'] = "science.process"
-_SECTIONS['sub-process'] = "science.sub_process"
-_SECTIONS['key-properties'] = "science.key_properties"
-_SECTIONS['grid'] = "science.grid"
-_SECTIONS['property-set'] = "science.detail_set"
+_SECTIONS['process'] = "science.topic"
+_SECTIONS['sub-process'] = "science.topic"
+_SECTIONS['key-properties'] = "science.topic"
+_SECTIONS['grid'] = "science.topic"
+_SECTIONS['property-set'] = None
 _SECTIONS['property'] = None
 _SECTIONS['enum-choice'] = None
 
@@ -68,7 +68,7 @@ class _Configuration(object):
         return self._data.get(key, {})
 
 
-class Generator(Parser):
+class Generator(RealmSpecializationParser):
     """Specialization to mindmap generator.
 
     """

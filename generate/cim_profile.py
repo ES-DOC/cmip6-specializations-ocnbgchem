@@ -18,89 +18,47 @@ CIM_PROFILE = OrderedDict()
 
 # science.model constraints.
 CIM_PROFILE["science.model"] = {
-	"include": [
-		"category",
-		"citations",
-		"description",
-		"key_properties",
-		"name",
-		"long_name",
-		"processes",
-		"version"
-	],
-	"exclude": [
-		"coupled_components",
-		"coupler",
-		"development_history",
-		"development_path",
-		"internal_software_components",
-		"release_date”",
-		"repository",
-	]
+    "include": [
+        "canonical_id",
+        "citations",
+        "description",
+        "key_properties",
+        "long_name",
+        "model_type",
+        "name",
+        "realms",
+        "version"
+    ],
+    "exclude": [
+        "coupled_components",
+        "coupler",
+        "development_history",
+        "development_path",
+        "internal_software_components",
+        "release_date”",
+        "repository",
+    ]
 }
 
 # science.realm constraints.
 CIM_PROFILE["science.realm"] = {
-	"include": [
-	   "citations",
-	   "keywords",
-	   "overview"
-	],
-	"exclude": []
+    "include": [
+        "canonical_name",
+        "citations",
+        "keywords",
+        "overview",
+        "responsible_parties"
+    ],
+    "exclude": []
 }
 
-# science.process constraints.
-CIM_PROFILE["science.process"] = {
-	"include": [
-	   "citations",
-	   "keywords",
-	   "overview"
-	],
-	"exclude": []
-}
-
-# science.sub_process constraints.
-CIM_PROFILE["science.sub_process"] = {
-	"include": [
-	   "citations",
-	   "keywords",
-	   "overview"
-	],
-	"exclude": []
-}
-
-# science.key_properties constraints.
-CIM_PROFILE["science.key_properties"] = {
-	"include": [
-	   "citations",
-	   "keywords",
-	],
-	"exclude": [
-		"extent",
-		"extra_conservation_properties",
-		"implementation_overview",
-		"keywords",
-		"resolution",
-		"tuning_applied"
-	]
-}
-
-# science.model[ocean].key_properties constraints.
-CIM_PROFILE["science.realm[ocean].key_properties"] = {
-	"include": [
-		"citations",
-		"detail_sets",
-		"description"
-		"extra_conservation_properties",
-		"keywords",
-		"resolution",
-		"short_name",
-		"sub_processes",
-		"tuning_applied"
-	],
-	"exclude": [
-		"extent",
-		"implementation_overview",
-		"keywords",
-	]
+# science.topic constraints.
+CIM_PROFILE["science.topic"] = {
+    "include": [
+        "citations",
+        "keywords",
+        "overview",
+        "responsible_parties"
+    ],
+    "exclude": []
 }

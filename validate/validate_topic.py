@@ -9,7 +9,7 @@
 
 """
 from utils import validate_std
-from validate_detail_sets import validate as validate_detail_sets
+from validate_property_sets import validate as validate_property_sets
 from validate_enum import validate_enumerations
 
 
@@ -21,10 +21,6 @@ def validate(ctx, topic):
     :param module detail_topic: A python module containing specializations.
 
     """
-    # Determine whether validating a process or not.
-    is_process = not topic.__name__.endswith("grid") and \
-                 not topic.__name__.endswith("key_properties")
-
     # Set expected sections.
     sections = ['ENUMERATIONS', 'DETAILS']
 
@@ -38,4 +34,4 @@ def validate(ctx, topic):
         validate_enumerations(topic.ENUMERATIONS)
     for section in sections[1:]:
         ctx.errors[topic] += \
-            validate_detail_sets(topic, getattr(topic, section))
+            validate_property_sets(topic, getattr(topic, section))

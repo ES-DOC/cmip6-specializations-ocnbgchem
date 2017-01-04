@@ -13,6 +13,3 @@ CARDINALITIES = {'0.1', '1.1', '0.N', '1.N'}
 
 # Set of valid property types.
 TYPES = {'bool', 'float', 'int', 'str'}
-
-# Set of valid QC states.
-QC_STATES = {'draft', 'complete'}
