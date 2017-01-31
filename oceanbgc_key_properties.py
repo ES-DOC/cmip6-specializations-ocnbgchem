@@ -54,6 +54,10 @@ DETAILS['toplevel'] = {
 # --------------------------------------------------------------------
 # KEY PROPERTIES: details
 # --------------------------------------------------------------------
+DETAILS['time_stepping_framework'] = {
+    'description': 'Time stepping frameowrk in ocean biogeochemistry',
+    'properties' : []
+    }
 
 DETAILS['time_stepping_framework:passive_tracers_transport'] = {
     'description': 'Time stepping method for passive tracers transport in ocean biogeochemistry',
@@ -132,7 +136,6 @@ DETAILS['gas_exchange'] = {
             'Specify any other gas exchange'),
         ]
     }
-
 
 DETAILS['carbon_chemistry'] = {
     'description': 'Properties of carbon chemistry biogeochemistry',

@@ -24,7 +24,7 @@ _ARGS.add_argument(
     help="Name of realm being validated.",
     dest="realm",
     type=str,
-    default=os.path.dirname(os.path.dirname(__file__)).split("-")[-1]
+    default=os.path.dirname(os.path.dirname(__file__)).split("/")[-1][22:]
     )
 _ARGS.add_argument(
     "--input",

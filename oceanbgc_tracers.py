@@ -217,7 +217,7 @@ ENUMERATIONS['prognostic_particules_sizes'] = {
 
 ENUMERATIONS['prognostic_particules_sinking_speed'] = {
     'description': 'Prognostic particulate carbon sinking speed in ocean biogeochemistry',
-    'is_open': Open,
+    'is_open': True,
     'members': [
         ('Constant', None),
         ('Function of particule size', None),

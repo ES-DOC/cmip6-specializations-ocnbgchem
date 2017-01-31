@@ -45,8 +45,10 @@ CHANGE_HISTORY = [
 DESCRIPTION = 'Ocean Biogeochemistry Realm'
 
 # --------------------------------------------------------------------
-# GRID: The grid used to layout the variables Not used for this Realm
+# GRID: The grid used to layout the variables
 # --------------------------------------------------------------------
+# Not used for this Realm.
+GRID = None
 
 # --------------------------------------------------------------------
 # KEY PROPERTIES: Key properties for the realm which differ from model defaults (grid, timestep etc)

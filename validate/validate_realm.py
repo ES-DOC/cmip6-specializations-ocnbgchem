@@ -26,7 +26,7 @@ def validate(ctx, realm):
         ('CONTRIBUTORS', str),
         ('CHANGE_HISTORY', list),
         ('KEY_PROPERTIES', str),
-        ('GRID', str),
+        ('GRID', (str, type(None))),
         ('PROCESSES', list)
         }:
         if not hasattr(realm, name):

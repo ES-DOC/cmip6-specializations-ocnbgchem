@@ -13,6 +13,13 @@ import os
 
 
 
+
+# Realm name overrides.
+REALM_NAME_OVERRIDES = {
+    "ocean-bgc": "oceanbgc"
+}
+
+
 def get_specializations(input_dir, realm_name):
     """Returns specialization modules organized by type.
 
@@ -20,6 +27,12 @@ def get_specializations(input_dir, realm_name):
     :param str realm_name: Name of realm being processed.
 
     """
+    # Reform realm name when running from specializations repo.
+    try:
+        realm_name = REALM_NAME_OVERRIDES[realm_name]
+    except KeyError:
+        pass
+
     def get_module(modules, name):
         for module in modules:
             if module.__name__ == name:
