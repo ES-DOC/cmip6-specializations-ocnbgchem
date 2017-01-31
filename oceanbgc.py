@@ -51,7 +51,7 @@ DESCRIPTION = 'Ocean Biogeochemistry Realm'
 GRID = None
 
 # --------------------------------------------------------------------
-# KEY PROPERTIES: Key properties for the realm which differ from model defaults (grid, timestep etc)
+# KEY PROPERTIES: Key properties for the realm which differ from model defaults
 # --------------------------------------------------------------------
 KEY_PROPERTIES = 'oceanbgc_key_properties'
 
