@@ -9,11 +9,16 @@
 
 """
 import collections
+import re
 
 import utils
 import validate_property_set
 import validate_enum
 
+
+
+# Regular expression to apply over a specialization key.
+_RE_KEY = '^[a-z_:]+$'
 
 
 def validate(ctx, topic):
@@ -25,6 +30,9 @@ def validate(ctx, topic):
     """
     if topic is None:
         return
+
+    # Set current module.
+    ctx.module = topic
 
     # Level-1 validation.
     _validate_fields(ctx, topic)
@@ -68,10 +76,15 @@ def _validate_section(ctx, module, section):
 
     """
     for key, obj in getattr(module, section).items():
-        if not isinstance(key, (str, unicode)):
+        if not isinstance(key, (str, unicode)) or \
+           len(key.strip()) == 0:
             err = "{}: all keys must be strings".format(section)
-        elif len(key.strip()) == 0:
-            err = "{}: all keys must be strings".format(section)
+            ctx.error(err)
+
+        elif not re.match(_RE_KEY, key):
+            err = "{}[{}]: all keys must be lower-case with underscore spacing".format(section, key)
+            ctx.error(err)
+
         elif not isinstance(obj, dict):
             err = "{}[{}]: must be a dictionary".format(section, key)
             ctx.error(err)

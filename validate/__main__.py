@@ -61,6 +61,7 @@ ctx = utils.ValidationContext(modules)
 # Validate.
 validate_root.validate(ctx)
 for module in [i for i in ctx.modules if i != ctx.root]:
+    # ctx.module = module
     validate_topic.validate(ctx, module)
 
 # Set errors.

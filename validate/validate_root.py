@@ -18,6 +18,9 @@ def validate(ctx):
     :param ValidationContext ctx: Validation contextual information.
 
     """
+    # Set current module.
+    ctx.module = ctx.root
+
     # Validate fields.
     for name, typeof in {
         ('AUTHORS', str),
@@ -41,4 +44,4 @@ def validate(ctx):
     module_keys = [i for i in module_keys if i is not None]
     for module_key in module_keys:
         if not ctx.has_module(module_key):
-            ctx.error("{} is an invalid key - no matching {}.py file can be found".format(module_key))
+            ctx.error("{0} is an invalid key - no matching {0}.py file can be found".format(module_key))
