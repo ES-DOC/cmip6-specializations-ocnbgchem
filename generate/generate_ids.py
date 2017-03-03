@@ -18,11 +18,11 @@ class Generator(SpecializationParser):
     """Specialization to mindmap generator.
 
     """
-    def __init__(self, root):
+    def __init__(self, root, short_tables):
         """Instance constructor.
 
         """
-        super(Generator, self).__init__(root)
+        super(Generator, self).__init__(root, short_tables)
 
         self._ids = [("cmip6-id", "cmip6-label", "cmip6-type", "")]
 

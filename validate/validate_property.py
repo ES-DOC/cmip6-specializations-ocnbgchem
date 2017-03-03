@@ -15,8 +15,8 @@ _CARDINALITIES = {'0.1', '1.1', '0.N', '1.N'}
 # Set of valid property types.
 _TYPES = {'bool', 'float', 'int', 'str'}
 
-# Proeprty name regular expression.
-_RE_NAME = '^[a-z_]+$'
+# Property name regular expression.
+_RE_NAME = '^[a-z0-9_]+$'
 
 
 def validate(prop, enums):

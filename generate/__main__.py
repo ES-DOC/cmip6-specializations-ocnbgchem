@@ -18,6 +18,7 @@ from generate_ids_level_2 import Generator as Level2IdentifierGenerator
 from generate_ids_level_3 import Generator as Level3IdentifierGenerator
 from utils_factory import get_specialization
 from utils_loader import get_modules
+from utils_loader import get_short_tables
 
 
 
@@ -109,6 +110,9 @@ else:
 # Set specialization modules.
 modules = get_modules(_ARGS.input_dir, _FILENAME)
 
+# Set specialization short tables.
+short_tables = get_short_tables(_ARGS.input_dir, _FILENAME)
+
 # Set specialization.
 specialization = get_specialization(modules)
 
@@ -130,7 +134,7 @@ for generator_type, generator_cls in targets.iteritems():
             fname = fname.replace("-", "_")
 
     # Set generator.
-    generator = generator_cls(specialization)
+    generator = generator_cls(specialization, short_tables)
 
     # Run generator
     generator.run()
