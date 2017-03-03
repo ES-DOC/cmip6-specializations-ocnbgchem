@@ -13,16 +13,17 @@ import datetime
 import operator
 import os
 
-from context import ValidationContext
-import utils_loader
+import utils
+import validate_root
+import validate_topic
 
 
 # Define command line options.
 _ARGS = argparse.ArgumentParser("Validates a set of CMIP6 specializations.")
 _ARGS.add_argument(
-    "--realm",
-    help="Name of realm being validated.",
-    dest="realm",
+    "--typeof",
+    help="Type of specializations being validated.",
+    dest="typeof",
     type=str,
     default=os.path.dirname(os.path.dirname(__file__)).split("/")[-1][22:]
     )
@@ -35,32 +36,48 @@ _ARGS.add_argument(
     )
 _ARGS = _ARGS.parse_args()
 
+
 # Report section break.
 _REPORT_BREAK = "------------------------------------------------------------------------"
 
-# Set specializations.
-realm, grid, key_properties, processes = \
-    utils_loader.get_specializations(_ARGS.input_dir, _ARGS.realm)
+# Map of specialization types to filename overrides.
+_FILENAME_OVERRIDES = {
+    "toplevel": "model",
+    "ocean-bgc": "oceanbgc"
+}
+
+# Set specialization filename prefix.
+try:
+    _FILENAME = _FILENAME_OVERRIDES[_ARGS.typeof]
+except KeyError:
+    _FILENAME = _ARGS.typeof
+
+# Set specialization modules.
+modules = utils.get_modules(_ARGS.input_dir, _FILENAME)
+
+# Set validation context.
+ctx = utils.ValidationContext(modules)
 
 # Validate.
-validator = ValidationContext(realm, grid, key_properties, processes)
-validator.validate()
+validate_root.validate(ctx)
+for module in [i for i in ctx.modules if i != ctx.root]:
+    validate_topic.validate(ctx, module)
 
 # Set errors.
-in_error = validator.get_errors()
-error_count = 0 if not in_error else len(reduce(operator.add, in_error.values()))
+in_error = ctx.get_errors()
 
 # Set report.
 report = []
 if not in_error:
     report.append(_REPORT_BREAK)
-    report.append("The CMIP6 {} specializations are currently valid. Congratulations!".format(_ARGS.realm))
+    report.append("The CMIP6 {} specializations are currently valid. Congratulations!".format(_ARGS.typeof))
     report.append(_REPORT_BREAK)
 else:
+    error_count = len(reduce(operator.add, in_error.values()))
     report.append(_REPORT_BREAK)
     report.append("CMIP6 SPECIALIZATIONS VALIDATION REPORT")
     report.append(_REPORT_BREAK)
-    report.append("Realm = {}".format(_ARGS.realm))
+    report.append("Specialization Type = {}".format(_ARGS.typeof))
     report.append("Generated @ {}".format(datetime.datetime.now()))
     report.append("Error count = {}".format(error_count))
     report.append(_REPORT_BREAK)

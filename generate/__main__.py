@@ -16,9 +16,8 @@ from generate_json import Generator as JsonGenerator
 from generate_ids_level_1 import Generator as Level1IdentifierGenerator
 from generate_ids_level_2 import Generator as Level2IdentifierGenerator
 from generate_ids_level_3 import Generator as Level3IdentifierGenerator
-from utils_loader import get_realm_specializations
-from utils_loader import REALM_NAME_OVERRIDES
-from utils_factory import create_realm_specialization
+from utils_factory import get_specialization
+from utils_loader import get_modules
 
 
 
@@ -49,7 +48,7 @@ _FILE_SUFFIXES = {
 _DIR = os.path.dirname(__file__)
 
 # Set command line arguments.
-_ARGS = argparse.ArgumentParser("Encodes CMIP6 realm specializations.")
+_ARGS = argparse.ArgumentParser("Encodes a CMIP6 specialization.")
 _ARGS.add_argument(
     "--type",
     help="Type of generator to be executed.",
@@ -65,32 +64,39 @@ _ARGS.add_argument(
     default=os.path.dirname(_DIR)
     )
 _ARGS.add_argument(
-    "--realm",
-    help="Name of realm being processed.",
-    dest="realm",
+    "--scope",
+    help="Name of specialization scope being processed.",
+    dest="scope",
     type=str,
     default=os.path.dirname(os.path.dirname(__file__)).split("/")[-1][22:]
     )
 _ARGS.add_argument(
     "--input",
-    help="Path to a directory in which realm specializations reside.",
+    help="Path to a directory in which specializations reside.",
     dest="input_dir",
     type=str,
     default=os.path.dirname(_DIR)
     )
 _ARGS = _ARGS.parse_args()
 
-# Override realm name.
-try:
-    _ARGS.realm = REALM_NAME_OVERRIDES[_ARGS.realm]
-except KeyError:
-    pass
 
 # Validate inputs.
 if _ARGS.typeof != 'all' and _ARGS.typeof not in _GENERATORS.keys():
     err = "Unknown generator type [{}].  Validate types = {}."
     err = err.format(_ARGS.typeof, " | ".join(sorted(_GENERATORS.keys())))
     raise ValueError(err)
+
+# Map of specialization types to filename overrides.
+_FILENAME_OVERRIDES = {
+    "toplevel": "model",
+    "ocean-bgc": "oceanbgc"
+}
+
+# Set specialization filename prefix.
+try:
+    _FILENAME = _FILENAME_OVERRIDES[_ARGS.scope]
+except KeyError:
+    _FILENAME = _ARGS.scope
 
 # Set target generators to be executed.
 if _ARGS.typeof == 'all':
@@ -99,6 +105,12 @@ else:
     targets = {
         _ARGS.typeof: _GENERATORS[_ARGS.typeof]
     }
+
+# Set specialization modules.
+modules = get_modules(_ARGS.input_dir, _FILENAME)
+
+# Set specialization.
+specialization = get_specialization(modules)
 
 logging_output = []
 for generator_type, generator_cls in targets.iteritems():
@@ -110,20 +122,17 @@ for generator_type, generator_cls in targets.iteritems():
 
     # Set output filename.
     try:
-        fname = "{}-{}".format(_ARGS.realm, _FILE_SUFFIXES[generator_type])
+        fname = "{}-{}".format(_FILENAME, _FILE_SUFFIXES[generator_type])
     except KeyError:
-        fname = _ARGS.realm
+        fname = _FILENAME
     finally:
         if encoding == 'py':
             fname = fname.replace("-", "_")
 
-    # Set realm.
-    realm = create_realm_specialization(
-        get_realm_specializations(_ARGS.input_dir, _ARGS.realm)
-        )
+    # Set generator.
+    generator = generator_cls(specialization)
 
-    # Run generator.
-    generator = generator_cls(realm)
+    # Run generator
     generator.run()
 
     # Write generated output to file system.
@@ -132,6 +141,7 @@ for generator_type, generator_cls in targets.iteritems():
         fstream.write(generator.get_output())
 
     logging_output.append((encoding, fpath))
+
 
 # Inform user.
 for encoding, fpath in sorted(logging_output):

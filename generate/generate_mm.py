@@ -3,7 +3,7 @@
 """
 .. module:: write_cmip6_xmind.py
    :platform: Unix, Windows
-   :synopsis: Rewrites a cmip6 realm specialization to mindmap.
+   :synopsis: Encodes a cmip6 specialization as a mindmap.
 
 .. moduleauthor:: Mark Conway-Greenslade <momipsl@ipsl.jussieu.fr>
 
@@ -15,10 +15,10 @@ import json
 import xml.etree.ElementTree as ET
 
 from cim_profile import CIM_PROFILE
-from utils_model import TopicPropertySpecialization
+from utils_constants import *
+from utils_model import PropertySpecialization
 from utils_model import TopicSpecialization
-from utils_parser import RealmSpecializationParser
-
+from utils_parser import SpecializationParser
 
 
 # HTML snippet for a set of notes.
@@ -38,14 +38,15 @@ _NOTE_HTML = "<dt><b>{}</b></dt><dd>{}</dd>"
 
 # Mind-map sections.
 _SECTIONS = collections.OrderedDict()
-_SECTIONS['realm'] = "science.realm"
-_SECTIONS['process'] = "science.topic"
-_SECTIONS['sub-process'] = "science.topic"
-_SECTIONS['key-properties'] = "science.topic"
-_SECTIONS['grid'] = "science.topic"
-_SECTIONS['property-set'] = None
-_SECTIONS['property'] = None
-_SECTIONS['enum-choice'] = None
+_SECTIONS[TYPE_KEY_ENUM_CHOICE] = None
+_SECTIONS[TYPE_KEY_GRID] = "science.topic"
+_SECTIONS[TYPE_KEY_KEYPROPS] = "science.topic"
+_SECTIONS[TYPE_KEY_MODEL] = "science.topic"
+_SECTIONS[TYPE_KEY_PROCESS] = "science.topic"
+_SECTIONS[TYPE_KEY_PROPERTY] = None
+_SECTIONS[TYPE_KEY_PROPERTY_SET] = None
+_SECTIONS[TYPE_KEY_REALM] = "science.realm"
+_SECTIONS[TYPE_KEY_SUBPROCESS] = "science.topic"
 
 
 class _Configuration(object):
@@ -68,15 +69,15 @@ class _Configuration(object):
         return self._data.get(key, {})
 
 
-class Generator(RealmSpecializationParser):
+class Generator(SpecializationParser):
     """Specialization to mindmap generator.
 
     """
-    def __init__(self, realm):
+    def __init__(self, root):
         """Instance constructor.
 
         """
-        super(Generator, self).__init__(realm)
+        super(Generator, self).__init__(root)
 
         self.cfg = _Configuration()
         self.mmap = None
@@ -90,36 +91,36 @@ class Generator(RealmSpecializationParser):
         return ET.tostring(self.mmap)
 
 
-    def on_realm_parse(self, realm):
-        """On realm parse event handler.
+    def on_root_parse(self, root):
+        """On root parse event handler.
 
         """
         self.mmap = ET.Element('map', {})
-        self._emit_node(self.mmap, realm, style="fork")
-        self._emit_change_history(realm)
-        self._emit_legend(realm)
-        self._emit_cim_profile(realm)
+        self._emit_node(self.mmap, root, style="fork")
+        self._emit_change_history(root)
+        self._emit_legend(root)
+        self._emit_cim_profile(root)
 
 
     def on_grid_parse(self, grid):
         """On grid parse event handler.
 
         """
-        self._emit_node(self.realm, grid)
+        self._emit_node(self.root, grid)
 
 
-    def on_keyproperties_parse(self, key_properties):
-        """On key_properties parse event handler.
+    def on_keyprops_parse(self, key_props):
+        """On key-properties parse event handler.
 
         """
-        self._emit_node(self.realm, key_properties)
+        self._emit_node(self.root, key_props)
 
 
     def on_process_parse(self, process):
         """On process parse event handler.
 
         """
-        self._emit_node(self.realm, process)
+        self._emit_node(self.root, process)
         self._emit_notes(process)
 
 
@@ -130,14 +131,14 @@ class Generator(RealmSpecializationParser):
         self._emit_node(subprocess.parent, subprocess)
 
 
-    def on_topic_property_set_parse(self, prop_set):
-        """On topic property set parse event handler.
+    def on_property_set_parse(self, prop_set):
+        """On property set parse event handler.
 
         """
         self._emit_node(prop_set.owner, prop_set)
 
 
-    def on_topic_property_parse(self, prop):
+    def on_property_parse(self, prop):
         """On property parse event handler.
 
         """
@@ -145,7 +146,7 @@ class Generator(RealmSpecializationParser):
         self._emit_notes(prop)
 
 
-    def on_enumchoice_parse(self, choice):
+    def on_enum_choice_parse(self, choice):
         """On enum property parse event handler.
 
         """
@@ -227,12 +228,12 @@ class Generator(RealmSpecializationParser):
         node.append(ET.fromstring(html))
 
 
-    def _emit_legend(self, realm):
+    def _emit_legend(self, root):
         """Emits mindmap legend.
 
         """
         cfg = self.cfg.get_section
-        root_node = ET.SubElement(self.nodes[realm], 'node', {
+        root_node = ET.SubElement(self.nodes[root], 'node', {
             'FOLDED': "true",
             'STYLE': "bubble",
             'TEXT': "LEGEND",
@@ -250,12 +251,12 @@ class Generator(RealmSpecializationParser):
                 ])
 
 
-    def _emit_cim_profile(self, realm):
+    def _emit_cim_profile(self, root):
         """Emits mindmap cim profile.
 
         """
         cfg = self.cfg.get_section
-        root_node = ET.SubElement(self.nodes[realm], 'node', {
+        root_node = ET.SubElement(self.nodes[root], 'node', {
             'FOLDED': "true",
             'STYLE': "bubble",
             'TEXT': "DETAILS INHERITED FROM CIM",
@@ -278,17 +279,17 @@ class Generator(RealmSpecializationParser):
                         })
 
 
-    def _emit_change_history(self, realm):
-        """Emits mindmap realm change history.
+    def _emit_change_history(self, root):
+        """Emits change history.
 
         """
-        root_node = ET.SubElement(self.nodes[realm], 'node', {
+        root_node = ET.SubElement(self.nodes[root], 'node', {
             'FOLDED': "true",
             'STYLE': "bubble",
             'TEXT': "CHANGE HISTORY",
             'POSITION': "left"
             })
-        for version, date, person, comment in realm.change_history:
+        for version, date, person, comment in root.change_history:
             node = ET.SubElement(root_node, 'node', {
                 'STYLE': "bubble",
                 'TEXT': version
@@ -308,7 +309,7 @@ def _get_notes(spec):
     result = [
         ("Description", lambda i: "N/A" if i.description is None else i.description.replace("&", "and"))
     ]
-    if isinstance(spec, TopicPropertySpecialization):
+    if isinstance(spec, PropertySpecialization):
         result += [
             ("Type", lambda i: i.typeof),
             ("Cardinality", lambda i: i.cardinality),

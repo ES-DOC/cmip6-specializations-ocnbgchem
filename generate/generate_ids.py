@@ -3,26 +3,26 @@
 """
 .. module:: generate_ids_level_1.py
    :platform: Unix, Windows
-   :synopsis: Generates level 1 identifiers.
+   :synopsis: Encodes a cmip6 specialization as CSV.
 
 .. moduleauthor:: Mark Conway-Greenslade <momipsl@ipsl.jussieu.fr>
 
 
 """
 from utils import get_label
-from utils_parser import RealmSpecializationParser
+from utils_parser import SpecializationParser
 
 
 
-class Generator(RealmSpecializationParser):
+class Generator(SpecializationParser):
     """Specialization to mindmap generator.
 
     """
-    def __init__(self, realm):
+    def __init__(self, root):
         """Instance constructor.
 
         """
-        super(Generator, self).__init__(realm)
+        super(Generator, self).__init__(root)
 
         self._ids = [("cmip6-id", "cmip6-label", "cmip6-type", "")]
 

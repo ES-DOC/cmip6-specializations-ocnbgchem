@@ -24,11 +24,11 @@ class Generator(IdentifierGenerator):
         self.emit_null_row(grid)
 
 
-    def on_keyproperties_parsed(self, key_properties):
-        """On key_properties parsed event handler.
+    def on_keyprops_parsed(self, key_props):
+        """On key-properties parsed event handler.
 
         """
-        self.emit_null_row(key_properties)
+        self.emit_null_row(key_props)
 
 
     def on_process_parsed(self, process):
@@ -38,8 +38,8 @@ class Generator(IdentifierGenerator):
         self.emit_null_row(process)
 
 
-    def on_topic_property_set_parse(self, prop_set):
-        """On topic property set parse event handler.
+    def on_property_set_parse(self, prop_set):
+        """On property set parse event handler.
 
         """
         self.set_id(prop_set)

@@ -1,6 +1,6 @@
 """
 
-A realm process sepecialization.
+A process specialization.
 
 For further information goto http://wordpress.es-doc.org/cmip6-model-specializations.
 """
@@ -12,12 +12,12 @@ DETAILS = OrderedDict()
 ENUMERATIONS = OrderedDict()
 
 # --------------------------------------------------------------------
-# CONTACT: Set to realm specialization co-ordinator.
+# CONTACT: Set to specialization co-ordinator.
 # --------------------------------------------------------------------
 CONTACT = ''
 
 # --------------------------------------------------------------------
-# AUTHORS: Set to realm specialization authors (comma delimited).
+# AUTHORS: Set to specialization authors (comma delimited).
 # --------------------------------------------------------------------
 AUTHORS = ''
 

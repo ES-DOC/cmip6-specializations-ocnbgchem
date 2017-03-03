@@ -8,6 +8,7 @@
 
 
 """
+import operator
 import re
 
 
@@ -17,7 +18,7 @@ _RE_ENUM_NAME = '^[a-z_]+$'
 _RE_ENUM_MEMBER_NAME = '^[a-zA-Z0-9-_ ()/\*\.\,\:+]+$'
 
 
-def validate_enumerations(enumerations):
+def validate(enumerations):
     """Validates the module .
 
     :param dict enumerations: Specialized enumerations.

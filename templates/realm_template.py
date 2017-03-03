@@ -1,20 +1,20 @@
-"""A realm sepecialization.
+"""A specialization.
 
 For further information goto http://wordpress.es-doc.org/cmip6-model-specializations.
 
 """
 # --------------------------------------------------------------------
-# CONTACT: Set to realm specialization co-ordinator.
+# CONTACT: Set to specialization co-ordinator.
 # --------------------------------------------------------------------
 CONTACT = ''
 
 # --------------------------------------------------------------------
-# AUTHORS: Set to realm specialization authors (comma delimited).
+# AUTHORS: Set to specialization authors (comma delimited).
 # --------------------------------------------------------------------
 AUTHORS = ''
 
 # --------------------------------------------------------------------
-# CONTRIBUTORS: Set to realm specialization contributors (comma delimited).
+# CONTRIBUTORS: Set to specialization contributors (comma delimited).
 # --------------------------------------------------------------------
 CONTRIBUTORS = ''
 
@@ -31,12 +31,12 @@ CHANGE_HISTORY = [
 QC_STATUS = 'draft'
 
 # --------------------------------------------------------------------
-# DESCRIPTION: Scientific context of this scientific realm
+# DESCRIPTION: Scientific context of this specialization
 # --------------------------------------------------------------------
 DESCRIPTION = ''
 
 # --------------------------------------------------------------------
-# REALM: Canonical name for the domain of this scientific realm
+# REALM: Canonical name for the domain of this specialization
 # --------------------------------------------------------------------
 REALM = ''
 
@@ -46,11 +46,11 @@ REALM = ''
 GRID = ''
 
 # --------------------------------------------------------------------
-# KEY PROPERTIES: Key properties for the realm which differ from model defaults (grid, timestep etc)
+# KEY PROPERTIES: Key properties for the specialization.
 # --------------------------------------------------------------------
 KEY_PROPERTIES = ''
 
 # --------------------------------------------------------------------
-# PROCESSES: Processes simulated within the realm
+# PROCESSES: Simulated processes.
 # --------------------------------------------------------------------
 PROCESSES = []
