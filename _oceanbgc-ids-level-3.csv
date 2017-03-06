@@ -40,8 +40,10 @@ cmip6.oceanbgc.tracers.ecosystem.upper_trophic_levels_definition, Oceanbgc > Tra
 cmip6.oceanbgc.tracers.ecosystem.upper_trophic_levels_treatment, Oceanbgc > Tracers > Ecosystem > Upper Trophic Levels Treatment, property
 cmip6.oceanbgc.tracers.ecosystem.phytoplancton.type, Oceanbgc > Tracers > Ecosystem > Phytoplancton > Type, property
 cmip6.oceanbgc.tracers.ecosystem.phytoplancton.list, Oceanbgc > Tracers > Ecosystem > Phytoplancton > List, property
+cmip6.oceanbgc.tracers.ecosystem.phytoplancton.size_range, Oceanbgc > Tracers > Ecosystem > Phytoplancton > Size Range, property
 cmip6.oceanbgc.tracers.ecosystem.zooplancton.type, Oceanbgc > Tracers > Ecosystem > Zooplancton > Type, property
 cmip6.oceanbgc.tracers.ecosystem.zooplancton.list, Oceanbgc > Tracers > Ecosystem > Zooplancton > List, property
+cmip6.oceanbgc.tracers.ecosystem.zooplancton.size_range, Oceanbgc > Tracers > Ecosystem > Zooplancton > Size Range, property
 cmip6.oceanbgc.tracers.disolved_organic_matter.bacteria_present, Oceanbgc > Tracers > Disolved Organic Matter > Bacteria Present, property
 cmip6.oceanbgc.tracers.disolved_organic_matter.lability, Oceanbgc > Tracers > Disolved Organic Matter > Lability, property
 cmip6.oceanbgc.tracers.particules.method, Oceanbgc > Tracers > Particules > Method, property
