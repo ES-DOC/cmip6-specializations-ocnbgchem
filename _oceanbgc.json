@@ -122,19 +122,19 @@
                     ], 
                     "propertySets": [
                         {
-                            "label": "Phytoplancton", 
-                            "description": "Phytoplancton properties in ocean biogeochemistry", 
-                            "id": "cmip6.oceanbgc.tracers.ecosystem.phytoplancton", 
+                            "label": "Phytoplankton", 
+                            "description": "Phytoplankton properties in ocean biogeochemistry", 
+                            "id": "cmip6.oceanbgc.tracers.ecosystem.phytoplankton", 
                             "properties": [
                                 {
                                     "label": "Type", 
-                                    "description": "Type of phytoplancton", 
-                                    "id": "cmip6.oceanbgc.tracers.ecosystem.phytoplancton.type", 
+                                    "description": "Type of phytoplankton", 
+                                    "id": "cmip6.oceanbgc.tracers.ecosystem.phytoplankton.type", 
                                     "cardinality": "1.1", 
                                     "type": "enum", 
                                     "enum": {
-                                        "label": "Plancton Types", 
-                                        "description": "Plancton types in ocean biogeochemistry", 
+                                        "label": "Phytoplankton Types", 
+                                        "description": "Phytoplankton types in ocean biogeochemistry", 
                                         "isOpen": false, 
                                         "choices": [
                                             {
@@ -146,7 +146,15 @@
                                                 "description": null
                                             }, 
                                             {
-                                                "label": "List (specify below)", 
+                                                "label": "PFT including size based (specify both below)", 
+                                                "description": "Plankton functional type including size based"
+                                            }, 
+                                            {
+                                                "label": "Size based only (specify below)", 
+                                                "description": null
+                                            }, 
+                                            {
+                                                "label": "PFT only (specify below)", 
                                                 "description": null
                                             }
                                         ]
@@ -154,14 +162,14 @@
                                     "uiOrdinal": 1
                                 }, 
                                 {
-                                    "label": "List", 
-                                    "description": "List species of phytoplancton if applicable", 
-                                    "id": "cmip6.oceanbgc.tracers.ecosystem.phytoplancton.list", 
+                                    "label": "Pft", 
+                                    "description": "Phytoplankton functional types (PFT) (if applicable)", 
+                                    "id": "cmip6.oceanbgc.tracers.ecosystem.phytoplankton.pft", 
                                     "cardinality": "0.N", 
                                     "type": "enum", 
                                     "enum": {
-                                        "label": "Phytoplancton List", 
-                                        "description": "Phytoplancton list in ocean biogeochemistry", 
+                                        "label": "Phytoplankton Pft List", 
+                                        "description": "Phytoplankton functional types list in ocean biogeochemistry", 
                                         "isOpen": true, 
                                         "choices": [
                                             {
@@ -175,40 +183,55 @@
                                             {
                                                 "label": "Calcifiers", 
                                                 "description": null
-                                            }, 
-                                            {
-                                                "label": "Picophytoplancton", 
-                                                "description": null
                                             }
                                         ]
                                     }, 
                                     "uiOrdinal": 2
                                 }, 
                                 {
-                                    "label": "Size Range", 
-                                    "description": "Size range of phytoplancton (if applicable)", 
-                                    "id": "cmip6.oceanbgc.tracers.ecosystem.phytoplancton.size_range", 
-                                    "cardinality": "0.1", 
-                                    "type": "str", 
+                                    "label": "Size Classes", 
+                                    "description": "Phytoplankton size classes (if applicable)", 
+                                    "id": "cmip6.oceanbgc.tracers.ecosystem.phytoplankton.size_classes", 
+                                    "cardinality": "0.N", 
+                                    "type": "enum", 
+                                    "enum": {
+                                        "label": "Phytoplankton Size Classes", 
+                                        "description": "Phytoplankton size classes in ocean biogeochemistry", 
+                                        "isOpen": true, 
+                                        "choices": [
+                                            {
+                                                "label": "Microphytoplankton", 
+                                                "description": null
+                                            }, 
+                                            {
+                                                "label": "Nanophytoplankton", 
+                                                "description": null
+                                            }, 
+                                            {
+                                                "label": "Picophytoplankton", 
+                                                "description": null
+                                            }
+                                        ]
+                                    }, 
                                     "uiOrdinal": 3
                                 }
                             ]
                         }, 
                         {
-                            "label": "Zooplancton", 
-                            "description": "Zooplancton properties in ocean biogeochemistry", 
-                            "id": "cmip6.oceanbgc.tracers.ecosystem.zooplancton", 
+                            "label": "Zooplankton", 
+                            "description": "Zooplankton properties in ocean biogeochemistry", 
+                            "id": "cmip6.oceanbgc.tracers.ecosystem.zooplankton", 
                             "properties": [
                                 {
                                     "label": "Type", 
-                                    "description": "Type of zooplancton", 
-                                    "id": "cmip6.oceanbgc.tracers.ecosystem.zooplancton.type", 
+                                    "description": "Type of zooplankton", 
+                                    "id": "cmip6.oceanbgc.tracers.ecosystem.zooplankton.type", 
                                     "cardinality": "1.1", 
                                     "type": "enum", 
                                     "enum": {
-                                        "label": "Plancton Types", 
-                                        "description": "Plancton types in ocean biogeochemistry", 
-                                        "isOpen": false, 
+                                        "label": "Zooplankton Types", 
+                                        "description": "Zooplankton types in ocean biogeochemistry", 
+                                        "isOpen": true, 
                                         "choices": [
                                             {
                                                 "label": "None", 
@@ -219,7 +242,7 @@
                                                 "description": null
                                             }, 
                                             {
-                                                "label": "List (specify below)", 
+                                                "label": "Size based (specify below)", 
                                                 "description": null
                                             }
                                         ]
@@ -227,35 +250,27 @@
                                     "uiOrdinal": 1
                                 }, 
                                 {
-                                    "label": "List", 
-                                    "description": "List species of zooplancton if applicable", 
-                                    "id": "cmip6.oceanbgc.tracers.ecosystem.zooplancton.list", 
+                                    "label": "Size Classes", 
+                                    "description": "Zooplankton size classes (if applicable)", 
+                                    "id": "cmip6.oceanbgc.tracers.ecosystem.zooplankton.size_classes", 
                                     "cardinality": "0.N", 
                                     "type": "enum", 
                                     "enum": {
-                                        "label": "Zooplancton List", 
-                                        "description": "Zooplancton list in ocean biogeochemistry", 
+                                        "label": "Zooplankton Size Classes", 
+                                        "description": "Zooplankton size classes in ocean biogeochemistry", 
                                         "isOpen": true, 
                                         "choices": [
                                             {
-                                                "label": "Microzooplancton", 
+                                                "label": "Microzooplankton", 
                                                 "description": null
                                             }, 
                                             {
-                                                "label": "Mesozooplancton", 
+                                                "label": "Mesozooplankton", 
                                                 "description": null
                                             }
                                         ]
                                     }, 
                                     "uiOrdinal": 2
-                                }, 
-                                {
-                                    "label": "Size Range", 
-                                    "description": "Size range of zooplancton (if applicable)", 
-                                    "id": "cmip6.oceanbgc.tracers.ecosystem.zooplancton.size_range", 
-                                    "cardinality": "0.1", 
-                                    "type": "str", 
-                                    "uiOrdinal": 3
                                 }
                             ]
                         }
@@ -475,11 +490,19 @@
             }, 
             {
                 "label": "Prognostic Variables", 
-                "description": "List of prognostic variables in the ocean biogeochemistry component", 
+                "description": "List of all prognostic tracer variables in the ocean biogeochemistry component", 
                 "id": "cmip6.oceanbgc.key_properties.prognostic_variables", 
                 "cardinality": "1.N", 
                 "type": "str", 
                 "uiOrdinal": 4
+            }, 
+            {
+                "label": "Diagnostic Variables", 
+                "description": "List of all diagnotic tracer variables in the ocean biogeochemistry component", 
+                "id": "cmip6.oceanbgc.key_properties.diagnostic_variables", 
+                "cardinality": "1.N", 
+                "type": "str", 
+                "uiOrdinal": 5
             }, 
             {
                 "label": "Damping", 
@@ -487,7 +510,7 @@
                 "id": "cmip6.oceanbgc.key_properties.damping", 
                 "cardinality": "0.1", 
                 "type": "str", 
-                "uiOrdinal": 5
+                "uiOrdinal": 6
             }
         ], 
         "subProcesses": [
@@ -651,7 +674,11 @@
                             "isOpen": false, 
                             "choices": [
                                 {
-                                    "label": "from file", 
+                                    "label": "from file (climatology)", 
+                                    "description": null
+                                }, 
+                                {
+                                    "label": "from file (interannual variations)", 
                                     "description": null
                                 }, 
                                 {
@@ -674,7 +701,11 @@
                             "isOpen": false, 
                             "choices": [
                                 {
-                                    "label": "from file", 
+                                    "label": "from file (climatology)", 
+                                    "description": null
+                                }, 
+                                {
+                                    "label": "from file (interannual variations)", 
                                     "description": null
                                 }, 
                                 {

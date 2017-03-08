@@ -3,6 +3,7 @@ cmip6.oceanbgc.key_properties.model_name, Oceanbgc > Key Properties > Model Name
 cmip6.oceanbgc.key_properties.model_family, Oceanbgc > Key Properties > Model Family, property
 cmip6.oceanbgc.key_properties.basic_approximations, Oceanbgc > Key Properties > Basic Approximations, property
 cmip6.oceanbgc.key_properties.prognostic_variables, Oceanbgc > Key Properties > Prognostic Variables, property
+cmip6.oceanbgc.key_properties.diagnostic_variables, Oceanbgc > Key Properties > Diagnostic Variables, property
 cmip6.oceanbgc.key_properties.damping, Oceanbgc > Key Properties > Damping, property
 cmip6.oceanbgc.key_properties.time_stepping_framework.passive_tracers_transport.method, Oceanbgc > Key Properties > Time Stepping Framework > Passive Tracers Transport > Method, property
 cmip6.oceanbgc.key_properties.time_stepping_framework.passive_tracers_transport.timestep_if_not_from_ocean, Oceanbgc > Key Properties > Time Stepping Framework > Passive Tracers Transport > Timestep If Not From Ocean, property
@@ -38,12 +39,11 @@ cmip6.oceanbgc.tracers.nitrous_species_if_N, Oceanbgc > Tracers > Nitrous Specie
 cmip6.oceanbgc.tracers.nitrous_processes_if_N, Oceanbgc > Tracers > Nitrous Processes If N, property
 cmip6.oceanbgc.tracers.ecosystem.upper_trophic_levels_definition, Oceanbgc > Tracers > Ecosystem > Upper Trophic Levels Definition, property
 cmip6.oceanbgc.tracers.ecosystem.upper_trophic_levels_treatment, Oceanbgc > Tracers > Ecosystem > Upper Trophic Levels Treatment, property
-cmip6.oceanbgc.tracers.ecosystem.phytoplancton.type, Oceanbgc > Tracers > Ecosystem > Phytoplancton > Type, property
-cmip6.oceanbgc.tracers.ecosystem.phytoplancton.list, Oceanbgc > Tracers > Ecosystem > Phytoplancton > List, property
-cmip6.oceanbgc.tracers.ecosystem.phytoplancton.size_range, Oceanbgc > Tracers > Ecosystem > Phytoplancton > Size Range, property
-cmip6.oceanbgc.tracers.ecosystem.zooplancton.type, Oceanbgc > Tracers > Ecosystem > Zooplancton > Type, property
-cmip6.oceanbgc.tracers.ecosystem.zooplancton.list, Oceanbgc > Tracers > Ecosystem > Zooplancton > List, property
-cmip6.oceanbgc.tracers.ecosystem.zooplancton.size_range, Oceanbgc > Tracers > Ecosystem > Zooplancton > Size Range, property
+cmip6.oceanbgc.tracers.ecosystem.phytoplankton.type, Oceanbgc > Tracers > Ecosystem > Phytoplankton > Type, property
+cmip6.oceanbgc.tracers.ecosystem.phytoplankton.pft, Oceanbgc > Tracers > Ecosystem > Phytoplankton > Pft, property
+cmip6.oceanbgc.tracers.ecosystem.phytoplankton.size_classes, Oceanbgc > Tracers > Ecosystem > Phytoplankton > Size Classes, property
+cmip6.oceanbgc.tracers.ecosystem.zooplankton.type, Oceanbgc > Tracers > Ecosystem > Zooplankton > Type, property
+cmip6.oceanbgc.tracers.ecosystem.zooplankton.size_classes, Oceanbgc > Tracers > Ecosystem > Zooplankton > Size Classes, property
 cmip6.oceanbgc.tracers.disolved_organic_matter.bacteria_present, Oceanbgc > Tracers > Disolved Organic Matter > Bacteria Present, property
 cmip6.oceanbgc.tracers.disolved_organic_matter.lability, Oceanbgc > Tracers > Disolved Organic Matter > Lability, property
 cmip6.oceanbgc.tracers.particules.method, Oceanbgc > Tracers > Particules > Method, property

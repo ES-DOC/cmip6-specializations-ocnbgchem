@@ -37,8 +37,10 @@ QC_STATUS = 'draft'
 CHANGE_HISTORY = [
     ("0.1.0", "2017-01-31", "Eric Guilyardi",
         "Initialised"),
-    ("0.2.0", "2017-03033", "Eric Guilyardi",
+    ("0.2.0", "2017-03-03", "Eric Guilyardi",
         "Added plancton size as per specific request"),
+    ("0.3.0", "2017-03-08", "Eric Guilyardi",
+        "Science updates and short table draft with O. Aumont"),
     ]
 
 # --------------------------------------------------------------------

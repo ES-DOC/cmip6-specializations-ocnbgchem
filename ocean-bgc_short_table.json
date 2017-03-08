@@ -1,0 +1,30 @@
+{
+    "AUTHORS": [
+        "Eric Guilyardi"
+    ],
+    "CHANGE_HISTORY": [
+        [
+            "0.1.0",
+            "2017-03-08",
+            "DEric Guilyardi",
+            "Initialised after discussion with Olivier Aumont (IPSL)"
+        ]
+    ],
+    "CONTACT": "Eric Guilyardi",
+    "CONTRIBUTORS": [],
+    "PROPERTIES": {
+        "priority1": [
+            "cmip6.oceanbgc.key_properties.prognostic_variables",
+            "cmip6.oceanbgc.key_properties.diagnostic_variables",
+            "cmip6.oceanbgc.key_properties.damping",
+            "cmip6.oceanbgc.key_properties.boundary_forcing.atmospheric_deposition",
+            "cmip6.oceanbgc.key_properties.boundary_forcing.river_input",
+            "cmip6.oceanbgc.key_properties.gas_exchange.CO2_exchange_type",
+            "cmip6.oceanbgc.key_properties.gas_exchange.O2_exchange_type",
+            "cmip6.oceanbgc.tracers.disolved_organic_matter.lability",
+            "cmip6.oceanbgc.tracers.particules.method"
+        ],
+        "priority2": []
+    },
+    "QC_STATUS": "draft"
+}
