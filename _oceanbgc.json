@@ -183,6 +183,14 @@
                                         ]
                                     }, 
                                     "uiOrdinal": 2
+                                }, 
+                                {
+                                    "label": "Size Range", 
+                                    "description": "Size range of phytoplancton (if applicable)", 
+                                    "id": "cmip6.oceanbgc.tracers.ecosystem.phytoplancton.size_range", 
+                                    "cardinality": "0.1", 
+                                    "type": "str", 
+                                    "uiOrdinal": 3
                                 }
                             ]
                         }, 
@@ -240,6 +248,14 @@
                                         ]
                                     }, 
                                     "uiOrdinal": 2
+                                }, 
+                                {
+                                    "label": "Size Range", 
+                                    "description": "Size range of zooplancton (if applicable)", 
+                                    "id": "cmip6.oceanbgc.tracers.ecosystem.zooplancton.size_range", 
+                                    "cardinality": "0.1", 
+                                    "type": "str", 
+                                    "uiOrdinal": 3
                                 }
                             ]
                         }
