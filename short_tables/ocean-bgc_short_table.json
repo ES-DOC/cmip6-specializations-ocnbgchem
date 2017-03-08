@@ -11,7 +11,9 @@
         ]
     ],
     "CONTACT": "Eric Guilyardi",
-    "CONTRIBUTORS": [],
+    "CONTRIBUTORS": [
+        "Olivier Aumont (IPSL)"
+    ],
     "PROPERTIES": {
         "priority1": [
             "cmip6.oceanbgc.key_properties.prognostic_variables",
