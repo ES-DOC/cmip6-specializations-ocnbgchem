@@ -87,16 +87,8 @@ if _ARGS.typeof != 'all' and _ARGS.typeof not in _GENERATORS.keys():
     err = err.format(_ARGS.typeof, " | ".join(sorted(_GENERATORS.keys())))
     raise ValueError(err)
 
-# Map of specialization types to filename overrides.
-_FILENAME_OVERRIDES = {
-    "toplevel": "model",
-}
-
 # Set specialization filename prefix.
-try:
-    _FILENAME = _FILENAME_OVERRIDES[_ARGS.scope]
-except KeyError:
-    _FILENAME = _ARGS.scope
+_FILENAME = _ARGS.scope
 
 # Set target generators to be executed.
 if _ARGS.typeof == 'all':

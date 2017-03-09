@@ -40,16 +40,8 @@ _ARGS = _ARGS.parse_args()
 # Report section break.
 _REPORT_BREAK = "------------------------------------------------------------------------"
 
-# Map of specialization types to filename overrides.
-_FILENAME_OVERRIDES = {
-    "toplevel": "model",
-}
-
 # Set specialization filename prefix.
-try:
-    _FILENAME = _FILENAME_OVERRIDES[_ARGS.typeof]
-except KeyError:
-    _FILENAME = _ARGS.typeof
+_FILENAME = _ARGS.typeof
 
 # Set specialization modules.
 modules = utils.get_modules(_ARGS.input_dir, _FILENAME)
