@@ -49,6 +49,11 @@ CHANGE_HISTORY = [
 DESCRIPTION = 'Ocean Biogeochemistry Realm'
 
 # --------------------------------------------------------------------
+# REALM: Canonical name for the domain of this scientific realm
+# --------------------------------------------------------------------
+REALM = 'ocnbgchem'
+
+# --------------------------------------------------------------------
 # GRID: The grid used to layout the variables
 # --------------------------------------------------------------------
 # Not used for this Realm.
@@ -57,13 +62,13 @@ GRID = None
 # --------------------------------------------------------------------
 # KEY PROPERTIES: Key properties for the realm which differ from model defaults
 # --------------------------------------------------------------------
-KEY_PROPERTIES = 'oceanbgc_key_properties'
+KEY_PROPERTIES = 'ocnbgchem_key_properties'
 
 # --------------------------------------------------------------------
 # PROCESSES: Processes simulated within the realm
 # --------------------------------------------------------------------
 PROCESSES = [
-    'oceanbgc_tracers',
+    'ocnbgchem_tracers',
     ]
 
 # --------------------------------------------------------------------
