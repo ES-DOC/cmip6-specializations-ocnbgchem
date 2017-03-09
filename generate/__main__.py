@@ -90,7 +90,6 @@ if _ARGS.typeof != 'all' and _ARGS.typeof not in _GENERATORS.keys():
 # Map of specialization types to filename overrides.
 _FILENAME_OVERRIDES = {
     "toplevel": "model",
-    "ocean-bgc": "oceanbgc"
 }
 
 # Set specialization filename prefix.

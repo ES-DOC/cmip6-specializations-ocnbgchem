@@ -43,7 +43,6 @@ _REPORT_BREAK = "---------------------------------------------------------------
 # Map of specialization types to filename overrides.
 _FILENAME_OVERRIDES = {
     "toplevel": "model",
-    "ocean-bgc": "oceanbgc"
 }
 
 # Set specialization filename prefix.
