@@ -1,0 +1,39 @@
+/* **************************************** */
+
+/*  HTML DEFAULTS                           */
+
+/* **************************************** */
+
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+body {
+    width: 980px;
+    margin: auto;
+}
+hr {
+    margin: 4px;
+}
+h2, h3 {
+    padding: 3px;
+    margin-top: 4px;
+    margin-bottom: 0px;
+}
+
+td.prop-cardinality, th.prop-cardinality,
+td.prop-typeof, th.prop-typeof {
+	text-align: center;
+}
+td.prop-name, th.prop-name {
+	text-align: left;
+	min-width: 600px;
+}
+select {
+	width: 80px;
+}
+
+article span {
+	float: right;
+}

@@ -11,8 +11,9 @@
 import argparse
 import os
 
-from generate_mm import Generator as MindmapGenerator
 from generate_json import Generator as JsonGenerator
+from generate_html import Generator as HTMLGenerator
+from generate_mm import Generator as MindmapGenerator
 from generate_ids_level_1 import Generator as Level1IdentifierGenerator
 from generate_ids_level_2 import Generator as Level2IdentifierGenerator
 from generate_ids_level_3 import Generator as Level3IdentifierGenerator
@@ -24,8 +25,9 @@ from utils_loader import get_short_tables
 
 # Map of generator types to generator.
 _GENERATORS = {
-    'mm': MindmapGenerator,
+    'html': HTMLGenerator,
     'json': JsonGenerator,
+    'mm': MindmapGenerator,
     'ids-level-1': Level1IdentifierGenerator,
     'ids-level-2': Level2IdentifierGenerator,
     'ids-level-3': Level3IdentifierGenerator

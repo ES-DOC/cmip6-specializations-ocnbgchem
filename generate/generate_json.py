@@ -19,7 +19,7 @@ from utils_parser import SpecializationParser
 
 
 class Generator(SpecializationParser):
-    """Specialization to mindmap generator.
+    """Specialization to JSON generator.
 
     """
     def __init__(self, root, short_tables):

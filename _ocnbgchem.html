@@ -1,0 +1,261 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <title>ES-DOC - Specialization</title>
+        <link href="media/app/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="media/ext/bootstrap-3.3.6/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="media/app/css/header.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="media/app/css/main.css" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+    <header class="clearfix main">
+        <img alt="Earth System Documentation" class="pull-left" src="media/app/img/logo-1.png" title="Earth System Documentation" />
+        <h1 class="pull-right">
+            <small><b>Specializations Viewer</b>
+            </small>
+            <b class="h6"> v0.9.7.5</b>
+            <button class="esdoc-support btn btn-success">Support</button>
+        </h1>
+    </header>
+    <article id="cmip6.ocnbgchem">
+    <header>
+        <h2 class="bg-primary">CMIP6 Ocnbgchem Specializations</h2>
+    </header>
+<section id="cmip6.ocnbgchem.key_properties">
+    <header>
+        <h3 class="bg-primary">Key Properties</h3>
+    </header>
+    <table class="table table-striped table-hover table-condensed">
+        <thead>
+            <tr>
+                <th class="prop-name">Property Long Name</th>
+                <th class="prop-cardinality">Cardinality</th>
+                <th class="prop-typeof">Type</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+    <td class="prop-name">Model Name</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Model Family</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Basic Approximations</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Prognostic Variables</td>
+    <td class="prop-cardinality">1.N</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Diagnostic Variables</td>
+    <td class="prop-cardinality">1.N</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Damping</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Time Stepping Framework --&gt; Passive Tracers Transport --&gt; Method</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="use ocean model transport time step">use ocean model transport time step</option><option title="use specific time step">use specific time step</option></select></td>
+</tr><tr>
+    <td class="prop-name">Time Stepping Framework --&gt; Passive Tracers Transport --&gt; Timestep If Not From Ocean</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">int</td>
+</tr><tr>
+    <td class="prop-name">Time Stepping Framework --&gt; Biology Sources Sinks --&gt; Method</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="use ocean model transport time step">use ocean model transport time step</option><option title="use specific time step">use specific time step</option></select></td>
+</tr><tr>
+    <td class="prop-name">Time Stepping Framework --&gt; Biology Sources Sinks --&gt; Timestep If Not From Ocean</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">int</td>
+</tr><tr>
+    <td class="prop-name">Transport Scheme --&gt; Type</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Offline">Offline</option><option title="Online">Online</option></select></td>
+</tr><tr>
+    <td class="prop-name">Transport Scheme --&gt; Scheme</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Use that of ocean model">Use that of ocean model</option></select></td>
+</tr><tr>
+    <td class="prop-name">Transport Scheme --&gt; Use Different Scheme</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Boundary Forcing --&gt; Atmospheric Deposition</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="from file (climatology)">from file (climatology)</option><option title="from file (interannual variations)">from file (interannual variations)</option><option title="from Atmospheric Chemistry model">from Atmospheric Chemistry model</option></select></td>
+</tr><tr>
+    <td class="prop-name">Boundary Forcing --&gt; River Input</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="from file (climatology)">from file (climatology)</option><option title="from file (interannual variations)">from file (interannual variations)</option><option title="from Land Surface model">from Land Surface model</option></select></td>
+</tr><tr>
+    <td class="prop-name">Boundary Forcing --&gt; Sediments From Boundary Conditions</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Boundary Forcing --&gt; Sediments From Explicit Model</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; CO2 Exchange Present</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">bool</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; CO2 Exchange Type</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="OMIP protocol">OMIP protocol</option></select></td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; O2 Exchange Present</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">bool</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; O2 Exchange Type</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="OMIP protocol">OMIP protocol</option></select></td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; DMS Exchange Present</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">bool</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; DMS Exchange Type</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; N2 Exchange Present</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">bool</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; N2 Exchange Type</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; N2O Exchange Present</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">bool</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; N2O Exchange Type</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; CO Exchange Present</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">bool</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; CO Exchange Type</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Gas Exchange --&gt; Other Gases</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Carbon Chemistry --&gt; Type</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="OMIP protocol">OMIP protocol</option><option title="Other protocol">Other protocol</option></select></td>
+</tr><tr>
+    <td class="prop-name">Carbon Chemistry --&gt; PH Scale</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Sea water">Sea water</option><option title="Free">Free</option></select></td>
+</tr><tr>
+    <td class="prop-name">Carbon Chemistry --&gt; Constants If Not OMIP</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr></tbody>
+    </table>
+</section><section id="cmip6.ocnbgchem.tracers">
+    <header>
+        <h3 class="bg-primary">Tracers</h3>
+    </header>
+    <table class="table table-striped table-hover table-condensed">
+        <thead>
+            <tr>
+                <th class="prop-name">Property Long Name</th>
+                <th class="prop-cardinality">Cardinality</th>
+                <th class="prop-typeof">Type</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+    <td class="prop-name">Sulfur Cycle Present</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">bool</td>
+</tr><tr>
+    <td class="prop-name">Nutrients Present</td>
+    <td class="prop-cardinality">1.N</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Nitrogen (N)">Nitrogen (N)</option><option title="Phosphorous (P)">Phosphorous (P)</option><option title="Silicium (S)">Silicium (S)</option><option title="Iron (Fe)">Iron (Fe)</option></select></td>
+</tr><tr>
+    <td class="prop-name">Nitrous Species If N</td>
+    <td class="prop-cardinality">0.N</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Nitrates (NO3)">Nitrates (NO3)</option><option title="Amonium (NH4)">Amonium (NH4)</option></select></td>
+</tr><tr>
+    <td class="prop-name">Nitrous Processes If N</td>
+    <td class="prop-cardinality">0.N</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Dentrification">Dentrification</option><option title="N fixation">N fixation</option></select></td>
+</tr><tr>
+    <td class="prop-name">Ecosystem --&gt; Upper Trophic Levels Definition</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Ecosystem --&gt; Upper Trophic Levels Treatment</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Ecosystem --&gt; Phytoplankton --&gt; Type</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="None">None</option><option title="Generic">Generic</option><option title="PFT including size based (specify both below)">PFT including size based (specify both below)</option><option title="Size based only (specify below)">Size based only (specify below)</option><option title="PFT only (specify below)">PFT only (specify below)</option></select></td>
+</tr><tr>
+    <td class="prop-name">Ecosystem --&gt; Phytoplankton --&gt; Pft</td>
+    <td class="prop-cardinality">0.N</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Diatoms">Diatoms</option><option title="Nfixers">Nfixers</option><option title="Calcifiers">Calcifiers</option></select></td>
+</tr><tr>
+    <td class="prop-name">Ecosystem --&gt; Phytoplankton --&gt; Size Classes</td>
+    <td class="prop-cardinality">0.N</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Microphytoplankton">Microphytoplankton</option><option title="Nanophytoplankton">Nanophytoplankton</option><option title="Picophytoplankton">Picophytoplankton</option></select></td>
+</tr><tr>
+    <td class="prop-name">Ecosystem --&gt; Zooplankton --&gt; Type</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="None">None</option><option title="Generic">Generic</option><option title="Size based (specify below)">Size based (specify below)</option></select></td>
+</tr><tr>
+    <td class="prop-name">Ecosystem --&gt; Zooplankton --&gt; Size Classes</td>
+    <td class="prop-cardinality">0.N</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Microzooplankton">Microzooplankton</option><option title="Mesozooplankton">Mesozooplankton</option></select></td>
+</tr><tr>
+    <td class="prop-name">Disolved Organic Matter --&gt; Bacteria Present</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof">bool</td>
+</tr><tr>
+    <td class="prop-name">Disolved Organic Matter --&gt; Lability</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="None">None</option><option title="Labile">Labile</option><option title="Semi-labile">Semi-labile</option><option title="Refractory">Refractory</option></select></td>
+</tr><tr>
+    <td class="prop-name">Particules --&gt; Method</td>
+    <td class="prop-cardinality">1.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Diagnostic">Diagnostic</option><option title="Diagnostic (Martin profile)">Diagnostic (Martin profile)</option><option title="Diagnostic (Balast)">Diagnostic (Balast)</option><option title="Prognostic">Prognostic</option></select></td>
+</tr><tr>
+    <td class="prop-name">Particules --&gt; Types If Prognostic</td>
+    <td class="prop-cardinality">0.N</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="POC">POC</option><option title="PIC (calcite)">PIC (calcite)</option><option title="PIC (aragonite">PIC (aragonite</option><option title="BSi">BSi</option></select></td>
+</tr><tr>
+    <td class="prop-name">Particules --&gt; Size If Prognostic</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="No size spectrum used">No size spectrum used</option><option title="Full size spectrum">Full size spectrum</option><option title="Discrete size classes (specify which below)">Discrete size classes (specify which below)</option></select></td>
+</tr><tr>
+    <td class="prop-name">Particules --&gt; Size If Discrete</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof">str</td>
+</tr><tr>
+    <td class="prop-name">Particules --&gt; Sinking Speed If Prognostic</td>
+    <td class="prop-cardinality">0.1</td>
+    <td class="prop-typeof"><select><option>enum</option><option title="Constant">Constant</option><option title="Function of particule size">Function of particule size</option><option title="Function of particule type (balast)">Function of particule type (balast)</option></select></td>
+</tr></tbody>
+    </table>
+</section></article></body>
+</html>
