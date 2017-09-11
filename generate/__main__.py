@@ -11,22 +11,28 @@
 import argparse
 import os
 
-from generate_json import Generator as JsonGenerator
 from generate_html import Generator as HTMLGenerator
+from generate_js import Generator as JavascriptGenerator
+from generate_json import Generator as JSONGenerator
 from generate_mm import Generator as MindmapGenerator
 from generate_ids_level_1 import Generator as Level1IdentifierGenerator
 from generate_ids_level_2 import Generator as Level2IdentifierGenerator
 from generate_ids_level_3 import Generator as Level3IdentifierGenerator
 from utils_factory import get_specialization
+from utils_factory import get_short_tables
 from utils_loader import get_modules
-from utils_loader import get_short_tables
+from utils_loader import get_short_tables_definitions
 
 
+
+# Name of associated project.
+_PROJECT = __file__.split('/')[-3].split('-')[0]
 
 # Map of generator types to generator.
 _GENERATORS = {
     'html': HTMLGenerator,
-    'json': JsonGenerator,
+    'js': JavascriptGenerator,
+    'json': JSONGenerator,
     'mm': MindmapGenerator,
     'ids-level-1': Level1IdentifierGenerator,
     'ids-level-2': Level2IdentifierGenerator,
@@ -40,11 +46,33 @@ _ENCODINGS = {
     'ids-level-3': 'csv'
 }
 
+# Map of generator types to file prefixes.
+_FILE_PREFIXES = {
+    'html': '_',
+    'js': '_',
+    'json': '_',
+    'mm': '_',
+    'ids-level-1': '_',
+    'ids-level-2': '_',
+    'ids-level-3': '_'
+}
+
 # Map of generator types to file suffixes.
 _FILE_SUFFIXES = {
-    'ids-level-1': 'ids-level-1',
-    'ids-level-2': 'ids-level-2',
-    'ids-level-3': 'ids-level-3'
+    'ids-level-1': '-ids-level-1',
+    'ids-level-2': '-ids-level-2',
+    'ids-level-3': '-ids-level-3'
+}
+
+# Map of generator types to directories.
+_DIRECTORIES = {
+    'html': '',
+    'js': '',
+    'json': '',
+    'mm': '',
+    'ids-level-1': '',
+    'ids-level-2': '',
+    'ids-level-3': ''
 }
 
 # Set directory from which module is being run.
@@ -101,43 +129,39 @@ else:
     }
 
 # Set specialization modules.
-modules = get_modules(_ARGS.input_dir, _FILENAME)
+specialization = get_specialization(get_modules(_ARGS.input_dir, _FILENAME))
 
 # Set specialization short tables.
-short_tables = get_short_tables(_ARGS.input_dir, _FILENAME)
-
-# Set specialization.
-specialization = get_specialization(modules)
+short_tables = get_short_tables(get_short_tables_definitions(_ARGS.input_dir, _FILENAME))
 
 logging_output = []
 for generator_type, generator_cls in targets.iteritems():
-    # Set output encoding.
-    try:
-        encoding = _ENCODINGS[generator_type]
-    except KeyError:
-        encoding = generator_type
-
-    # Set output filename.
-    try:
-        fname = "{}-{}".format(_FILENAME, _FILE_SUFFIXES[generator_type])
-    except KeyError:
-        fname = _FILENAME
-    finally:
-        if encoding == 'py':
-            fname = fname.replace("-", "_")
-
-    # Set generator.
-    generator = generator_cls(specialization, short_tables)
-
     # Run generator
+    generator = generator_cls(_PROJECT, specialization, short_tables)
     generator.run()
 
+    # Set output file name.
+    fname = "{}{}{}.{}".format(
+        _FILE_PREFIXES.get(generator_type, ''),
+        _FILENAME,
+        _FILE_SUFFIXES.get(generator_type, ''),
+        _ENCODINGS.get(generator_type, generator_type)
+        )
+    if fname.endswith('.py'):
+        fname = fname.replace("-", "_")
+
+    # Set output file path.
+    fpath = _ARGS.output_dir
+    dpath = _DIRECTORIES.get(generator_type, '')
+    for part in dpath.split('/'):
+        fpath = os.path.join(fpath, part)
+    fpath = os.path.join(fpath, fname)
+
     # Write generated output to file system.
-    fpath = os.path.join(_ARGS.output_dir, "_{}.{}".format(fname, encoding))
     with open(fpath, 'w') as fstream:
         fstream.write(generator.get_output())
 
-    logging_output.append((encoding, fpath))
+    logging_output.append((fname.split('.')[-1], fpath))
 
 
 # Inform user.

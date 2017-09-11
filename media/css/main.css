@@ -22,18 +22,22 @@ h2, h3 {
     margin-bottom: 0px;
 }
 
-td.prop-cardinality, th.prop-cardinality,
-td.prop-typeof, th.prop-typeof {
+/* **************************************** */
+
+/*  Properties                              */
+
+/* **************************************** */
+tr.property {
+    cursor: pointer;
+}
+td.property-cardinality,
+th.property-cardinality,
+td.property-type,
+th.property-type {
 	text-align: center;
 }
-td.prop-name, th.prop-name {
+td.property-name,
+th.property-name {
 	text-align: left;
 	min-width: 600px;
-}
-select {
-	width: 80px;
-}
-
-article span {
-	float: right;
 }

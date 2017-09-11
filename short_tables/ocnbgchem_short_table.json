@@ -14,6 +14,7 @@
     "CONTRIBUTORS": [
         "Olivier Aumont (IPSL)"
     ],
+    "LABEL": "Main",
     "PROPERTIES": {
         "priority1": [
             "cmip6.ocnbgchem.key_properties.model_name",

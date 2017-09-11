@@ -22,11 +22,11 @@ class Generator(SpecializationParser):
     """Specialization to JSON generator.
 
     """
-    def __init__(self, root, short_tables):
+    def __init__(self, project, root, short_tables):
         """Instance constructor.
 
         """
-        super(Generator, self).__init__(root, short_tables)
+        super(Generator, self).__init__(project, root, short_tables)
 
         self._maps = collections.OrderedDict()
         self.on_root_parse = self._on_topic_parse
