@@ -325,29 +325,24 @@ class Generator(SpecializationParser):
             'STYLE': "bubble",
             'TEXT': short_table.name
             })
-        for group in [i for i in short_table.groups if i.identifiers]:
-            group_node = ET.SubElement(table_node, 'node', {
-                'BACKGROUND_COLOR': "#FFFFFF",
-                'COLOR': "#000000",
-                'STYLE': "bubble",
-                'TEXT': group.name
-                })
-            for property_id in group.identifiers:
-                property_text = ".".join(property_id.split(".")[2:])
-                if self.root.has_property(property_id):
-                    ET.SubElement(group_node, 'node', {
-                        'BACKGROUND_COLOR': "#FFFFFF",
-                        'COLOR': "#000000",
-                        'STYLE': "bubble",
-                        'TEXT': property_text
-                        })
-                else:
-                    ET.SubElement(group_node, 'node', {
-                        'BACKGROUND_COLOR': "#FF0000",
-                        'COLOR': "#FFFFFF",
-                        'STYLE': "bubble",
-                        'TEXT': property_text
-                        })
+        for prop in short_table.properties:
+            if prop.identifier.startswith('cim'):
+                node = ET.SubElement(table_node, 'node', {
+                    'BACKGROUND_COLOR': "#F3FFE2",
+                    'COLOR': "#000000",
+                    'STYLE': "bubble",
+                    'TEXT': prop.identifier
+                    })
+            else:
+                node = ET.SubElement(table_node, 'node', {
+                    'BACKGROUND_COLOR': "#FFFFFF",
+                    'COLOR': "#000000",
+                    'STYLE': "bubble",
+                    'TEXT': prop.identifier
+                    })
+            self._emit_notes(node, notes=[
+                ('Priority', prop.priority),
+                ])
 
 
 def _get_notes(spec):

@@ -10,16 +10,10 @@
         projects: [],
         topics: null,
         topic: null,
+        tables: [],
+        table: null,
         subTopicGroups: null,
         subTopicGroup: null,
-        shortTables: null,
-        shortTable: null,
-
-        getProperties: function (subTopic) {
-            return _.filter(subTopic.properties, function (i) {
-                return _.contains(STATE.shortTable.identifiers, i.id);
-            });
-        },
 
         setProject: function (p) {
             STATE.project = p;
@@ -28,20 +22,20 @@
             STATE.setTopic(p.topics[0]);
         },
 
-        setTopic: function (t) {
-            STATE.topic = t;
+        setTopic: function (tp) {
+            STATE.topic = tp;
+            STATE.tables = tp.tables;
+            STATE.setTable(tp.tables[0]);
+        },
+
+        setTable: function (t) {
+            STATE.table = t;
             STATE.subTopicGroups = t.subTopicGroups;
-            STATE.shortTables = t.shortTables;
             STATE.setSubTopicGroup(t.subTopicGroups[0]);
-            STATE.setShortTable(t.shortTables[0]);
         },
 
         setSubTopicGroup: function (stg) {
             STATE.subTopicGroup = stg;
-        },
-
-        setShortTable: function (st) {
-            STATE.shortTable = st;
         }
     };
 
@@ -59,6 +53,13 @@
         EVENTS.trigger("topic:updated");
     });
 
+    EVENTS.on("table:update", function (identifier) {
+        STATE.setTable(_.find(STATE.tables, function (i) {
+            return i.id === identifier;
+        }));
+        EVENTS.trigger("table:updated");
+    });
+
     EVENTS.on("subTopicGroup:update", function (identifier) {
         STATE.setSubTopicGroup(_.find(STATE.subTopicGroups, function (i) {
             return i.id === identifier;
@@ -66,12 +67,6 @@
         EVENTS.trigger("subTopicGroup:updated");
     });
 
-    EVENTS.on("shortTable:update", function (identifier) {
-        STATE.setShortTable(_.find(STATE.shortTables, function (i) {
-            return i.id === identifier;
-        }));
-        EVENTS.trigger("shortTable:updated");
-    });
 
     // Register topic.
     APP.registerTopic = function (topic) {
@@ -93,36 +88,70 @@
             p.topics.push(topic);
         }
 
-        // Set topic subTopicGroups.
-        topic.subTopicGroups = [
-            {
+        // Set default table.
+        topic.tables = [{
+            id: "default",
+            label: "--",
+            subTopicGroups: [{
                 id: "a",
                 label: "All",
                 subTopics: topic.subTopics
-            }
-        ];
-        _.each(topic.subTopics, function (i) {
-            topic.subTopicGroups.push({
-                id: i.id,
-                label: i.label,
-                subTopics: [i]
-            });
-        });
-        topic.subTopicGroup = topic.subTopicGroups[0];
+            }].concat(_.map(topic.subTopics, function (i) {
+                return {
+                    id: i.id,
+                    label: i.label,
+                    subTopics: [i]
+                };
+            }))
+        }];
 
-        // Set short tables.
-        st = {
-            id: "default",
-            label: '--',
-            identifiers: []
-        };
-        _.each(topic.subTopics, function (i) {
-            _.each(i.properties, function (j) {
-                st.identifiers.push(j.id);
+        // Set other tables.
+        _.each(topic.shortTables, function (st) {
+            var properties, subTopicIdentifiers, subTopics;
+
+            // Set property identifiers.
+            properties = _.pluck(st.properties, 'id');
+            properties = _.filter(properties, function (id) {
+                return id.toLowerCase().startsWith('cim') === false;
+            });
+
+            // Set sub-topics.
+            subTopicIdentifiers = _.uniq(_.map(properties, function (id) {
+                return id.split('.').slice(0, 3).join('.');
+            }));
+            subTopics = _.map(subTopicIdentifiers, function (i) {
+                return _.find(topic.subTopics, function (j) {
+                    return j.id === i;
+                })
+            });
+            subTopics = _.map(subTopics, function (i) {
+                return {
+                    description: i.description,
+                    id: i.id,
+                    label: i.label,
+                    properties: _.filter(i.properties, function (j) {
+                        return _.contains(properties, j.id);
+                    })
+                };
+            });
+
+            // Set table.
+            topic.tables.push({
+                id: st.id,
+                label: st.label,
+                subTopicGroups: [{
+                    id: "a",
+                    label: "All",
+                    subTopics: subTopics
+                }].concat(_.map(subTopics, function (i) {
+                    return {
+                        id: i.id,
+                        label: i.label,
+                        subTopics: [i]
+                    };
+                }))
             });
         });
-        topic.shortTable = st;
-        topic.shortTables = [st].concat(topic.shortTables);
 
         // Set global state.
         if (_.isNull(STATE.project)) {

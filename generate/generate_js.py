@@ -141,8 +141,9 @@ class Generator(SpecializationParser):
         obj = collections.OrderedDict()
         obj['id'] = short_table.name
         obj['label'] = short_table.label
-        obj['identifiers'] = []
-        for group in short_table:
-            obj['identifiers'] += group.identifiers
+        obj['properties'] = [collections.OrderedDict(
+            id=i.identifier,
+            priority=i.priority
+        ) for i in short_table]
 
         self._maps[short_table] = obj

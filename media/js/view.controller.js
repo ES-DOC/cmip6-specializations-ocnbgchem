@@ -1,7 +1,7 @@
 // --------------------------------------------------------
 // search/view._.js - Main page view.
 // --------------------------------------------------------
-(function (APP, _, $, Backbone, window) {
+(function (APP, STATE, _, $, Backbone) {
 
     // ECMAScript 5 Strict Mode
     "use strict";
@@ -30,14 +30,14 @@
                 APP.events.trigger("topic:update", $(e.target).val());
             },
 
+            // Table: value change.
+            'change #tableFilter': function (e) {
+                APP.events.trigger("table:update", $(e.target).val());
+            },
+
             // Group: value change.
             'change #subTopicGroupFilter': function (e) {
                 APP.events.trigger("subTopicGroup:update", $(e.target).val());
-            },
-
-            // Short Table: value change.
-            'change #shortTableFilter': function (e) {
-                APP.events.trigger("shortTable:update", $(e.target).val());
             }
         },
 
@@ -45,8 +45,8 @@
         initialize: function (p) {
             APP.events.on("project:updated", this._onProjectUpdated, this);
             APP.events.on("topic:updated", this._onTopicUpdated, this);
+            APP.events.on("table:updated", this._onTableUpdated, this);
             APP.events.on("subTopicGroup:updated", this._onSubTopicGroupUpdated, this);
-            APP.events.on("shortTable:updated", this._onShortTableUpdated, this);
         },
 
         // Backbone: view renderer.
@@ -69,38 +69,28 @@
             this.$("#topicFilter").replaceWith($html);
             this.$("#topicFilterLabel").text(STATE.config.labels.topic + ":");
 
-            $html = APP.utils.renderTemplate("template-subtopic-group-filter", null);
-            this.$("#subTopicGroupFilter").replaceWith($html);
-            this.$("#subTopicGroupFilterLabel").text(STATE.config.labels.subTopic + ":");
-
-            $html = APP.utils.renderTemplate("template-short-table-filter", null);
-            this.$("#shortTableFilter").replaceWith($html);
-
-            $html = APP.utils.renderTemplate("template-property-sets", null);
-            this.$("#propertySets").replaceWith($html);
+            this._onTopicUpdated()
         },
 
         _onTopicUpdated: function () {
             var $html;
 
+            $html = APP.utils.renderTemplate("template-table-filter", null);
+            this.$("#tableFilter").replaceWith($html);
+
+            this._onTableUpdated();
+        },
+
+        _onTableUpdated: function () {
+            var $html;
+
             $html = APP.utils.renderTemplate("template-subtopic-group-filter", null);
             this.$("#subTopicGroupFilter").replaceWith($html);
 
-            $html = APP.utils.renderTemplate("template-short-table-filter", null);
-            this.$("#shortTableFilter").replaceWith($html);
-
-            $html = APP.utils.renderTemplate("template-property-sets", null);
-            this.$("#propertySets").replaceWith($html);
+            this._onSubTopicGroupUpdated();
         },
 
         _onSubTopicGroupUpdated: function () {
-            var $html;
-
-            $html = APP.utils.renderTemplate("template-property-sets", null);
-            this.$("#propertySets").replaceWith($html);
-        },
-
-        _onShortTableUpdated: function () {
             var $html;
 
             $html = APP.utils.renderTemplate("template-property-sets", null);
@@ -110,8 +100,8 @@
 
 }(
     this.APP,
+    this.APP.state,
     this._,
     this.$,
-    this.Backbone,
-    this.window
+    this.Backbone
 ));
