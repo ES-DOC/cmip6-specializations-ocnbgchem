@@ -47,29 +47,28 @@ class Generator(SpecializationParser):
             return fstream.read().replace('TOPIC', data)
 
 
-    def _on_topic_parse(self, topic):
-        """On topic parse event handler.
-
-        """
-        obj = collections.OrderedDict()
-        obj['label'] = get_label(topic.name)
-        obj['description'] = topic.description
-        obj['id'] = topic.id
-        obj['contact'] = topic.contact
-        obj['properties'] = []
-        self._maps[topic] = obj
-
-
     def on_root_parse(self, root):
         """On root parse event handler.
 
         """
+        def _get_change(i):
+            return collections.OrderedDict(
+                version=i[0],
+                date=i[1],
+                author=i[2],
+                note=i[3]
+                )
+
         obj = collections.OrderedDict()
         obj['id'] = root.id
         obj['label'] = get_label(root.name)
         obj['description'] = root.description
         obj['contact'] = root.contact
+        obj['authors'] = [i.strip() for i in root.authors.split(',')]
+        obj['contributors'] = [i.strip() for i in root.contributors.split(',')]
         obj['project'] = 'cmip6'
+        obj['changeHistory'] = [_get_change(i) for i in root.change_history]
+        obj['qcStatus'] = root.qc_status
         obj['shortTables'] = []
         obj['subTopics'] = []
 
@@ -94,6 +93,7 @@ class Generator(SpecializationParser):
         obj['id'] = topic.id
         obj['label'] = get_label(topic.name)
         obj['description'] = topic.description
+        obj['contact'] = topic.contact
         obj['properties'] = []
 
         self._maps[topic] = obj

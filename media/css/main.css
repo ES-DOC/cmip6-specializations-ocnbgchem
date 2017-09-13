@@ -1,9 +1,6 @@
 /* **************************************** */
-
 /*  HTML DEFAULTS                           */
-
 /* **************************************** */
-
 html, body {
     padding: 0;
     margin: 0;
@@ -23,9 +20,26 @@ h2, h3 {
 }
 
 /* **************************************** */
+/*  Header                                  */
+/* **************************************** */
+header.main {
+    margin-top: 10px;
+}
 
+header.main img:hover {
+    cursor:pointer;
+}
+
+header.main h1 small b {
+    color: black;
+}
+
+header.main h1 {
+    margin-top: 0px;
+}
+
+/* **************************************** */
 /*  Properties                              */
-
 /* **************************************** */
 tr.property {
     cursor: pointer;
@@ -40,4 +54,13 @@ td.property-name,
 th.property-name {
 	text-align: left;
 	min-width: 600px;
+}
+
+/* **************************************** */
+/*  Other                                   */
+/* **************************************** */
+.topic-further-info {
+    background-color: rgb(217, 237, 247);
+    color: black;
+    cursor: pointer;
 }

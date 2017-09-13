@@ -70,7 +70,7 @@
 
     // Register topic.
     APP.registerTopic = function (topic) {
-        var p, st;
+        var p;
 
         // Set project.
         p = _.find(STATE.projects, function (i) {
@@ -122,7 +122,7 @@
             subTopics = _.map(subTopicIdentifiers, function (i) {
                 return _.find(topic.subTopics, function (j) {
                     return j.id === i;
-                })
+                });
             });
             subTopics = _.map(subTopics, function (i) {
                 return {
@@ -152,11 +152,6 @@
                 }))
             });
         });
-
-        // Set global state.
-        if (_.isNull(STATE.project)) {
-            STATE.setProject(p);
-        }
     };
 
 }(

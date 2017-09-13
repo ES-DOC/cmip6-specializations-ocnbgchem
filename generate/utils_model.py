@@ -24,6 +24,7 @@ class TopicSpecialization(object):
 
         """
         self.authors = None
+        self.change_history = []
         self.contact = None
         self.contributors = None
         self.description = None

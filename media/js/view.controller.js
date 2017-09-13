@@ -30,6 +30,11 @@
                 APP.events.trigger("topic:update", $(e.target).val());
             },
 
+            // Topic: further info click.
+            'click .topic-further-info': function (e) {
+                APP.events.trigger("topic:display-info", $(e.target).val());
+            },
+
             // Table: value change.
             'change #tableFilter': function (e) {
                 APP.events.trigger("table:update", $(e.target).val());
@@ -45,12 +50,15 @@
         initialize: function (p) {
             APP.events.on("project:updated", this._onProjectUpdated, this);
             APP.events.on("topic:updated", this._onTopicUpdated, this);
+            APP.events.on("topic:display-info", this._displayTopicFurtherInfo, this);
             APP.events.on("table:updated", this._onTableUpdated, this);
             APP.events.on("subTopicGroup:updated", this._onSubTopicGroupUpdated, this);
         },
 
         // Backbone: view renderer.
         render: function () {
+            var self = this;
+
             _.each([
                 "template-header",
                 "template-filters",
@@ -58,8 +66,36 @@
                 ], function (template) {
                 APP.utils.renderTemplate(template, null, this);
             }, this);
+            $('#topicFurtherInfoModal').modal({
+                'show': false
+            });
+            $('#topicFurtherInfoModal').on("show.bs.modal", function (e) {
+                var $html;
+
+                $html = APP.utils.renderTemplate("template-topic-info", null);
+                $(".modal-content").replaceWith($html);
+            });
 
             return this;
+        },
+
+        _renderTopicFurtherInfo: function (e) {
+            var $html;
+
+            $html = APP.utils.renderTemplate("template-topic-info", null);
+            $(".modal-content").replaceWith($html);
+        },
+
+        _displayTopicFurtherInfo: function () {
+            // $(".topic-authors").text(STATE.topic.authors.join(", ") || "--");
+            // $(".topic-contributors").text(STATE.topic.contributors.join(", ") || "--");
+            // $(".topic-contact").text(STATE.topic.contact || "--");
+
+            // $(".topic-qcstatus").text(STATE.topic.qcStatus || "--");
+            // $(".topic-contact").text(STATE.topic.contact || "--");
+            // $(".topic-contact").text(STATE.topic.contact || "--");
+
+            $('#topicFurtherInfoModal').modal('show');
         },
 
         _onProjectUpdated: function () {
