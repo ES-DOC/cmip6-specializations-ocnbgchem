@@ -53,7 +53,7 @@
             </span>
             <span class="col-md-3">
                 <label for="topicFilter" id="topicFilterLabel"><%= STATE.config.labels.topic %>: </label>
-                <span class="topic-further-info badge">?</span>
+                <span class="topic-further-info-button badge">?</span>
                 <%= APP.utils.renderTemplate("template-topic-filter") %>
             </span>
             <span class="col-md-3">
@@ -172,92 +172,100 @@
 <script type="underscore/template" id="template-topic-info">
     <div class="modal-content">
         <div class="modal-header bg-primary">
-            <button type="button" class="close" style="" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title"><%= STATE.project.label %> <%= STATE.config.labels.topic %> Specialization</h4>
         </div>
-        <div class="modal-body">
-            <table class="table table-hover table-condensed" style="margin-top: 0px; margin-bottom: 6px;">
-                <tbody>
-                    <tr class="bg-primary">
-                        <td colspan="2">Overview</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-3">
-                            <strong><%= STATE.config.labels.topic %></strong>
-                        </td>
-                        <td>
-                            <%= STATE.project.label %> - <%= STATE.topic.label %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-3">
-                            <strong>Description</strong>
-                        </td>
-                        <td>
-                            <%= STATE.topic.description %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-3">
-                            <strong>Current Version</strong>
-                        </td>
-                        <td>
-                            <%= _.last(STATE.topic.changeHistory).version %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-3">
-                            <strong>QC Status</strong>
-                        </td>
-                        <td style="text-transform: capitalize;">
-                            <%= STATE.topic.qcStatus %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-3">
-                            <strong>Contact</strong>
-                        </td>
-                        <td>
-                            <%= STATE.topic.contact ? STATE.topic.contact : "--" %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-3">
-                            <strong>Authors</strong>
-                        </td>
-                        <td>
-                            <%= STATE.topic.authors.length ? STATE.topic.authors.join(", ") : "--" %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-3">
-                            <strong>Contributors</strong>
-                        </td>
-                        <td>
-                            <%= STATE.topic.contributors.length ? STATE.topic.contributors.join(", ") : "--" %>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table table-hover table-condensed" style="margin-top: 0px; margin-bottom: 0px;">
-                <tbody>
-                    <tr class="bg-primary">
-                        <td colspan="2">Change History</td>
-                    </tr>
-                    <% _.each(STATE.topic.changeHistory.reverse(), function(change, index) { %>
-                    <tr>
-                        <td class="col-md-3">
-                            <strong>v<%= change.version %></strong>
-                        </td>
-                        <td>
-                            <%= change.author %> @ <%= change.date %>
-                            <br/>
-                            <i><%= change.note %></i>
-                        </td>
-                    </tr>
-                    <% }); %>
-                </tbody>
-            </table>
+        <div class="modal-body topic-info-content">
+            <article>
+                <section>
+                    <header>
+                        <h5 class="bg-primary">Overview</h5>
+                    </header>
+                    <table class="table table-hover table-condensed" style="margin-top: 0px; margin-bottom: 6px;">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-3">
+                                    <strong><%= STATE.config.labels.topic %></strong>
+                                </td>
+                                <td>
+                                    <%= STATE.project.label %> - <%= STATE.topic.label %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-3">
+                                    <strong>Description</strong>
+                                </td>
+                                <td>
+                                    <%= STATE.topic.description %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-3">
+                                    <strong>Current Version</strong>
+                                </td>
+                                <td>
+                                    <%= _.last(STATE.topic.changeHistory).version %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-3">
+                                    <strong>QC Status</strong>
+                                </td>
+                                <td style="text-transform: capitalize;">
+                                    <%= STATE.topic.qcStatus %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-3">
+                                    <strong>Contact</strong>
+                                </td>
+                                <td>
+                                    <%= STATE.topic.contact ? STATE.topic.contact : "--" %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-3">
+                                    <strong>Authors</strong>
+                                </td>
+                                <td>
+                                    <%= STATE.topic.authors.length ? STATE.topic.authors.join(", ") : "--" %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-3">
+                                    <strong>Contributors</strong>
+                                </td>
+                                <td>
+                                    <%= STATE.topic.contributors.length ? STATE.topic.contributors.join(", ") : "--" %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <header>
+                        <h5 class="bg-primary">Change History</h5>
+                    </header>
+                    <div class="topic-change-history">
+                        <table class="table table-hover table-condensed" style="margin-top: 0px; margin-bottom: 0px;">
+                            <tbody>
+                                <% _.each(STATE.topic.changeHistory.reverse(), function(change, index) { %>
+                                <tr>
+                                    <td class="col-md-3">
+                                        <strong>v<%= change.version %></strong>
+                                    </td>
+                                    <td>
+                                        <%= change.author %> @ <%= change.date %>
+                                        <br/>
+                                        <i><%= change.note %></i>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </article>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
