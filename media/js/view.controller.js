@@ -31,7 +31,7 @@
             },
 
             // Topic: further info click.
-            'click .topic-further-info': function (e) {
+            'click .topic-further-info-button': function (e) {
                 APP.events.trigger("topic:display-info", $(e.target).val());
             },
 

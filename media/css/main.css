@@ -59,8 +59,21 @@ th.property-name {
 /* **************************************** */
 /*  Other                                   */
 /* **************************************** */
-.topic-further-info {
+.topic-further-info-button {
     background-color: rgb(217, 237, 247);
     color: black;
     cursor: pointer;
+}
+
+div.topic-change-history {
+    max-height: 256px;
+    overflow-x: auto;
+    overflow-y:auto;
+}
+
+.topic-info-content h5 {
+    margin: 0;
+    padding: 3px;
+    font-weight: normal;
+    font-size: 1.1em;
 }

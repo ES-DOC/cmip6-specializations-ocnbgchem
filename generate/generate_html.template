@@ -22,7 +22,6 @@
     <title>ES-DOC - Specializations</title>
     <link rel="shortcut icon" type="image/x-icon" href="media/img/favicon.ico" />
     <link href="media/ext/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="media/css/header.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="media/css/main.css" media="screen" rel="stylesheet" type="text/css" />
 </head>
 
@@ -31,10 +30,10 @@
 <!-- ---------------------------------------------- -->
 <body>
 
-<!-- TEMPLATE:Page header -->
+<!-- TEMPLATE: Page header -->
 <script type="underscore/template" id="template-header">
     <header class="clearfix main">
-        <img src="media/img/logo-1.png" alt="Earth System Documentation" title="Earth System Documentation" class="esdoc-logo pull-left" />
+        <img src="media/img/logo.png" alt="Earth System Documentation" title="Earth System Documentation" class="esdoc-logo pull-left" />
         <h1 class="pull-right">
             <small><b>Specializations Viewer</b>
             </small>
@@ -42,36 +41,34 @@
             <button class="esdoc-support btn btn-success">Support</button>
         </h1>
     </header>
-    <div id="propertyDetails"></div>
 </script>
 
-<!-- TEMPLATE:Filters -->
+<!-- TEMPLATE: Filters -->
 <script type="underscore/template" id="template-filters">
-
-<div class="container-fluid bg-primary" style="padding:5px;">
-    <div class="row">
-        <span class="col-md-3">
-            <label for="projectFilter">Project:</label>
-            <%= APP.utils.renderTemplate("template-project-filter") %>
-        </span>
-        <span class="col-md-3">
-            <label for="topicFilter" id="topicFilterLabel"><%= STATE.config.labels.topic %>: </label>
-            <%= APP.utils.renderTemplate("template-topic-filter") %>
-        </span>
-        <span class="col-md-3">
-            <label for="subTopicGroupFilter" id="subTopicGroupFilterLabel"><%= STATE.config.labels.subTopic %>:</label>
-            <%= APP.utils.renderTemplate("template-subtopic-group-filter") %>
-        </span>
-        <span class="col-md-3">
-            <label for="tableFilter">Short Table:</label>
-            <%= APP.utils.renderTemplate("template-table-filter") %>
-        </span>
+    <div class="container-fluid bg-primary" style="padding:5px;">
+        <div class="row">
+            <span class="col-md-3">
+                <label for="projectFilter">Project:</label>
+                <%= APP.utils.renderTemplate("template-project-filter") %>
+            </span>
+            <span class="col-md-3">
+                <label for="topicFilter" id="topicFilterLabel"><%= STATE.config.labels.topic %>: </label>
+                <span class="topic-further-info badge">?</span>
+                <%= APP.utils.renderTemplate("template-topic-filter") %>
+            </span>
+            <span class="col-md-3">
+                <label for="subTopicGroupFilter" id="subTopicGroupFilterLabel"><%= STATE.config.labels.subTopic %>:</label>
+                <%= APP.utils.renderTemplate("template-subtopic-group-filter") %>
+            </span>
+            <span class="col-md-3">
+                <label for="tableFilter">Short Table:</label>
+                <%= APP.utils.renderTemplate("template-table-filter") %>
+            </span>
+        </div>
     </div>
-</div>
-
 </script>
 
-<!-- TEMPLATE:Project Filter -->
+<!-- TEMPLATE: Project Filter -->
 <script type="underscore/template" id="template-project-filter">
     <select id="projectFilter" class="form-control input-sm">
         <% _.each(STATE.projects, function(i) { %>
@@ -82,7 +79,7 @@
     </select>
 </script>
 
-<!-- TEMPLATE:Topic Filter -->
+<!-- TEMPLATE: Topic Filter -->
 <script type="underscore/template" id="template-topic-filter">
     <select id="topicFilter" class="form-control input-sm">
         <% _.each(STATE.topics, function(i) { %>
@@ -93,7 +90,7 @@
     </select>
 </script>
 
-<!-- TEMPLATE:Table Filter -->
+<!-- TEMPLATE: Table Filter -->
 <script type="underscore/template" id="template-table-filter">
     <select id="tableFilter" class="form-control input-sm">
         <% _.each(STATE.tables, function(i) { %>
@@ -104,7 +101,7 @@
     </select>
 </script>
 
-<!-- TEMPLATE:Group Filter -->
+<!-- TEMPLATE: Group Filter -->
 <script type="underscore/template" id="template-subtopic-group-filter">
     <select id="subTopicGroupFilter" class="form-control input-sm">
         <% _.each(STATE.subTopicGroups, function(i) { %>
@@ -115,7 +112,7 @@
     </select>
 </script>
 
-<!-- TEMPLATE:Property set -->
+<!-- TEMPLATE: Property set -->
 <script type="underscore/template" id="template-property-sets">
     <div id='propertySets'>
         <% _.each(STATE.subTopicGroup.subTopics, function(subTopic) { %>
@@ -170,6 +167,110 @@
         <% }); %>
     </div>
 </script>
+
+<!-- TEMPLATE: Topic info -->
+<script type="underscore/template" id="template-topic-info">
+    <div class="modal-content">
+        <div class="modal-header bg-primary">
+            <button type="button" class="close" style="" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title"><%= STATE.project.label %> <%= STATE.config.labels.topic %> Specialization</h4>
+        </div>
+        <div class="modal-body">
+            <table class="table table-hover table-condensed" style="margin-top: 0px; margin-bottom: 6px;">
+                <tbody>
+                    <tr class="bg-primary">
+                        <td colspan="2">Overview</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">
+                            <strong><%= STATE.config.labels.topic %></strong>
+                        </td>
+                        <td>
+                            <%= STATE.project.label %> - <%= STATE.topic.label %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">
+                            <strong>Description</strong>
+                        </td>
+                        <td>
+                            <%= STATE.topic.description %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">
+                            <strong>Current Version</strong>
+                        </td>
+                        <td>
+                            <%= _.last(STATE.topic.changeHistory).version %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">
+                            <strong>QC Status</strong>
+                        </td>
+                        <td style="text-transform: capitalize;">
+                            <%= STATE.topic.qcStatus %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">
+                            <strong>Contact</strong>
+                        </td>
+                        <td>
+                            <%= STATE.topic.contact ? STATE.topic.contact : "--" %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">
+                            <strong>Authors</strong>
+                        </td>
+                        <td>
+                            <%= STATE.topic.authors.length ? STATE.topic.authors.join(", ") : "--" %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">
+                            <strong>Contributors</strong>
+                        </td>
+                        <td>
+                            <%= STATE.topic.contributors.length ? STATE.topic.contributors.join(", ") : "--" %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-hover table-condensed" style="margin-top: 0px; margin-bottom: 0px;">
+                <tbody>
+                    <tr class="bg-primary">
+                        <td colspan="2">Change History</td>
+                    </tr>
+                    <% _.each(STATE.topic.changeHistory.reverse(), function(change, index) { %>
+                    <tr>
+                        <td class="col-md-3">
+                            <strong>v<%= change.version %></strong>
+                        </td>
+                        <td>
+                            <%= change.author %> @ <%= change.date %>
+                            <br/>
+                            <i><%= change.note %></i>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</script>
+
+<!-- Topic information -->
+<div id="topicFurtherInfoModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" />
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <!-- ---------------------------------------------- -->
 <!-- JS:3rd party libraries                         -->

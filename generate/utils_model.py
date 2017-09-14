@@ -136,7 +136,7 @@ class TopicSpecialization(object):
 
 
     @property
-    def ENUMS(self):
+    def enums(self):
         """Gets associated enumeration definitions.
 
         """
