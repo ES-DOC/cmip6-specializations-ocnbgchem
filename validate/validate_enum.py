@@ -18,14 +18,14 @@ _RE_ENUM_NAME = '^[a-z_]+$'
 _RE_ENUM_MEMBER_NAME = '^[a-zA-Z0-9-_ ()/\*\.\,\:+]+$'
 
 
-def validate(enumerations):
+def validate(obj):
     """Validates the module .
 
-    :param dict enumerations: Specialized enumerations.
+    :param dict obj: Specialized enumerations.
 
     """
     errors = []
-    for name, value in enumerations.items():
+    for name, value in obj.items():
         errors += _validate_enum(name, value)
 
     return errors
