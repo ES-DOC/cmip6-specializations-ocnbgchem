@@ -1,0 +1,9 @@
+(function (APP) {
+
+    // ECMAScript 5 Strict Mode
+    "use strict";
+
+    // Register with application.
+    APP.registerTopic(TOPIC);
+
+}(this.APP));

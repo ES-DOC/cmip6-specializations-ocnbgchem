@@ -15,7 +15,7 @@ from utils import validate_field
 def validate(ctx):
     """Validates a scientific root specialization.
 
-    :param ValidationContext ctx: Validation contextual information.
+    :param DefinitionsValidationContext ctx: Validation contextual information.
 
     """
     # Set current module.

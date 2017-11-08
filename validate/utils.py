@@ -81,8 +81,8 @@ def _is_target(filename, specialization_type):
            filename.startswith(specialization_type)
 
 
-class ValidationContext(object):
-    """Validation context information.
+class DefinitionsValidationContext(object):
+    """Definitions validation context information.
 
     """
     def __init__(self, specializations):
@@ -143,3 +143,19 @@ class ValidationContext(object):
 
         """
         return {k: v for k, v in self.warnings.items() if v}
+
+
+
+class ShortTableValidationContext(object):
+    """Short table validation context information.
+
+    """
+    def __init__(self, fpath):
+        """Instance constructor.
+
+        """
+        self.fpath = fpath
+        self.errors = []
+        self.warnings = []
+
+

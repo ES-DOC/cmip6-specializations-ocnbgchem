@@ -1,5 +1,5 @@
 """
-.. module:: loader.py
+.. module:: utils_loader.py
    :license: GPL/CeCIL
    :platform: Unix, Windows
    :synopsis: Loads CMIP6 specialization from file system.
@@ -14,7 +14,8 @@ import os
 import glob
 
 
-def get_short_tables(input_dir, typeof):
+
+def get_short_tables_definitions(input_dir, typeof):
     """Returns specialization short tables.
 
     :param str input_dir: Directory within which modules reside.

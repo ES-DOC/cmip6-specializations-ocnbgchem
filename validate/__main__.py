@@ -10,11 +10,13 @@
 """
 import argparse
 import datetime
+import glob
 import operator
 import os
 
 import utils
 import validate_root
+import validate_short_table
 import validate_topic
 
 
@@ -36,51 +38,95 @@ _ARGS.add_argument(
     )
 _ARGS = _ARGS.parse_args()
 
+# Name of associated project.
+_PROJECT = __file__.split('/')[-3].split('-')[0]
 
 # Report section break.
 _REPORT_BREAK = "------------------------------------------------------------------------"
 
-# Set specialization filename prefix.
-_FILENAME = _ARGS.typeof
 
-# Set specialization modules.
-modules = utils.get_modules(_ARGS.input_dir, _FILENAME)
+def _validate_definitions():
+    """Validates py definitions.
 
-# Set validation context.
-ctx = utils.ValidationContext(modules)
+    """
+    # Set specialization modules.
+    modules = utils.get_modules(_ARGS.input_dir, _ARGS.typeof)
 
-# Validate.
-validate_root.validate(ctx)
-for module in [i for i in ctx.modules if i != ctx.root]:
-    # ctx.module = module
-    validate_topic.validate(ctx, module)
+    # Set validation context.
+    ctx = utils.DefinitionsValidationContext(modules)
 
-# Set errors.
-in_error = ctx.get_errors()
+    # Validate.
+    validate_root.validate(ctx)
+    for module in [i for i in ctx.modules if i != ctx.root]:
+        validate_topic.validate(ctx, module)
 
-# Set report.
-report = []
-if not in_error:
-    report.append(_REPORT_BREAK)
-    report.append("The CMIP6 {} specializations are currently valid. Congratulations!".format(_ARGS.typeof))
-    report.append(_REPORT_BREAK)
-else:
-    error_count = len(reduce(operator.add, in_error.values()))
-    report.append(_REPORT_BREAK)
-    report.append("CMIP6 SPECIALIZATIONS VALIDATION REPORT")
-    report.append(_REPORT_BREAK)
-    report.append("Specialization Type = {}".format(_ARGS.typeof))
-    report.append("Generated @ {}".format(datetime.datetime.now()))
-    report.append("Error count = {}".format(error_count))
-    report.append(_REPORT_BREAK)
+    # Set errors.
+    errors = ctx.get_errors()
 
-    # Set report errors.
-    for module, errors in sorted(in_error.items()):
-        report.append("{}.py".format(module.__name__))
-        for idx, err in enumerate(errors):
-            report.append("Error #{}:\t{}.".format(idx + 1, err))
-        report.append("")
+    # Set report.
+    report = []
+    if not errors:
+        report.append(_REPORT_BREAK)
+        report.append("{} {} specializations are valid.".format(_PROJECT.upper(), _ARGS.typeof))
+        report.append(_REPORT_BREAK)
+    else:
+        error_count = len(reduce(operator.add, errors.values()))
+        report.append(_REPORT_BREAK)
+        report.append("CMIP6 SPECIALIZATIONS VALIDATION REPORT")
+        report.append(_REPORT_BREAK)
+        report.append("Specialization Type = {}".format(_ARGS.typeof))
+        report.append("Generated @ {}".format(datetime.datetime.now()))
+        report.append("Error count = {}".format(error_count))
+        report.append(_REPORT_BREAK)
 
-# Write to stdout.
-for l in report:
-    print l
+        # Set report errors.
+        for module, errors in sorted(errors.items()):
+            report.append("{}.py".format(module.__name__))
+            for idx, err in enumerate(errors):
+                report.append("Error #{}:\t{}.".format(idx + 1, err))
+            report.append("")
+
+    # Write to stdout.
+    for l in report:
+        print "ES-DOC :: {}".format(l)
+
+    return len(errors) == 0
+
+
+def _validate_short_tables():
+    """Validates short tables definitions.
+
+    """
+    # Set files to be validated.
+    dpath = os.path.join(_ARGS.input_dir, 'short_tables')
+    if not os.path.exists(dpath):
+        return
+
+
+    # Validate files.
+    errors = {i: validate_short_table.validate(i) \
+              for i in glob.glob("{}/*.json".format(dpath))}
+
+    # Report errors.
+    report = []
+    for fpath, ferrors in errors.items():
+        fname = fpath.split('/')[-1]
+        if ferrors:
+            report.append(_REPORT_BREAK)
+            report.append("Invalid {} {} short-table: {}".format(_PROJECT.upper(), _ARGS.typeof, fname))
+            for error in ferrors:
+                report.append("\t{}".format(error))
+            report.append(_REPORT_BREAK)
+
+    if not report:
+        report.append(_REPORT_BREAK)
+        report.append("{} {} short-tables are valid.".format(_PROJECT.upper(), _ARGS.typeof))
+        report.append(_REPORT_BREAK)
+
+    # Write to stdout.
+    for l in report:
+        print "ES-DOC :: {}".format(l)
+
+
+if _validate_definitions():
+    _validate_short_tables()

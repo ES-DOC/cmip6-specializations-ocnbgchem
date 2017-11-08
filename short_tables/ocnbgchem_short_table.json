@@ -9,33 +9,23 @@
             "Eric Guilyardi",
             "Initialised"
         ]
-        [
-            "0.2.0",
-            "2017-11-08",
-            "Eric Guilyardi",
-            "Updated following community review"
-        ]
     ],
     "CONTACT": "Eric Guilyardi",
     "CONTRIBUTORS": [
         "Olivier Aumont (IPSL)"
     ],
-    "PROPERTIES": {
-        "priority1": [
-            "cmip6.ocnbgchem.key_properties.model_name",
-            "cmip6.ocnbgchem.key_properties.model_type",
-            "cmip6.ocnbgchem.key_properties.elemental_stoichiometry",
-            "cmip6.ocnbgchem.key_properties.prognostic_variables",
-            "cmip6.ocnbgchem.key_properties.diagnostic_variables",
-            "cmip6.ocnbgchem.key_properties.damping",
-            "cmip6.ocnbgchem.key_properties.boundary_forcing.atmospheric_deposition",
-            "cmip6.ocnbgchem.key_properties.boundary_forcing.river_input",
-            "cmip6.ocnbgchem.key_properties.gas_exchange.CO2_exchange_type",
-            "cmip6.ocnbgchem.key_properties.gas_exchange.O2_exchange_type",
-            "cmip6.ocnbgchem.tracers.disolved_organic_matter.lability",
-            "cmip6.ocnbgchem.tracers.particules.method"
-        ],
-        "priority2": []
-    },
+    "LABEL": "Main",
+    "PROPERTIES": [
+        ["cmip6.ocnbgchem.key_properties.model_name", 1],
+        ["cmip6.ocnbgchem.key_properties.prognostic_variables", 1],
+        ["cmip6.ocnbgchem.key_properties.diagnostic_variables", 1],
+        ["cmip6.ocnbgchem.key_properties.damping", 1],
+        ["cmip6.ocnbgchem.key_properties.boundary_forcing.atmospheric_deposition", 1],
+        ["cmip6.ocnbgchem.key_properties.boundary_forcing.river_input", 1],
+        ["cmip6.ocnbgchem.key_properties.gas_exchange.CO2_exchange_type", 1],
+        ["cmip6.ocnbgchem.key_properties.gas_exchange.O2_exchange_type", 1],
+        ["cmip6.ocnbgchem.tracers.disolved_organic_matter.lability", 1],
+        ["cmip6.ocnbgchem.tracers.particules.method", 1]
+    ],
     "QC_STATUS": "draft"
 }

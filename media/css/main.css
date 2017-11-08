@@ -1,0 +1,79 @@
+/* **************************************** */
+/*  HTML DEFAULTS                           */
+/* **************************************** */
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+body {
+    width: 980px;
+    margin: auto;
+}
+hr {
+    margin: 4px;
+}
+h2, h3 {
+    padding: 3px;
+    margin-top: 4px;
+    margin-bottom: 0px;
+}
+
+/* **************************************** */
+/*  Header                                  */
+/* **************************************** */
+header.main {
+    margin-top: 10px;
+}
+
+header.main img:hover {
+    cursor:pointer;
+}
+
+header.main h1 small b {
+    color: black;
+}
+
+header.main h1 {
+    margin-top: 0px;
+}
+
+/* **************************************** */
+/*  Properties                              */
+/* **************************************** */
+tr.property {
+    cursor: pointer;
+}
+td.property-cardinality,
+th.property-cardinality,
+td.property-type,
+th.property-type {
+	text-align: center;
+}
+td.property-name,
+th.property-name {
+	text-align: left;
+	min-width: 600px;
+}
+
+/* **************************************** */
+/*  Other                                   */
+/* **************************************** */
+.topic-further-info-button {
+    background-color: rgb(217, 237, 247);
+    color: black;
+    cursor: pointer;
+}
+
+div.topic-change-history {
+    max-height: 256px;
+    overflow-x: auto;
+    overflow-y:auto;
+}
+
+.topic-info-content h5 {
+    margin: 0;
+    padding: 3px;
+    font-weight: normal;
+    font-size: 1.1em;
+}

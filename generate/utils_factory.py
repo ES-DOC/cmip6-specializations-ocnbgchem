@@ -1,5 +1,5 @@
 """
-.. module:: factory.py
+.. module:: utils_factory.py
    :license: GPL/CeCIL
    :platform: Unix, Windows
    :synopsis: Takes specialization modules and returns instances of wrapper classes.
@@ -16,6 +16,50 @@ import utils_model as model
 # Map of specializations by id.
 CACHE = dict()
 
+
+def get_short_tables(tables):
+    """Returns a set of short table wrappers.
+
+    :param tables: 2 member tuple: name, dict.
+
+    :returns: A specialization wrapper.
+    :rtype: tuple
+
+    """
+    return [_get_short_table(i, j) for i, j in tables]
+
+
+def _get_short_table(name, obj):
+    """Creates & returns a short-table wrapper.
+
+    """
+    result = model.ShortTable()
+    result.authors = obj['AUTHORS']
+    result.change_history = obj['CHANGE_HISTORY']
+    result.contact = obj['CONTACT']
+    result.contributors = obj['CONTRIBUTORS']
+    result.label = obj['LABEL']
+    result.name = name
+    result.properties = [_get_short_table_property(i) for i in obj['PROPERTIES']]
+    result.qc_status = obj['QC_STATUS']
+
+    return result
+
+
+def _get_short_table_property(obj):
+    """Returns a short table property wrapper.
+
+    :param modules: 4 member tuple of python modules: root, grid, key-properties, processes.
+
+    :returns: A specialization wrapper.
+    :rtype: tuple
+
+    """
+    result = model.ShortTableProperty()
+    result.identifier = obj[0]
+    result.priority = obj[1]
+
+    return result
 
 
 def get_specialization(modules):
@@ -35,9 +79,9 @@ def get_specialization(modules):
 
     # Create topic tree.
     result = _create_topic(None, mod_root, type_key)
+    _create_topic(result, mod_keyprops, TYPE_KEY_KEYPROPS)
     if mod_grid is not None:
         _create_topic(result, mod_grid, TYPE_KEY_GRID)
-    _create_topic(result, mod_keyprops, TYPE_KEY_KEYPROPS)
     for i in mod_processes:
         _create_topic(result, i, TYPE_KEY_PROCESS)
 
@@ -195,4 +239,3 @@ def _create_enum_choice(enum, value, description):
     ec.value = value
 
     return ec
-

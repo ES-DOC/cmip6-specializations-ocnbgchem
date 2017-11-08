@@ -73,11 +73,11 @@ class Generator(SpecializationParser):
     """Specialization to mindmap generator.
 
     """
-    def __init__(self, root, short_tables):
+    def __init__(self, project, root, short_tables):
         """Instance constructor.
 
         """
-        super(Generator, self).__init__(root, short_tables)
+        super(Generator, self).__init__(project, root, short_tables)
 
         self.cfg = _Configuration()
         self.mmap = None
@@ -315,7 +315,7 @@ class Generator(SpecializationParser):
             })
 
 
-    def on_short_table_parse(self, name, obj):
+    def on_short_table_parse(self, short_table):
         """On short table parse event handler.
 
         """
@@ -323,33 +323,26 @@ class Generator(SpecializationParser):
             'BACKGROUND_COLOR': "#FFFFFF",
             'COLOR': "#000000",
             'STYLE': "bubble",
-            'TEXT': name
+            'TEXT': short_table.name
             })
-        for priority in sorted(obj['PROPERTIES']):
-            if len(obj['PROPERTIES'][priority]) == 0:
-                continue
-            priority_node = ET.SubElement(table_node, 'node', {
-                'BACKGROUND_COLOR': "#FFFFFF",
-                'COLOR': "#000000",
-                'STYLE': "bubble",
-                'TEXT': priority
-                })
-            for property_id in obj['PROPERTIES'][priority]:
-                property_text = ".".join(property_id.split(".")[2:])
-                if self.root.has_property(property_id):
-                    ET.SubElement(priority_node, 'node', {
-                        'BACKGROUND_COLOR': "#FFFFFF",
-                        'COLOR': "#000000",
-                        'STYLE': "bubble",
-                        'TEXT': property_text
-                        })
-                else:
-                    ET.SubElement(priority_node, 'node', {
-                        'BACKGROUND_COLOR': "#FF0000",
-                        'COLOR': "#FFFFFF",
-                        'STYLE': "bubble",
-                        'TEXT': property_text
-                        })
+        for prop in short_table.properties:
+            if prop.identifier.startswith('cim'):
+                node = ET.SubElement(table_node, 'node', {
+                    'BACKGROUND_COLOR': "#F3FFE2",
+                    'COLOR': "#000000",
+                    'STYLE': "bubble",
+                    'TEXT': prop.identifier
+                    })
+            else:
+                node = ET.SubElement(table_node, 'node', {
+                    'BACKGROUND_COLOR': "#FFFFFF",
+                    'COLOR': "#000000",
+                    'STYLE': "bubble",
+                    'TEXT': prop.identifier
+                    })
+            self._emit_notes(node, notes=[
+                ('Priority', prop.priority),
+                ])
 
 
 def _get_notes(spec):

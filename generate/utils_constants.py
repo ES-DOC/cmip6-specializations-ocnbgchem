@@ -1,4 +1,13 @@
+"""
+.. module:: utils_constants.py
+   :license: GPL/CeCIL
+   :platform: Unix, Windows
+   :synopsis: Specialization model constants.
 
+.. moduleauthor:: Mark Conway-Greenslade <momipsl@ipsl.jussieu.fr>
+
+
+"""
 # Specialization type keys.
 TYPE_KEY_ENUM = 'enum'
 TYPE_KEY_ENUM_CHOICE = 'enum-choice'
@@ -10,3 +19,10 @@ TYPE_KEY_PROPERTY = "property"
 TYPE_KEY_PROPERTY_SET = "property-set"
 TYPE_KEY_REALM = "realm"
 TYPE_KEY_SUBPROCESS = "subprocess"
+
+# Set of abbreviations that do not require converting.
+ABBREVIATIONS = {
+	'CO2',
+	'N20',
+	'CH4'
+}
