@@ -8,6 +8,12 @@
             "2017-03-13",
             "Eric Guilyardi",
             "Initialised"
+        ],
+        [
+            "0.2.0",
+            "2017-11-08",
+            "Eric Guilyardi",
+            "Update following community review"
         ]
     ],
     "CONTACT": "Eric Guilyardi",
@@ -17,6 +23,8 @@
     "LABEL": "Main",
     "PROPERTIES": [
         ["cmip6.ocnbgchem.key_properties.model_name", 1],
+        ["cmip6.ocnbgchem.key_properties.model_type", 1],
+        ["cmip6.ocnbgchem.key_properties.elemental_stoichiometry", 1],
         ["cmip6.ocnbgchem.key_properties.prognostic_variables", 1],
         ["cmip6.ocnbgchem.key_properties.diagnostic_variables", 1],
         ["cmip6.ocnbgchem.key_properties.damping", 1],
