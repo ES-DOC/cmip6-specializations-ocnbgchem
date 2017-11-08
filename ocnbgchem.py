@@ -41,6 +41,8 @@ CHANGE_HISTORY = [
         "Added plancton size as per specific request"),
     ("0.3.0", "2017-03-08", "Eric Guilyardi",
         "Science updates and short table draft with O. Aumont"),
+    ("0.4.0", "2017-11-08", "Eric Guilyardi",
+        "Science updates following community review with L. Bopp and O. Aumont"),
     ]
 
 # --------------------------------------------------------------------
