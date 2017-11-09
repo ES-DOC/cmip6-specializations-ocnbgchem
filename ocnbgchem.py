@@ -24,7 +24,7 @@ AUTHORS = 'Eric Guilyardi'
 # --------------------------------------------------------------------
 # CONTRIBUTORS: Set to realm specialization contributors (comma delimited).
 # --------------------------------------------------------------------
-CONTRIBUTORS = 'CMIP5 version + Olivier Aumont (LOCEAN/IPSL)'
+CONTRIBUTORS = 'CMIP5 version + Olivier Aumont (LOCEAN/IPSL), Laurent Bopp (LSCE/IPSL)'
 
 # --------------------------------------------------------------------
 # QUALITY CONTROL STATUS: Set to 'draft' or 'complete'
