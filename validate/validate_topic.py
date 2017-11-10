@@ -18,7 +18,7 @@ import validate_enum
 
 
 # Regular expression to apply over a specialization key.
-_RE_KEY = '^[a-z0-9_:,CO2,CH4,N20,CFC,SO4,ODS]+$'
+_RE_KEY = '^[a-z0-9_:,CO2,CH4,N20,CFC,SO4,ODS,GHG]+$'
 
 
 def validate(ctx, topic):
