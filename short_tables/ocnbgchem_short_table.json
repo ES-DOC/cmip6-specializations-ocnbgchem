@@ -20,7 +20,7 @@
     "CONTRIBUTORS": [
         "Olivier Aumont (IPSL)"
     ],
-    "LABEL": "Main",
+    "LABEL": "Ocean biogeochemistry CMIP6 short table",
     "PROPERTIES": [
         ["cmip6.ocnbgchem.key_properties.model_name", 1],
         ["cmip6.ocnbgchem.key_properties.model_type", 1],
