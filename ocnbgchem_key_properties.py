@@ -41,7 +41,7 @@ DETAILS['toplevel'] = {
             'Name of ocean biogeochemistry model code (PISCES 2.0,...)'),
         ('model_type', 'ENUM:model_types', '1.1',
             'Type of ocean biogeochemistry model'),
-        ('elemental_stoichiometry_type', 'ENUM:elemental_stoichiometry_types', '1.1',
+        ('elemental_stoichiometry', 'ENUM:elemental_stoichiometry_types', '1.1',
             'Describe elemental stoichiometry (fixed, variable, mix of the two)',),
         ('elemental_stoichiometry_details', 'str', '1.1',
             'Describe which elements have fixed/variable stoichiometry',),
