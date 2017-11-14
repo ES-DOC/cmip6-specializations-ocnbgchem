@@ -37,6 +37,8 @@ DESCRIPTION = 'Ocean biogeochemistry tracers'
 DETAILS['toplevel'] = {
     'description': 'Top level properties of tracers in ocean biogeochemistry',
     'properties': [
+        ('overview', 'str', '1.1',
+            'Overview of tracers in ocean biogeochemistry'),
         ('sulfur_cycle_present', 'bool', '1.1',
             'Is sulfur cycle modeled ?'),
         ('nutrients_present', 'ENUM:nutrients_species', '1.N',

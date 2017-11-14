@@ -48,6 +48,7 @@ CHANGE_HISTORY = [
 # --------------------------------------------------------------------
 # CMIP5_MAPPINGS_SYNCED_AT: Latest version that has been synced with CMIP5 mappings.
 # --------------------------------------------------------------------
+# TODO
 CMIP5_MAPPINGS_SYNCED_AT = "N/A"
 
 # --------------------------------------------------------------------

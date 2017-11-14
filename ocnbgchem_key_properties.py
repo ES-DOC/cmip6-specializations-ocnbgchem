@@ -37,6 +37,8 @@ DESCRIPTION = 'Ocean Biogeochemistry key properties'
 DETAILS['toplevel'] = {
     'description': 'General key properties in ocean biogeochemistry',
     'properties': [
+        ('model_overview', 'str', '1.1',
+            'Overview of ocean biogeochemistry model'),
         ('model_name', 'str', '1.1',
             'Name of ocean biogeochemistry model code (PISCES 2.0,...)'),
         ('model_type', 'ENUM:model_types', '1.1',

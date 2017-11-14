@@ -11,12 +11,20 @@
             "contact": "Eric Guilyardi", 
             "properties": [
                 {
+                    "label": "Overview", 
+                    "description": "Overview of tracers in ocean biogeochemistry", 
+                    "id": "cmip6.ocnbgchem.tracers.overview", 
+                    "cardinality": "1.1", 
+                    "type": "str", 
+                    "uiOrdinal": 1
+                }, 
+                {
                     "label": "Sulfur Cycle Present", 
                     "description": "Is sulfur cycle modeled ?", 
                     "id": "cmip6.ocnbgchem.tracers.sulfur_cycle_present", 
                     "cardinality": "1.1", 
                     "type": "bool", 
-                    "uiOrdinal": 1
+                    "uiOrdinal": 2
                 }, 
                 {
                     "label": "Nutrients Present", 
@@ -47,7 +55,7 @@
                             }
                         ]
                     }, 
-                    "uiOrdinal": 2
+                    "uiOrdinal": 3
                 }, 
                 {
                     "label": "Nitrous Species If N", 
@@ -70,7 +78,7 @@
                             }
                         ]
                     }, 
-                    "uiOrdinal": 3
+                    "uiOrdinal": 4
                 }, 
                 {
                     "label": "Nitrous Processes If N", 
@@ -93,7 +101,7 @@
                             }
                         ]
                     }, 
-                    "uiOrdinal": 4
+                    "uiOrdinal": 5
                 }
             ], 
             "subProcesses": [
@@ -527,12 +535,20 @@
         "contact": "Eric Guilyardi", 
         "properties": [
             {
+                "label": "Model Overview", 
+                "description": "Overview of ocean biogeochemistry model", 
+                "id": "cmip6.ocnbgchem.key_properties.model_overview", 
+                "cardinality": "1.1", 
+                "type": "str", 
+                "uiOrdinal": 1
+            }, 
+            {
                 "label": "Model Name", 
                 "description": "Name of ocean biogeochemistry model code (PISCES 2.0,...)", 
                 "id": "cmip6.ocnbgchem.key_properties.model_name", 
                 "cardinality": "1.1", 
                 "type": "str", 
-                "uiOrdinal": 1
+                "uiOrdinal": 2
             }, 
             {
                 "label": "Model Type", 
@@ -559,12 +575,12 @@
                         }
                     ]
                 }, 
-                "uiOrdinal": 2
+                "uiOrdinal": 3
             }, 
             {
-                "label": "Elemental Stoichiometry Type", 
+                "label": "Elemental Stoichiometry", 
                 "description": "Describe elemental stoichiometry (fixed, variable, mix of the two)", 
-                "id": "cmip6.ocnbgchem.key_properties.elemental_stoichiometry_type", 
+                "id": "cmip6.ocnbgchem.key_properties.elemental_stoichiometry", 
                 "cardinality": "1.1", 
                 "type": "enum", 
                 "enum": {
@@ -586,7 +602,7 @@
                         }
                     ]
                 }, 
-                "uiOrdinal": 3
+                "uiOrdinal": 4
             }, 
             {
                 "label": "Elemental Stoichiometry Details", 
@@ -594,7 +610,7 @@
                 "id": "cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details", 
                 "cardinality": "1.1", 
                 "type": "str", 
-                "uiOrdinal": 4
+                "uiOrdinal": 5
             }, 
             {
                 "label": "Prognostic Variables", 
@@ -602,7 +618,7 @@
                 "id": "cmip6.ocnbgchem.key_properties.prognostic_variables", 
                 "cardinality": "1.N", 
                 "type": "str", 
-                "uiOrdinal": 5
+                "uiOrdinal": 6
             }, 
             {
                 "label": "Diagnostic Variables", 
@@ -610,7 +626,7 @@
                 "id": "cmip6.ocnbgchem.key_properties.diagnostic_variables", 
                 "cardinality": "1.N", 
                 "type": "str", 
-                "uiOrdinal": 6
+                "uiOrdinal": 7
             }, 
             {
                 "label": "Damping", 
@@ -618,7 +634,7 @@
                 "id": "cmip6.ocnbgchem.key_properties.damping", 
                 "cardinality": "0.1", 
                 "type": "str", 
-                "uiOrdinal": 7
+                "uiOrdinal": 8
             }
         ], 
         "subProcesses": [
