@@ -19,18 +19,14 @@
                 return i.id === targets[0];
             });
         }
-        if (_.isUndefined(project)) {
-            project = APP.state.projects[0];
-        }
+        project = project || APP.state.projects[0];
 
         if (targets.length === 2) {
             topic = _.find(project.topics, function (i) {
                 return i.id === targets.join('.');
             });
         }
-        if (_.isUndefined(topic)) {
-            topic = project.topics[0];
-        }
+        topic = topic || project.topics[0];
 
         // Initialise state.
         APP.state.setProject(project);
