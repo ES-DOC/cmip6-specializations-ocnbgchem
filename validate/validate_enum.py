@@ -15,7 +15,7 @@ import re
 
 # Regular expressions.
 _RE_ENUM_NAME = '^[a-z0-9_,ODS]+$'
-_RE_ENUM_MEMBER_NAME = '^[a-zA-Z0-9-_ ()/\*\.\,\:+]+$'
+_RE_ENUM_MEMBER_NAME = '^[a-zA-Z0-9-_ ()\{\}/\*\.\,\:+]+$'
 
 
 def validate(obj):
