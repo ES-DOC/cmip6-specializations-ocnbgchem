@@ -13,10 +13,10 @@
         // Set of email related constants.
         EMAIL: {
             // Contact email.
-            CONTACT: "es-doc-contact@list.woc.noaa.gov",
+            CONTACT: "cmip6-help@es-doc.org",
 
             // Support email.
-            SUPPORT: "es-doc-support@list.woc.noaa.gov",
+            SUPPORT: "cmip6-help@es-doc.org",
 
             // Default email subject.
             SUBJECT: 'ES-DOC SPECIALIZATIONS :: subject goes here',
