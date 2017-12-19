@@ -56,6 +56,14 @@ th.property-name {
 	min-width: 600px;
 }
 
+td.property-description-caption {
+    width: 220px;
+}
+
+td.property-enum-caption {
+    width: 185px;
+}
+
 /* **************************************** */
 /*  Other                                   */
 /* **************************************** */
