@@ -41,21 +41,6 @@ header.main h1 {
 /* **************************************** */
 /*  Properties                              */
 /* **************************************** */
-tr.property {
-    cursor: pointer;
-}
-td.property-cardinality,
-th.property-cardinality,
-td.property-type,
-th.property-type {
-	text-align: center;
-}
-td.property-name,
-th.property-name {
-	text-align: left;
-	min-width: 600px;
-}
-
 td.property-description-caption {
     width: 220px;
 }

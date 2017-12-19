@@ -19,7 +19,7 @@
             STATE.project = p;
             STATE.config = APP.config[p.id];
             STATE.topics = p.topics;
-            STATE.setTopic(p.topics[0]);
+            STATE.setTopic(STATE.topics[0]);
         },
 
         setTopic: function (tp) {
@@ -70,7 +70,7 @@
 
     // Register topic.
     APP.registerTopic = function (topic) {
-        var p;
+        var p, subTopics;
 
         // Set project.
         p = _.find(STATE.projects, function (i) {
@@ -87,6 +87,11 @@
         } else {
             p.topics.push(topic);
         }
+
+        // Exclude sub-topics without properties.
+        topic.subTopics = _.filter(topic.subTopics, (i) => {
+            return i.properties.length > 0;
+        });
 
         // Set default table.
         topic.tables = [{
@@ -109,16 +114,24 @@
         _.each(topic.shortTables, function (st) {
             var properties, subTopicIdentifiers, subTopics;
 
+
             // Set property identifiers.
             properties = _.pluck(st.properties, 'id');
             properties = _.filter(properties, function (id) {
                 return id.toLowerCase().startsWith('cim') === false;
             });
+            if (st.id === 'aerosol') {
+                console.log(properties);                    
+            }
 
             // Set sub-topics.
             subTopicIdentifiers = _.uniq(_.map(properties, function (id) {
                 return id.split('.').slice(0, 3).join('.');
             }));
+            if (st.id === 'aerosol') {
+                console.log(subTopicIdentifiers);
+            }
+
             subTopics = _.map(subTopicIdentifiers, function (i) {
                 return _.find(topic.subTopics, function (j) {
                     return j.id === i;

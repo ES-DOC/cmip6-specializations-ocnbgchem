@@ -47,7 +47,7 @@
         },
 
         // Backbone: view initializer.
-        initialize: function (p) {
+        initialize: function () {
             APP.events.on("project:updated", this._onProjectUpdated, this);
             APP.events.on("topic:updated", this._onTopicUpdated, this);
             APP.events.on("topic:display-info", this._displayTopicFurtherInfo, this);
@@ -57,8 +57,6 @@
 
         // Backbone: view renderer.
         render: function () {
-            var self = this;
-
             _.each([
                 "template-header",
                 "template-filters",
@@ -69,7 +67,7 @@
             $('#topicFurtherInfoModal').modal({
                 'show': false
             });
-            $('#topicFurtherInfoModal').on("show.bs.modal", function (e) {
+            $('#topicFurtherInfoModal').on("show.bs.modal", function () {
                 var $html;
 
                 $html = APP.utils.renderTemplate("template-topic-info", null);
@@ -79,7 +77,7 @@
             return this;
         },
 
-        _renderTopicFurtherInfo: function (e) {
+        _renderTopicFurtherInfo: function () {
             var $html;
 
             $html = APP.utils.renderTemplate("template-topic-info", null);
@@ -87,14 +85,6 @@
         },
 
         _displayTopicFurtherInfo: function () {
-            // $(".topic-authors").text(STATE.topic.authors.join(", ") || "--");
-            // $(".topic-contributors").text(STATE.topic.contributors.join(", ") || "--");
-            // $(".topic-contact").text(STATE.topic.contact || "--");
-
-            // $(".topic-qcstatus").text(STATE.topic.qcStatus || "--");
-            // $(".topic-contact").text(STATE.topic.contact || "--");
-            // $(".topic-contact").text(STATE.topic.contact || "--");
-
             $('#topicFurtherInfoModal').modal('show');
         },
 
@@ -105,7 +95,7 @@
             this.$("#topicFilter").replaceWith($html);
             this.$("#topicFilterLabel").text(STATE.config.labels.topic + ":");
 
-            this._onTopicUpdated()
+            this._onTopicUpdated();
         },
 
         _onTopicUpdated: function () {
