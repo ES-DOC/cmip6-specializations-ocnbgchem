@@ -43,13 +43,17 @@ CHANGE_HISTORY = [
         "Science updates and short table draft with O. Aumont"),
     ("0.4.0", "2017-11-08", "Eric Guilyardi",
         "Science updates following community review with L. Bopp and O. Aumont"),
+    ("0.5.0", "2017-12-12", "Eric Guilyardi",
+        "Science updates following community review phase 3"),
+    ("1.0.0", "2018-02-21", "Eric Guilyardi",
+        "Version for release 1.0"),
     ]
 
 # --------------------------------------------------------------------
 # CMIP5_MAPPINGS_SYNCED_AT: Latest version that has been synced with CMIP5 mappings.
 # --------------------------------------------------------------------
 # TODO
-CMIP5_MAPPINGS_SYNCED_AT = "N/A"
+CMIP5_MAPPINGS_SYNCED_AT = "1.0.0"
 
 # --------------------------------------------------------------------
 # DESCRIPTION: Scientific context of this scientific realm

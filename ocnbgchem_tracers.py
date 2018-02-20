@@ -59,9 +59,9 @@ DETAILS['ecosystem'] = {
     'description': 'Ecosystem properties in ocean biogeochemistry',
     'properties': [
         ('upper_trophic_levels_definition', 'str', '1.1',
-            'Definition of upper trophic level (e.g. based on size) ?'),
+            'Describe how upper trophic levels are defined in model (e.g. based on size)'),
         ('upper_trophic_levels_treatment', 'str', '1.1',
-            'Define how upper trophic level are treated'),
+            'Describe how upper trophic levels are treated in model'),
         ]
     }
 
@@ -101,7 +101,7 @@ DETAILS['disolved_organic_matter'] = {
 DETAILS['particules'] = {
     'description': 'Particulate carbon properties in ocean biogeochemistry',
     'properties': [
-        ('method', 'ENUM:particules_method', '1.1',
+        ('method', 'ENUM:particules_method', '1.N',
             'How is particulate carbon represented in ocean biogeochemistry?'),
         ('types_if_prognostic', 'ENUM:prognostic_particules_types', '0.N',
             'If prognostic, type(s) of particulate matter taken into account'),
