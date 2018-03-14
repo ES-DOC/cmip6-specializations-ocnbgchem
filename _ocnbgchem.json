@@ -113,7 +113,7 @@
                     "properties": [
                         {
                             "label": "Upper Trophic Levels Definition", 
-                            "description": "Definition of upper trophic level (e.g. based on size) ?", 
+                            "description": "Describe how upper trophic levels are defined in model (e.g. based on size)", 
                             "id": "cmip6.ocnbgchem.tracers.ecosystem.upper_trophic_levels_definition", 
                             "cardinality": "1.1", 
                             "type": "str", 
@@ -121,7 +121,7 @@
                         }, 
                         {
                             "label": "Upper Trophic Levels Treatment", 
-                            "description": "Define how upper trophic level are treated", 
+                            "description": "Describe how upper trophic levels are treated in model", 
                             "id": "cmip6.ocnbgchem.tracers.ecosystem.upper_trophic_levels_treatment", 
                             "cardinality": "1.1", 
                             "type": "str", 
@@ -341,7 +341,7 @@
                             "label": "Method", 
                             "description": "How is particulate carbon represented in ocean biogeochemistry?", 
                             "id": "cmip6.ocnbgchem.tracers.particules.method", 
-                            "cardinality": "1.1", 
+                            "cardinality": "1.N", 
                             "type": "enum", 
                             "enum": {
                                 "label": "Particules Method", 
@@ -622,7 +622,7 @@
             }, 
             {
                 "label": "Diagnostic Variables", 
-                "description": "List of all diagnotic tracer variables in the ocean biogeochemistry component", 
+                "description": "List of all diagnotic tracer variables in the ocean biogeochemistry component (derived from prognostic variables", 
                 "id": "cmip6.ocnbgchem.key_properties.diagnostic_variables", 
                 "cardinality": "1.N", 
                 "type": "str", 

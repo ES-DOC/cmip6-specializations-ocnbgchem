@@ -74,14 +74,10 @@ def get_specialization(modules):
     # Unpack modules.
     mod_root, mod_grid, mod_keyprops, mod_processes = modules
 
-    # Set root type key.
-    type_key = TYPE_KEY_REALM if mod_root.__name__ != "model" else TYPE_KEY_MODEL
-
     # Create topic tree.
-    result = _create_topic(None, mod_root, type_key)
+    result = _create_topic(None, mod_root, TYPE_KEY_REALM)
     _create_topic(result, mod_keyprops, TYPE_KEY_KEYPROPS)
-    if mod_grid is not None:
-        _create_topic(result, mod_grid, TYPE_KEY_GRID)
+    _create_topic(result, mod_grid, TYPE_KEY_GRID)
     for i in mod_processes:
         _create_topic(result, i, TYPE_KEY_PROCESS)
 
@@ -106,6 +102,9 @@ def _create_topic(parent, spec, type_key, key=None):
     if parent:
         topic.parent = parent
         parent.sub_topics.append(topic)
+
+    # Inject common attributes.
+    
 
     # Cache (used in downstream tooling chain).
     CACHE[topic.id] = topic
