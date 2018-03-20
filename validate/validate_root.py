@@ -31,7 +31,6 @@ def validate(ctx):
         ('GRID', (str, type(None))),
         ('KEY_PROPERTIES', str),
         ('PROCESSES', list),
-        ('QC_STATUS', str)
         }:
         validate_field(ctx, ctx.root, name, typeof)
 

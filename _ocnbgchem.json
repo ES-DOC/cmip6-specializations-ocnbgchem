@@ -1,22 +1,30 @@
 {
     "label": "Ocnbgchem", 
-    "description": "Ocean Biogeochemistry Realm", 
+    "description": "Ocean Biogeochemistry", 
     "id": "cmip6.ocnbgchem", 
-    "contact": "Eric Guilyardi", 
+    "contact": null, 
     "processes": [
         {
             "label": "Tracers", 
             "description": "Ocean biogeochemistry tracers", 
             "id": "cmip6.ocnbgchem.tracers", 
-            "contact": "Eric Guilyardi", 
+            "contact": null, 
             "properties": [
                 {
-                    "label": "Overview", 
-                    "description": "Overview of tracers in ocean biogeochemistry", 
-                    "id": "cmip6.ocnbgchem.tracers.overview", 
-                    "cardinality": "1.1", 
+                    "label": "Name", 
+                    "description": "Commonly used name for the tracers in ocnbgchem model.", 
+                    "id": "cmip6.ocnbgchem.tracers.name", 
+                    "cardinality": "0.1", 
                     "type": "str", 
                     "uiOrdinal": 1
+                }, 
+                {
+                    "label": "Overview", 
+                    "description": "Overview of ocean biogeochemistry tracers in ocnbgchem model.", 
+                    "id": "cmip6.ocnbgchem.tracers.overview", 
+                    "cardinality": "0.1", 
+                    "type": "str", 
+                    "uiOrdinal": 2
                 }, 
                 {
                     "label": "Sulfur Cycle Present", 
@@ -24,7 +32,7 @@
                     "id": "cmip6.ocnbgchem.tracers.sulfur_cycle_present", 
                     "cardinality": "1.1", 
                     "type": "bool", 
-                    "uiOrdinal": 2
+                    "uiOrdinal": 3
                 }, 
                 {
                     "label": "Nutrients Present", 
@@ -55,7 +63,7 @@
                             }
                         ]
                     }, 
-                    "uiOrdinal": 3
+                    "uiOrdinal": 4
                 }, 
                 {
                     "label": "Nitrous Species If N", 
@@ -78,7 +86,7 @@
                             }
                         ]
                     }, 
-                    "uiOrdinal": 4
+                    "uiOrdinal": 5
                 }, 
                 {
                     "label": "Nitrous Processes If N", 
@@ -101,7 +109,7 @@
                             }
                         ]
                     }, 
-                    "uiOrdinal": 5
+                    "uiOrdinal": 6
                 }
             ], 
             "subProcesses": [
@@ -109,7 +117,7 @@
                     "label": "Ecosystem", 
                     "description": "Ecosystem properties in ocean biogeochemistry", 
                     "id": "cmip6.ocnbgchem.tracers.ecosystem", 
-                    "contact": "Eric Guilyardi", 
+                    "contact": null, 
                     "properties": [
                         {
                             "label": "Upper Trophic Levels Definition", 
@@ -288,7 +296,7 @@
                     "label": "Disolved Organic Matter", 
                     "description": "Disolved organic matter properties in ocean biogeochemistry", 
                     "id": "cmip6.ocnbgchem.tracers.disolved_organic_matter", 
-                    "contact": "Eric Guilyardi", 
+                    "contact": null, 
                     "properties": [
                         {
                             "label": "Bacteria Present", 
@@ -335,7 +343,7 @@
                     "label": "Particules", 
                     "description": "Particulate carbon properties in ocean biogeochemistry", 
                     "id": "cmip6.ocnbgchem.tracers.particules", 
-                    "contact": "Eric Guilyardi", 
+                    "contact": null, 
                     "properties": [
                         {
                             "label": "Method", 
@@ -467,7 +475,7 @@
                     "label": "Dic Alkalinity", 
                     "description": "DIC and alkalinity properties in ocean biogeochemistry", 
                     "id": "cmip6.ocnbgchem.tracers.dic_alkalinity", 
-                    "contact": "Eric Guilyardi", 
+                    "contact": null, 
                     "properties": [
                         {
                             "label": "Carbon Isotopes", 
@@ -532,20 +540,20 @@
         "label": "Key Properties", 
         "description": "Ocean Biogeochemistry key properties", 
         "id": "cmip6.ocnbgchem.key_properties", 
-        "contact": "Eric Guilyardi", 
+        "contact": null, 
         "properties": [
             {
-                "label": "Model Overview", 
-                "description": "Overview of ocean biogeochemistry model", 
-                "id": "cmip6.ocnbgchem.key_properties.model_overview", 
+                "label": "Name", 
+                "description": "Name of ocnbgchem model code", 
+                "id": "cmip6.ocnbgchem.key_properties.name", 
                 "cardinality": "1.1", 
                 "type": "str", 
                 "uiOrdinal": 1
             }, 
             {
-                "label": "Model Name", 
-                "description": "Name of ocean biogeochemistry model code (PISCES 2.0,...)", 
-                "id": "cmip6.ocnbgchem.key_properties.model_name", 
+                "label": "Overview", 
+                "description": "Overview of ocnbgchem model.", 
+                "id": "cmip6.ocnbgchem.key_properties.overview", 
                 "cardinality": "1.1", 
                 "type": "str", 
                 "uiOrdinal": 2
@@ -557,7 +565,7 @@
                 "cardinality": "1.1", 
                 "type": "enum", 
                 "enum": {
-                    "label": "Model Types", 
+                    "label": "Model Family", 
                     "description": "Types of models for ocean biogeochemistry", 
                     "isOpen": true, 
                     "choices": [
@@ -642,7 +650,7 @@
                 "label": "Time Stepping Framework", 
                 "description": "Time stepping framework for ocean biogeochemistry", 
                 "id": "cmip6.ocnbgchem.key_properties.time_stepping_framework", 
-                "contact": "Eric Guilyardi", 
+                "contact": null, 
                 "propertySets": [
                     {
                         "label": "Passive Tracers Transport", 
@@ -726,7 +734,7 @@
                 "label": "Transport Scheme", 
                 "description": "Transport scheme in ocean biogeochemistry", 
                 "id": "cmip6.ocnbgchem.key_properties.transport_scheme", 
-                "contact": "Eric Guilyardi", 
+                "contact": null, 
                 "properties": [
                     {
                         "label": "Type", 
@@ -784,7 +792,7 @@
                 "label": "Boundary Forcing", 
                 "description": "Properties of biogeochemistry boundary forcing", 
                 "id": "cmip6.ocnbgchem.key_properties.boundary_forcing", 
-                "contact": "Eric Guilyardi", 
+                "contact": null, 
                 "properties": [
                     {
                         "label": "Atmospheric Deposition", 
@@ -862,7 +870,7 @@
                 "label": "Gas Exchange", 
                 "description": "Properties of gas exchange in ocean biogeochemistry ", 
                 "id": "cmip6.ocnbgchem.key_properties.gas_exchange", 
-                "contact": "Eric Guilyardi", 
+                "contact": null, 
                 "properties": [
                     {
                         "label": "CO2 Exchange Present", 
@@ -1060,7 +1068,7 @@
                 "label": "Carbon Chemistry", 
                 "description": "Properties of carbon chemistry biogeochemistry", 
                 "id": "cmip6.ocnbgchem.key_properties.carbon_chemistry", 
-                "contact": "Eric Guilyardi", 
+                "contact": null, 
                 "properties": [
                     {
                         "label": "Type", 

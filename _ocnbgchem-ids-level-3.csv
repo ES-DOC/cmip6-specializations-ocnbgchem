@@ -1,6 +1,6 @@
 cmip6-id, cmip6-label, cmip6-type
-cmip6.ocnbgchem.key_properties.model_overview, Ocnbgchem > Key Properties > Model Overview, property
-cmip6.ocnbgchem.key_properties.model_name, Ocnbgchem > Key Properties > Model Name, property
+cmip6.ocnbgchem.key_properties.name, Ocnbgchem > Key Properties > Name, property
+cmip6.ocnbgchem.key_properties.overview, Ocnbgchem > Key Properties > Overview, property
 cmip6.ocnbgchem.key_properties.model_type, Ocnbgchem > Key Properties > Model Type, property
 cmip6.ocnbgchem.key_properties.elemental_stoichiometry, Ocnbgchem > Key Properties > Elemental Stoichiometry, property
 cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details, Ocnbgchem > Key Properties > Elemental Stoichiometry Details, property
@@ -43,6 +43,7 @@ cmip6.ocnbgchem.key_properties.carbon_chemistry.type, Ocnbgchem > Key Properties
 cmip6.ocnbgchem.key_properties.carbon_chemistry.pH_scale, Ocnbgchem > Key Properties > Carbon Chemistry > PH Scale, property
 cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP, Ocnbgchem > Key Properties > Carbon Chemistry > Constants If Not OMIP, property
 , , 
+cmip6.ocnbgchem.tracers.name, Ocnbgchem > Tracers > Name, property
 cmip6.ocnbgchem.tracers.overview, Ocnbgchem > Tracers > Overview, property
 cmip6.ocnbgchem.tracers.sulfur_cycle_present, Ocnbgchem > Tracers > Sulfur Cycle Present, property
 cmip6.ocnbgchem.tracers.nutrients_present, Ocnbgchem > Tracers > Nutrients Present, property

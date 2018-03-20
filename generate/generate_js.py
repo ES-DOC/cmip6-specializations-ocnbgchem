@@ -103,6 +103,9 @@ class Generator(SpecializationParser):
         """On property parse event handler.
 
         """
+        if prop.is_cim_property:
+            return
+
         obj = collections.OrderedDict()
         obj['id'] = prop.id
         obj['label'] = " > ".join([get_label(i) for i in prop.id.split('.')[3:]])

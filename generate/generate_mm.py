@@ -138,6 +138,9 @@ class Generator(SpecializationParser):
         """On property set parse event handler.
 
         """
+        if prop_set.are_cim_properties:
+            return
+
         self._emit_node(prop_set.owner, prop_set)
 
 
@@ -145,6 +148,9 @@ class Generator(SpecializationParser):
         """On property parse event handler.
 
         """
+        if prop.is_cim_property:
+            return
+
         self._emit_node(prop.owner, prop)
         self._emit_notes(prop)
 

@@ -12,21 +12,6 @@ DETAILS = OrderedDict()
 ENUMERATIONS = OrderedDict()
 
 # --------------------------------------------------------------------
-# CONTACT: Set to realm specialization co-ordinator.
-# --------------------------------------------------------------------
-CONTACT = 'Eric Guilyardi'
-
-# --------------------------------------------------------------------
-# AUTHORS: Set to realm specialization authors (comma delimited).
-# --------------------------------------------------------------------
-AUTHORS = 'Eric Guilyardi'
-
-# --------------------------------------------------------------------
-# QUALITY CONTROL STATUS: Set to 'draft' or 'complete'
-# --------------------------------------------------------------------
-QC_STATUS = 'draft'
-
-# --------------------------------------------------------------------
 # DESCRIPTION: Short description of the specialization.
 # --------------------------------------------------------------------
 DESCRIPTION = 'Ocean biogeochemistry tracers'
@@ -37,8 +22,6 @@ DESCRIPTION = 'Ocean biogeochemistry tracers'
 DETAILS['toplevel'] = {
     'description': 'Top level properties of tracers in ocean biogeochemistry',
     'properties': [
-        ('overview', 'str', '1.1',
-            'Overview of tracers in ocean biogeochemistry'),
         ('sulfur_cycle_present', 'bool', '1.1',
             'Is sulfur cycle modeled ?'),
         ('nutrients_present', 'ENUM:nutrients_species', '1.N',
@@ -47,14 +30,12 @@ DETAILS['toplevel'] = {
             'If nitrogen present, list nitrous species.'),
         ('nitrous_processes_if_N', 'ENUM:nitrous_processes', '0.N',
             'If nitrogen present, list nitrous processes.'),
-
         ]
     }
 
 # --------------------------------------------------------------------
 # PROCESS: detailed properties
 # --------------------------------------------------------------------
-
 DETAILS['ecosystem'] = {
     'description': 'Ecosystem properties in ocean biogeochemistry',
     'properties': [

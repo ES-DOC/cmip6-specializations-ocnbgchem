@@ -40,13 +40,8 @@ def get_modules(input_dir, typeof):
 
     # Set specializations.
     root = _get_module(modules, typeof)
-    try:
-        root.GRID
-    except AttributeError:
-        grid = None
-    else:
-        grid = _get_module(modules, root.GRID)
-    key_properties = _get_module(modules, root.KEY_PROPERTIES)
+    grid = _get_module(modules, '{}_grid'.format(typeof))
+    key_properties = _get_module(modules, '{}_key_properties'.format(typeof))
     processes = [_get_module(modules, p) for p in root.PROCESSES]
 
     return root, grid, key_properties, processes

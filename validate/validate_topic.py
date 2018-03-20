@@ -52,12 +52,9 @@ def _validate_fields(ctx, module):
 
     """
     for field, typeof in {
-        ('AUTHORS', str),
-        ('CONTACT', str),
         ('DESCRIPTION', str),
         ('DETAILS', collections.OrderedDict),
         ('ENUMERATIONS', collections.OrderedDict),
-        ('QC_STATUS', str)
         }:
         utils.validate_field(ctx, module, field, typeof)
 

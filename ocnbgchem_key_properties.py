@@ -12,21 +12,6 @@ DETAILS = OrderedDict()
 ENUMERATIONS = OrderedDict()
 
 # --------------------------------------------------------------------
-# CONTACT: Set to realm specialization co-ordinator.
-# --------------------------------------------------------------------
-CONTACT = 'Eric Guilyardi'
-
-# --------------------------------------------------------------------
-# AUTHORS: Set to realm specialization authors (comma delimited).
-# --------------------------------------------------------------------
-AUTHORS = 'Eric Guilyardi'
-
-# --------------------------------------------------------------------
-# QUALITY CONTROL STATUS: Set to 'draft' or 'complete'
-# --------------------------------------------------------------------
-QC_STATUS = 'draft'
-
-# --------------------------------------------------------------------
 # DESCRIPTION: Short description of the specialization.
 # --------------------------------------------------------------------
 DESCRIPTION = 'Ocean Biogeochemistry key properties'
@@ -37,11 +22,7 @@ DESCRIPTION = 'Ocean Biogeochemistry key properties'
 DETAILS['toplevel'] = {
     'description': 'General key properties in ocean biogeochemistry',
     'properties': [
-        ('model_overview', 'str', '1.1',
-            'Overview of ocean biogeochemistry model'),
-        ('model_name', 'str', '1.1',
-            'Name of ocean biogeochemistry model code (PISCES 2.0,...)'),
-        ('model_type', 'ENUM:model_types', '1.1',
+        ('model_type', 'ENUM:model_family', '1.1',
             'Type of ocean biogeochemistry model'),
         ('elemental_stoichiometry', 'ENUM:elemental_stoichiometry_types', '1.1',
             'Describe elemental stoichiometry (fixed, variable, mix of the two)',),
@@ -59,11 +40,9 @@ DETAILS['toplevel'] = {
 # --------------------------------------------------------------------
 # KEY PROPERTIES: details
 # --------------------------------------------------------------------
-
 DETAILS['time_stepping_framework'] = {
     'description': 'Time stepping framework for ocean biogeochemistry',
-    'properties' : [
-        ]
+    'properties' : []
     }
 
 DETAILS['time_stepping_framework:passive_tracers_transport'] = {
@@ -176,7 +155,7 @@ DETAILS['carbon_chemistry'] = {
 # --------------------------------------------------------------------
 # KEY PROPERTIES: ENUMERATIONS
 # --------------------------------------------------------------------
-ENUMERATIONS['model_types'] = {
+ENUMERATIONS['model_family'] = {
     'description': 'Types of models for ocean biogeochemistry',
     'is_open': True,
     'members': [
@@ -185,6 +164,7 @@ ENUMERATIONS['model_types'] = {
         ('PFT','Several plankton types'),
         ]
     }
+
 ENUMERATIONS['elemental_stoichiometry_types'] = {
     'description': 'Types elemental stoichiometry for ocean biogeochemistry',
     'is_open': False,
@@ -267,5 +247,3 @@ ENUMERATIONS['ph_scale'] = {
         ('Free', None),
         ]
     }
-
-

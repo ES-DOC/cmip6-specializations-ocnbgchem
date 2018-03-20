@@ -111,10 +111,4 @@ def _validate_dict(obj):
                     errors.append("Property priorities must be integers > 0")
                     break
 
-    # Validate LABEL.
-    if "QC_STATUS" not in obj:
-        errors.append("QC_STATUS is required")
-    elif not isinstance(obj['QC_STATUS'], (str, basestring)):
-        errors.append("QC_STATUS must be a string")
-
     return errors
