@@ -61,8 +61,12 @@ def _set_injected_properties(topic):
     """Injects a set of properties into the set of specializations.
 
     """
+    # Escape if not dealing with topics.
+    if len(topic.path) != 3:
+        return
+
     # Model properties.
-    if topic.path[1] == 'toplevel':
+    if topic.path[1] == 'toplevel' and topic.path[-1] == 'key_properties':
         if topic.path[-1] == 'key_properties':
             if not topic.has_property('overview'):
                 description = 'Top level overview of coupled model'
@@ -73,7 +77,7 @@ def _set_injected_properties(topic):
                 _set_injected_property('name', 'str', '1.1', description, topic)
 
     # Topic key properties.
-    elif len(topic.path) == 3 and topic.path[-1] == 'key_properties':
+    elif topic.path[-1] == 'key_properties':
         if not topic.has_property('overview'):
             description = 'Overview of {} model.'.format(topic.root.name)
             _set_injected_property('overview', 'str', '1.1', description, topic)
@@ -83,13 +87,13 @@ def _set_injected_properties(topic):
             _set_injected_property('name', 'str', '1.1', description, topic)
 
     # Topic grid properties.
-    elif len(topic.path) == 3 and topic.path[-1] == 'grid':
+    elif topic.path[-1] == 'grid':
         if not topic.has_property('overview'):
             description = 'Overview of grid in {} model.'.format(topic.root.name)
             _set_injected_property('overview', 'str', '0.1', description, topic)
 
     # Topic standard properties.
-    elif len(topic.path) == 3:
+    else:
         if not topic.has_property('overview'):
             description = 'Overview of {} in {} model.'.format(topic.description.lower(), topic.root.name)
             _set_injected_property('overview', 'str', '0.1', description, topic)

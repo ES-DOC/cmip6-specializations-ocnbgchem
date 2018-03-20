@@ -11,7 +11,6 @@
 import argparse
 import os
 
-from generate_html import Generator as HTMLGenerator
 from generate_js import Generator as JavascriptGenerator
 from generate_json import Generator as JSONGenerator
 from generate_mm import Generator as MindmapGenerator
@@ -30,7 +29,6 @@ _PROJECT = __file__.split('/')[-3].split('-')[0]
 
 # Map of generator types to generator.
 _GENERATORS = {
-    'html': HTMLGenerator,
     'js': JavascriptGenerator,
     'json': JSONGenerator,
     'mm': MindmapGenerator,
@@ -48,7 +46,6 @@ _ENCODINGS = {
 
 # Map of generator types to file prefixes.
 _FILE_PREFIXES = {
-    'html': '_',
     'js': '_',
     'json': '_',
     'mm': '_',
@@ -66,7 +63,6 @@ _FILE_SUFFIXES = {
 
 # Map of generator types to directories.
 _DIRECTORIES = {
-    'html': '',
     'js': '',
     'json': '',
     'mm': '',
