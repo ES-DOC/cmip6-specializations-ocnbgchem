@@ -39,14 +39,11 @@ _NOTE_HTML = "<dt><b>{}</b></dt><dd>{}</dd>"
 # Mind-map sections.
 _SECTIONS = collections.OrderedDict()
 _SECTIONS[TYPE_KEY_ENUM_CHOICE] = None
-
 _SECTIONS[TYPE_KEY_GRID] = "science.topic"
 _SECTIONS[TYPE_KEY_KEYPROPS] = "science.topic"
 _SECTIONS[TYPE_KEY_PROCESS] = "science.topic"
-
 _SECTIONS[TYPE_KEY_PROPERTY] = None
 _SECTIONS[TYPE_KEY_PROPERTY_SET] = None
-
 _SECTIONS[TYPE_KEY_REALM] = "science.realm"
 _SECTIONS[TYPE_KEY_SUBPROCESS] = "science.topic"
 
@@ -358,17 +355,19 @@ def _get_notes(spec):
 
     """
     result = [
-        ("Description", lambda i: "N/A" if i.description is None else i.description.replace("&", "and"))
+        ("Description", lambda i: "N/A" if i.description is None else i.description.replace("&", "and")),
+        ("Spec. ID", lambda i: i.id),
     ]
+
     if isinstance(spec, PropertySpecialization):
         result += [
             ("Type", lambda i: i.typeof),
             ("Cardinality", lambda i: i.cardinality),
             ("Specialization ID", lambda i: i.id)
         ]
-    elif isinstance(spec, TopicSpecialization):
+
+    elif isinstance(spec, TopicSpecialization) and spec.parent is None:
         result += [
-            ("QC status", lambda i: i.qc_status),
             ("Contact", lambda i: i.contact),
             ("Authors", lambda i: i.authors),
             ("Contributors", lambda i: i.contributors)

@@ -144,7 +144,7 @@ DETAILS['carbon_chemistry'] = {
     'properties': [
         ('type', 'ENUM:carbon_chemistry', '1.1',
             'Describe how carbon chemistry is modeled'),
-        ('pH_scale', 'ENUM:ph_scale', '0.1',
+        ('ph_scale', 'ENUM:ph_scale', '0.1',
             'If NOT OMIP protocol, describe pH scale.'),
         ('constants_if_not_OMIP', 'str', '0.1',
             'If NOT OMIP protocol, list carbon chemistry constants.'),

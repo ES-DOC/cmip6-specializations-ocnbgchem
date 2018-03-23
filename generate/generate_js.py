@@ -68,7 +68,6 @@ class Generator(SpecializationParser):
         obj['contributors'] = [i.strip() for i in root.contributors.split(',')]
         obj['project'] = 'cmip6'
         obj['changeHistory'] = [_get_change(i) for i in root.change_history]
-        obj['qcStatus'] = root.qc_status
         obj['shortTables'] = []
         obj['subTopics'] = []
 

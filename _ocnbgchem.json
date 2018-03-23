@@ -2,13 +2,13 @@
     "label": "Ocnbgchem", 
     "description": "Ocean Biogeochemistry", 
     "id": "cmip6.ocnbgchem", 
-    "contact": null, 
+    "contact": "Eric Guilyardi", 
     "processes": [
         {
             "label": "Tracers", 
             "description": "Ocean biogeochemistry tracers", 
             "id": "cmip6.ocnbgchem.tracers", 
-            "contact": null, 
+            "contact": "Eric Guilyardi", 
             "properties": [
                 {
                     "label": "Name", 
@@ -117,15 +117,23 @@
                     "label": "Ecosystem", 
                     "description": "Ecosystem properties in ocean biogeochemistry", 
                     "id": "cmip6.ocnbgchem.tracers.ecosystem", 
-                    "contact": null, 
+                    "contact": "Eric Guilyardi", 
                     "properties": [
+                        {
+                            "label": "Overview", 
+                            "description": "Overview of ecosystem properties in ocean biogeochemistry in ocnbgchem model.", 
+                            "id": "cmip6.ocnbgchem.tracers.ecosystem.overview", 
+                            "cardinality": "0.1", 
+                            "type": "str", 
+                            "uiOrdinal": 1
+                        }, 
                         {
                             "label": "Upper Trophic Levels Definition", 
                             "description": "Describe how upper trophic levels are defined in model (e.g. based on size)", 
                             "id": "cmip6.ocnbgchem.tracers.ecosystem.upper_trophic_levels_definition", 
                             "cardinality": "1.1", 
                             "type": "str", 
-                            "uiOrdinal": 1
+                            "uiOrdinal": 2
                         }, 
                         {
                             "label": "Upper Trophic Levels Treatment", 
@@ -133,7 +141,7 @@
                             "id": "cmip6.ocnbgchem.tracers.ecosystem.upper_trophic_levels_treatment", 
                             "cardinality": "1.1", 
                             "type": "str", 
-                            "uiOrdinal": 2
+                            "uiOrdinal": 3
                         }
                     ], 
                     "propertySets": [
@@ -296,15 +304,23 @@
                     "label": "Disolved Organic Matter", 
                     "description": "Disolved organic matter properties in ocean biogeochemistry", 
                     "id": "cmip6.ocnbgchem.tracers.disolved_organic_matter", 
-                    "contact": null, 
+                    "contact": "Eric Guilyardi", 
                     "properties": [
+                        {
+                            "label": "Overview", 
+                            "description": "Overview of disolved organic matter properties in ocean biogeochemistry in ocnbgchem model.", 
+                            "id": "cmip6.ocnbgchem.tracers.disolved_organic_matter.overview", 
+                            "cardinality": "0.1", 
+                            "type": "str", 
+                            "uiOrdinal": 1
+                        }, 
                         {
                             "label": "Bacteria Present", 
                             "description": "Is there bacteria representation ?", 
                             "id": "cmip6.ocnbgchem.tracers.disolved_organic_matter.bacteria_present", 
                             "cardinality": "1.1", 
                             "type": "bool", 
-                            "uiOrdinal": 1
+                            "uiOrdinal": 2
                         }, 
                         {
                             "label": "Lability", 
@@ -335,7 +351,7 @@
                                     }
                                 ]
                             }, 
-                            "uiOrdinal": 2
+                            "uiOrdinal": 3
                         }
                     ]
                 }, 
@@ -343,8 +359,16 @@
                     "label": "Particules", 
                     "description": "Particulate carbon properties in ocean biogeochemistry", 
                     "id": "cmip6.ocnbgchem.tracers.particules", 
-                    "contact": null, 
+                    "contact": "Eric Guilyardi", 
                     "properties": [
+                        {
+                            "label": "Overview", 
+                            "description": "Overview of particulate carbon properties in ocean biogeochemistry in ocnbgchem model.", 
+                            "id": "cmip6.ocnbgchem.tracers.particules.overview", 
+                            "cardinality": "0.1", 
+                            "type": "str", 
+                            "uiOrdinal": 1
+                        }, 
                         {
                             "label": "Method", 
                             "description": "How is particulate carbon represented in ocean biogeochemistry?", 
@@ -374,7 +398,7 @@
                                     }
                                 ]
                             }, 
-                            "uiOrdinal": 1
+                            "uiOrdinal": 2
                         }, 
                         {
                             "label": "Types If Prognostic", 
@@ -405,7 +429,7 @@
                                     }
                                 ]
                             }, 
-                            "uiOrdinal": 2
+                            "uiOrdinal": 3
                         }, 
                         {
                             "label": "Size If Prognostic", 
@@ -432,7 +456,7 @@
                                     }
                                 ]
                             }, 
-                            "uiOrdinal": 3
+                            "uiOrdinal": 4
                         }, 
                         {
                             "label": "Size If Discrete", 
@@ -440,7 +464,7 @@
                             "id": "cmip6.ocnbgchem.tracers.particules.size_if_discrete", 
                             "cardinality": "0.1", 
                             "type": "str", 
-                            "uiOrdinal": 4
+                            "uiOrdinal": 5
                         }, 
                         {
                             "label": "Sinking Speed If Prognostic", 
@@ -467,7 +491,7 @@
                                     }
                                 ]
                             }, 
-                            "uiOrdinal": 5
+                            "uiOrdinal": 6
                         }
                     ]
                 }, 
@@ -475,8 +499,16 @@
                     "label": "Dic Alkalinity", 
                     "description": "DIC and alkalinity properties in ocean biogeochemistry", 
                     "id": "cmip6.ocnbgchem.tracers.dic_alkalinity", 
-                    "contact": null, 
+                    "contact": "Eric Guilyardi", 
                     "properties": [
+                        {
+                            "label": "Overview", 
+                            "description": "Overview of dic and alkalinity properties in ocean biogeochemistry in ocnbgchem model.", 
+                            "id": "cmip6.ocnbgchem.tracers.dic_alkalinity.overview", 
+                            "cardinality": "0.1", 
+                            "type": "str", 
+                            "uiOrdinal": 1
+                        }, 
                         {
                             "label": "Carbon Isotopes", 
                             "description": "Which carbon isotopes are modelled (C13, C14)?", 
@@ -498,7 +530,7 @@
                                     }
                                 ]
                             }, 
-                            "uiOrdinal": 1
+                            "uiOrdinal": 2
                         }, 
                         {
                             "label": "Abiotic Carbon", 
@@ -506,7 +538,7 @@
                             "id": "cmip6.ocnbgchem.tracers.dic_alkalinity.abiotic_carbon", 
                             "cardinality": "1.1", 
                             "type": "bool", 
-                            "uiOrdinal": 2
+                            "uiOrdinal": 3
                         }, 
                         {
                             "label": "Alkalinity", 
@@ -529,7 +561,7 @@
                                     }
                                 ]
                             }, 
-                            "uiOrdinal": 3
+                            "uiOrdinal": 4
                         }
                     ]
                 }
@@ -540,7 +572,7 @@
         "label": "Key Properties", 
         "description": "Ocean Biogeochemistry key properties", 
         "id": "cmip6.ocnbgchem.key_properties", 
-        "contact": null, 
+        "contact": "Eric Guilyardi", 
         "properties": [
             {
                 "label": "Name", 
@@ -650,7 +682,17 @@
                 "label": "Time Stepping Framework", 
                 "description": "Time stepping framework for ocean biogeochemistry", 
                 "id": "cmip6.ocnbgchem.key_properties.time_stepping_framework", 
-                "contact": null, 
+                "contact": "Eric Guilyardi", 
+                "properties": [
+                    {
+                        "label": "Overview", 
+                        "description": "Overview of time stepping framework for ocean biogeochemistry in ocnbgchem model.", 
+                        "id": "cmip6.ocnbgchem.key_properties.time_stepping_framework.overview", 
+                        "cardinality": "0.1", 
+                        "type": "str", 
+                        "uiOrdinal": 1
+                    }
+                ], 
                 "propertySets": [
                     {
                         "label": "Passive Tracers Transport", 
@@ -734,8 +776,16 @@
                 "label": "Transport Scheme", 
                 "description": "Transport scheme in ocean biogeochemistry", 
                 "id": "cmip6.ocnbgchem.key_properties.transport_scheme", 
-                "contact": null, 
+                "contact": "Eric Guilyardi", 
                 "properties": [
+                    {
+                        "label": "Overview", 
+                        "description": "Overview of transport scheme in ocean biogeochemistry in ocnbgchem model.", 
+                        "id": "cmip6.ocnbgchem.key_properties.transport_scheme.overview", 
+                        "cardinality": "0.1", 
+                        "type": "str", 
+                        "uiOrdinal": 1
+                    }, 
                     {
                         "label": "Type", 
                         "description": "Type of transport scheme", 
@@ -757,7 +807,7 @@
                                 }
                             ]
                         }, 
-                        "uiOrdinal": 1
+                        "uiOrdinal": 2
                     }, 
                     {
                         "label": "Scheme", 
@@ -776,7 +826,7 @@
                                 }
                             ]
                         }, 
-                        "uiOrdinal": 2
+                        "uiOrdinal": 3
                     }, 
                     {
                         "label": "Use Different Scheme", 
@@ -784,7 +834,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.transport_scheme.use_different_scheme", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 3
+                        "uiOrdinal": 4
                     }
                 ]
             }, 
@@ -792,8 +842,16 @@
                 "label": "Boundary Forcing", 
                 "description": "Properties of biogeochemistry boundary forcing", 
                 "id": "cmip6.ocnbgchem.key_properties.boundary_forcing", 
-                "contact": null, 
+                "contact": "Eric Guilyardi", 
                 "properties": [
+                    {
+                        "label": "Overview", 
+                        "description": "Overview of properties of biogeochemistry boundary forcing in ocnbgchem model.", 
+                        "id": "cmip6.ocnbgchem.key_properties.boundary_forcing.overview", 
+                        "cardinality": "0.1", 
+                        "type": "str", 
+                        "uiOrdinal": 1
+                    }, 
                     {
                         "label": "Atmospheric Deposition", 
                         "description": "Describe how atmospheric deposition is modeled", 
@@ -819,7 +877,7 @@
                                 }
                             ]
                         }, 
-                        "uiOrdinal": 1
+                        "uiOrdinal": 2
                     }, 
                     {
                         "label": "River Input", 
@@ -846,7 +904,7 @@
                                 }
                             ]
                         }, 
-                        "uiOrdinal": 2
+                        "uiOrdinal": 3
                     }, 
                     {
                         "label": "Sediments From Boundary Conditions", 
@@ -854,7 +912,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_boundary_conditions", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 3
+                        "uiOrdinal": 4
                     }, 
                     {
                         "label": "Sediments From Explicit Model", 
@@ -862,7 +920,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_explicit_model", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 4
+                        "uiOrdinal": 5
                     }
                 ]
             }, 
@@ -870,15 +928,23 @@
                 "label": "Gas Exchange", 
                 "description": "Properties of gas exchange in ocean biogeochemistry ", 
                 "id": "cmip6.ocnbgchem.key_properties.gas_exchange", 
-                "contact": null, 
+                "contact": "Eric Guilyardi", 
                 "properties": [
+                    {
+                        "label": "Overview", 
+                        "description": "Overview of properties of gas exchange in ocean biogeochemistry  in ocnbgchem model.", 
+                        "id": "cmip6.ocnbgchem.key_properties.gas_exchange.overview", 
+                        "cardinality": "0.1", 
+                        "type": "str", 
+                        "uiOrdinal": 1
+                    }, 
                     {
                         "label": "CO2 Exchange Present", 
                         "description": "Is CO2 gas exchange modeled ?", 
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.CO2_exchange_present", 
                         "cardinality": "1.1", 
                         "type": "bool", 
-                        "uiOrdinal": 1
+                        "uiOrdinal": 2
                     }, 
                     {
                         "label": "CO2 Exchange Type", 
@@ -897,7 +963,7 @@
                                 }
                             ]
                         }, 
-                        "uiOrdinal": 2
+                        "uiOrdinal": 3
                     }, 
                     {
                         "label": "O2 Exchange Present", 
@@ -905,7 +971,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.O2_exchange_present", 
                         "cardinality": "1.1", 
                         "type": "bool", 
-                        "uiOrdinal": 3
+                        "uiOrdinal": 4
                     }, 
                     {
                         "label": "O2 Exchange Type", 
@@ -924,7 +990,7 @@
                                 }
                             ]
                         }, 
-                        "uiOrdinal": 4
+                        "uiOrdinal": 5
                     }, 
                     {
                         "label": "DMS Exchange Present", 
@@ -932,7 +998,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.DMS_exchange_present", 
                         "cardinality": "1.1", 
                         "type": "bool", 
-                        "uiOrdinal": 5
+                        "uiOrdinal": 6
                     }, 
                     {
                         "label": "DMS Exchange Type", 
@@ -940,7 +1006,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.DMS_exchange_type", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 6
+                        "uiOrdinal": 7
                     }, 
                     {
                         "label": "N2 Exchange Present", 
@@ -948,7 +1014,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.N2_exchange_present", 
                         "cardinality": "1.1", 
                         "type": "bool", 
-                        "uiOrdinal": 7
+                        "uiOrdinal": 8
                     }, 
                     {
                         "label": "N2 Exchange Type", 
@@ -956,7 +1022,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.N2_exchange_type", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 8
+                        "uiOrdinal": 9
                     }, 
                     {
                         "label": "N2O Exchange Present", 
@@ -964,7 +1030,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.N2O_exchange_present", 
                         "cardinality": "1.1", 
                         "type": "bool", 
-                        "uiOrdinal": 9
+                        "uiOrdinal": 10
                     }, 
                     {
                         "label": "N2O Exchange Type", 
@@ -972,7 +1038,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.N2O_exchange_type", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 10
+                        "uiOrdinal": 11
                     }, 
                     {
                         "label": "CFC11 Exchange Present", 
@@ -980,7 +1046,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.CFC11_exchange_present", 
                         "cardinality": "1.1", 
                         "type": "bool", 
-                        "uiOrdinal": 11
+                        "uiOrdinal": 12
                     }, 
                     {
                         "label": "CFC11 Exchange Type", 
@@ -988,7 +1054,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.CFC11_exchange_type", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 12
+                        "uiOrdinal": 13
                     }, 
                     {
                         "label": "CFC12 Exchange Present", 
@@ -996,7 +1062,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.CFC12_exchange_present", 
                         "cardinality": "1.1", 
                         "type": "bool", 
-                        "uiOrdinal": 13
+                        "uiOrdinal": 14
                     }, 
                     {
                         "label": "CFC12 Exchange Type", 
@@ -1004,7 +1070,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.CFC12_exchange_type", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 14
+                        "uiOrdinal": 15
                     }, 
                     {
                         "label": "SF6 Exchange Present", 
@@ -1012,7 +1078,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.SF6_exchange_present", 
                         "cardinality": "1.1", 
                         "type": "bool", 
-                        "uiOrdinal": 15
+                        "uiOrdinal": 16
                     }, 
                     {
                         "label": "SF6 Exchange Type", 
@@ -1020,7 +1086,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.SF6_exchange_type", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 16
+                        "uiOrdinal": 17
                     }, 
                     {
                         "label": "13CO2 Exchange Present", 
@@ -1028,7 +1094,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.13CO2_exchange_present", 
                         "cardinality": "1.1", 
                         "type": "bool", 
-                        "uiOrdinal": 17
+                        "uiOrdinal": 18
                     }, 
                     {
                         "label": "13CO2 Exchange Type", 
@@ -1036,7 +1102,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.13CO2_exchange_type", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 18
+                        "uiOrdinal": 19
                     }, 
                     {
                         "label": "14CO2 Exchange Present", 
@@ -1044,7 +1110,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.14CO2_exchange_present", 
                         "cardinality": "1.1", 
                         "type": "bool", 
-                        "uiOrdinal": 19
+                        "uiOrdinal": 20
                     }, 
                     {
                         "label": "14CO2 Exchange Type", 
@@ -1052,7 +1118,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.14CO2_exchange_type", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 20
+                        "uiOrdinal": 21
                     }, 
                     {
                         "label": "Other Gases", 
@@ -1060,7 +1126,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.gas_exchange.other_gases", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 21
+                        "uiOrdinal": 22
                     }
                 ]
             }, 
@@ -1068,8 +1134,16 @@
                 "label": "Carbon Chemistry", 
                 "description": "Properties of carbon chemistry biogeochemistry", 
                 "id": "cmip6.ocnbgchem.key_properties.carbon_chemistry", 
-                "contact": null, 
+                "contact": "Eric Guilyardi", 
                 "properties": [
+                    {
+                        "label": "Overview", 
+                        "description": "Overview of properties of carbon chemistry biogeochemistry in ocnbgchem model.", 
+                        "id": "cmip6.ocnbgchem.key_properties.carbon_chemistry.overview", 
+                        "cardinality": "0.1", 
+                        "type": "str", 
+                        "uiOrdinal": 1
+                    }, 
                     {
                         "label": "Type", 
                         "description": "Describe how carbon chemistry is modeled", 
@@ -1091,12 +1165,12 @@
                                 }
                             ]
                         }, 
-                        "uiOrdinal": 1
+                        "uiOrdinal": 2
                     }, 
                     {
-                        "label": "PH Scale", 
+                        "label": "Ph Scale", 
                         "description": "If NOT OMIP protocol, describe pH scale.", 
-                        "id": "cmip6.ocnbgchem.key_properties.carbon_chemistry.pH_scale", 
+                        "id": "cmip6.ocnbgchem.key_properties.carbon_chemistry.ph_scale", 
                         "cardinality": "0.1", 
                         "type": "enum", 
                         "enum": {
@@ -1114,7 +1188,7 @@
                                 }
                             ]
                         }, 
-                        "uiOrdinal": 2
+                        "uiOrdinal": 3
                     }, 
                     {
                         "label": "Constants If Not OMIP", 
@@ -1122,7 +1196,7 @@
                         "id": "cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP", 
                         "cardinality": "0.1", 
                         "type": "str", 
-                        "uiOrdinal": 3
+                        "uiOrdinal": 4
                     }
                 ]
             }

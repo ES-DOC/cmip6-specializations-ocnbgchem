@@ -30,7 +30,6 @@ class TopicSpecialization(object):
         self.contributors = None
         self.description = None
         self.id = None
-        self.qc_status = None
         self.name = None
         self.parent = parent
         self.properties = []
@@ -507,7 +506,6 @@ class ShortTable(object):
         self.label = None
         self.name = None
         self.properties = []
-        self.qc_status = None
 
 
     def __iter__(self):
