@@ -52,8 +52,8 @@ def get_modules(input_dir, typeof):
     # Set specializations.
     root = _get_module(modules, typeof)
     children = [_get_module(modules, i) for i in [
-        '{}_grid'.format(typeof),
-        '{}_key_properties'.format(typeof)
+        '{}_key_properties'.format(typeof),
+        '{}_grid'.format(typeof)
     ] + root.PROCESSES]
 
     return [root] + [i for i in children if i is not None]
