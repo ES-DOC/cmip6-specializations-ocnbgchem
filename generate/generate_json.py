@@ -73,7 +73,7 @@ class Generator(SpecializationParser):
         obj['description'] = prop.description
         obj['id'] = prop.id
         obj['cardinality'] = prop.cardinality
-        obj['type'] = "enum" if prop.enum else prop.typeof
+        obj['type'] = "enum" if prop.enum else prop.typeof.split('-')[0]
 
         self._maps[prop] = obj
 

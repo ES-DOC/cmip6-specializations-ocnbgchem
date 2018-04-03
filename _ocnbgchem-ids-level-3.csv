@@ -1,5 +1,6 @@
 cmip6-id, cmip6-label, cmip6-type
 cmip6.ocnbgchem.key_properties.name, Ocnbgchem > Key Properties > Name, property
+cmip6.ocnbgchem.key_properties.keywords, Ocnbgchem > Key Properties > Keywords, property
 cmip6.ocnbgchem.key_properties.overview, Ocnbgchem > Key Properties > Overview, property
 cmip6.ocnbgchem.key_properties.model_type, Ocnbgchem > Key Properties > Model Type, property
 cmip6.ocnbgchem.key_properties.elemental_stoichiometry, Ocnbgchem > Key Properties > Elemental Stoichiometry, property

@@ -71,7 +71,11 @@ def _set_topic_injected_properties(topic):
     if len(topic.path) == 3 and topic.path[1] == 'toplevel' and topic.path[2] == 'key_properties':
         if not topic.has_property('overview'):
             description = 'Top level overview of coupled model'
-            _set_injected_property('overview', 'str', '1.1', description, topic)
+            _set_injected_property('overview', 'l-str', '1.1', description, topic)
+
+        if not topic.has_property('keywords'):
+            description = 'Keywords associated with coupled model'
+            _set_injected_property('keywords', 'cs-str', '1.1', description, topic)
 
         if not topic.has_property('name'):
             description = 'Name of coupled model'
@@ -81,7 +85,11 @@ def _set_topic_injected_properties(topic):
     elif len(topic.path) == 3 and topic.path[2] == 'key_properties':
         if not topic.has_property('overview'):
             description = 'Overview of {} model.'.format(topic.root.name)
-            _set_injected_property('overview', 'str', '1.1', description, topic)
+            _set_injected_property('overview', 'l-str', '1.1', description, topic)
+
+        if not topic.has_property('keywords'):
+            description = 'Keywords associated with {} model code'.format(topic.root.name)
+            _set_injected_property('keywords', 'cs-str', '1.1', description, topic)
 
         if not topic.has_property('name'):
             description = 'Name of {} model code'.format(topic.root.name)
@@ -91,7 +99,7 @@ def _set_topic_injected_properties(topic):
     elif len(topic.path) == 3 and topic.path[-1] == 'grid':
         if not topic.has_property('overview'):
             description = 'Overview of grid in {} model.'.format(topic.root.name)
-            _set_injected_property('overview', 'str', '0.1', description, topic)
+            _set_injected_property('overview', 'l-str', '0.1', description, topic)
 
         if not topic.has_property('name'):
             description = 'Name of grid in {} model.'.format(topic.root.name)
@@ -101,7 +109,7 @@ def _set_topic_injected_properties(topic):
     elif len(topic.path) == 3:
         if not topic.has_property('overview'):
             description = 'Overview of {} in {} model.'.format(topic.description.lower(), topic.root.name)
-            _set_injected_property('overview', 'str', '0.1', description, topic)
+            _set_injected_property('overview', 'l-str', '0.1', description, topic)
 
         if not topic.has_property('name'):
             description = 'Commonly used name for the {} in {} model.'.format(topic.name_camel_case_spaced.lower(), topic.root.name)

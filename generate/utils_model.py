@@ -354,7 +354,7 @@ class PropertySpecialization(object):
         """Gets label for the property type.
 
         """
-        if self.typeof == 'str':
+        if self.typeof in {'str', 'cs-str', 'l-str'}:
             return "STRING"
         elif self.typeof == 'bool':
             return "BOOLEAN"
@@ -391,7 +391,7 @@ class PropertySpecialization(object):
         if self.enum:
             self.enum.validate_value(val)
 
-        if self.typeof == 'str':
+        if self.typeof in {'str', 'cs-str', 'l-str'}:
             if not isinstance(val, basestring) or not len(val.strip()):
                 raise ValueError("Invalid value: must be a non zero length string")
 
