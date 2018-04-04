@@ -657,23 +657,23 @@
                 "description": "Describe which elements have fixed/variable stoichiometry", 
                 "id": "cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details", 
                 "cardinality": "1.1", 
-                "type": "str", 
+                "type": "cs", 
                 "uiOrdinal": 6
             }, 
             {
                 "label": "Prognostic Variables", 
                 "description": "List of all prognostic tracer variables in the ocean biogeochemistry component", 
                 "id": "cmip6.ocnbgchem.key_properties.prognostic_variables", 
-                "cardinality": "1.N", 
-                "type": "str", 
+                "cardinality": "1.1", 
+                "type": "cs", 
                 "uiOrdinal": 7
             }, 
             {
                 "label": "Diagnostic Variables", 
                 "description": "List of all diagnotic tracer variables in the ocean biogeochemistry component (derived from prognostic variables", 
                 "id": "cmip6.ocnbgchem.key_properties.diagnostic_variables", 
-                "cardinality": "1.N", 
-                "type": "str", 
+                "cardinality": "1.1", 
+                "type": "cs", 
                 "uiOrdinal": 8
             }, 
             {
@@ -841,7 +841,7 @@
                         "description": "Decribe transport scheme if different than that of ocean model", 
                         "id": "cmip6.ocnbgchem.key_properties.transport_scheme.use_different_scheme", 
                         "cardinality": "0.1", 
-                        "type": "str", 
+                        "type": "l", 
                         "uiOrdinal": 4
                     }
                 ]
@@ -919,7 +919,7 @@
                         "description": "List which sediments are speficied from boundary condition", 
                         "id": "cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_boundary_conditions", 
                         "cardinality": "0.1", 
-                        "type": "str", 
+                        "type": "cs", 
                         "uiOrdinal": 4
                     }, 
                     {
@@ -927,7 +927,7 @@
                         "description": "List which sediments are speficied from explicit sediment model", 
                         "id": "cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_explicit_model", 
                         "cardinality": "0.1", 
-                        "type": "str", 
+                        "type": "cs", 
                         "uiOrdinal": 5
                     }
                 ]
@@ -1203,7 +1203,7 @@
                         "description": "If NOT OMIP protocol, list carbon chemistry constants.", 
                         "id": "cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP", 
                         "cardinality": "0.1", 
-                        "type": "str", 
+                        "type": "cs", 
                         "uiOrdinal": 4
                     }
                 ]

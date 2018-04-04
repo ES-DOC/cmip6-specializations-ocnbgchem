@@ -26,11 +26,11 @@ DETAILS['toplevel'] = {
             'Type of ocean biogeochemistry model'),
         ('elemental_stoichiometry', 'ENUM:elemental_stoichiometry_types', '1.1',
             'Describe elemental stoichiometry (fixed, variable, mix of the two)',),
-        ('elemental_stoichiometry_details', 'str', '1.1',
+        ('elemental_stoichiometry_details', 'cs-str', '1.1',
             'Describe which elements have fixed/variable stoichiometry',),
-        ('prognostic_variables', 'str', '1.N',
+        ('prognostic_variables', 'cs-str', '1.1',
             'List of all prognostic tracer variables in the ocean biogeochemistry component'),
-        ('diagnostic_variables', 'str', '1.N',
+        ('diagnostic_variables', 'cs-str', '1.1',
             'List of all diagnotic tracer variables in the ocean biogeochemistry component (derived from prognostic variables'),
         ('damping', 'str', '0.1',
             'Describe any tracer damping used (such as artificial correction or relaxation to climatology,...)'),
@@ -72,7 +72,7 @@ DETAILS['transport_scheme'] = {
             'Type of transport scheme'),
         ('scheme', 'ENUM:transport_scheme', '1.1',
             'Transport scheme used'),
-        ('use_different_scheme', 'str', '0.1',
+        ('use_different_scheme', 'l-str', '0.1',
             'Decribe transport scheme if different than that of ocean model'),
         ]
     }
@@ -84,9 +84,9 @@ DETAILS['boundary_forcing'] = {
             'Describe how atmospheric deposition is modeled'),
         ('river_input', 'ENUM:sources_river_input', '1.1',
             'Describe how river input is modeled'),
-        ('sediments_from_boundary_conditions', 'str', '0.1',
+        ('sediments_from_boundary_conditions', 'cs-str', '0.1',
             'List which sediments are speficied from boundary condition'),
-        ('sediments_from_explicit_model', 'str', '0.1',
+        ('sediments_from_explicit_model', 'cs-str', '0.1',
             'List which sediments are speficied from explicit sediment model'),
         ]
     }
@@ -146,7 +146,7 @@ DETAILS['carbon_chemistry'] = {
             'Describe how carbon chemistry is modeled'),
         ('ph_scale', 'ENUM:ph_scale', '0.1',
             'If NOT OMIP protocol, describe pH scale.'),
-        ('constants_if_not_OMIP', 'str', '0.1',
+        ('constants_if_not_OMIP', 'cs-str', '0.1',
             'If NOT OMIP protocol, list carbon chemistry constants.'),
         ]
     }

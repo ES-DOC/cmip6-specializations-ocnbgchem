@@ -47,6 +47,13 @@
         <dt><b>Version</b></dt><dd>1.0.0</dd><dt><b>Date</b></dt><dd>2018-02-21</dd><dt><b>Person</b></dt><dd>Eric Guilyardi</dd><dt><b>Comment</b></dt><dd>Version for release 1.0</dd>
     </dl>
   </body>
+</html></richcontent></node><node STYLE="bubble" TEXT="1.0.1"><richcontent TYPE="NOTE"><html>
+  <head />
+  <body>
+    <dl>
+        <dt><b>Version</b></dt><dd>1.0.1</dd><dt><b>Date</b></dt><dd>2018-04-04</dd><dt><b>Person</b></dt><dd>David Hassell</dd><dt><b>Comment</b></dt><dd>Replaced some occurences of 'str' with 'cs-str' and 'l-str'</dd>
+    </dl>
+  </body>
 </html></richcontent></node></node><node FOLDED="true" POSITION="left" STYLE="bubble" TEXT="LEGEND"><node BACKGROUND_COLOR="#FFFFFF" COLOR="#000000" STYLE="bubble" TEXT="enum-choice"><richcontent TYPE="NOTE"><html>
   <head />
   <body>
@@ -226,42 +233,42 @@
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>Describe which elements have fixed/variable stoichiometry</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>1.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details</dd>
+        <dt><b>Description</b></dt><dd>Describe which elements have fixed/variable stoichiometry</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>1.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details</dd>
     </dl>
   </body>
 </html></richcontent><richcontent TYPE="NOTE"><html>
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>Describe which elements have fixed/variable stoichiometry</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>1.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details</dd>
+        <dt><b>Description</b></dt><dd>Describe which elements have fixed/variable stoichiometry</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>1.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.elemental_stoichiometry_details</dd>
     </dl>
   </body>
 </html></richcontent></node><node BACKGROUND_COLOR="#C9D787" COLOR="#000000" FOLDED="true" STYLE="bubble" TEXT="prognostic_variables"><font BOLD="True" NAME="courier" SIZE="10" /><richcontent TYPE="NOTE"><html>
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>List of all prognostic tracer variables in the ocean biogeochemistry component</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.prognostic_variables</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>1.N</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.prognostic_variables</dd>
+        <dt><b>Description</b></dt><dd>List of all prognostic tracer variables in the ocean biogeochemistry component</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.prognostic_variables</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>1.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.prognostic_variables</dd>
     </dl>
   </body>
 </html></richcontent><richcontent TYPE="NOTE"><html>
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>List of all prognostic tracer variables in the ocean biogeochemistry component</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.prognostic_variables</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>1.N</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.prognostic_variables</dd>
+        <dt><b>Description</b></dt><dd>List of all prognostic tracer variables in the ocean biogeochemistry component</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.prognostic_variables</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>1.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.prognostic_variables</dd>
     </dl>
   </body>
 </html></richcontent></node><node BACKGROUND_COLOR="#C9D787" COLOR="#000000" FOLDED="true" STYLE="bubble" TEXT="diagnostic_variables"><font BOLD="True" NAME="courier" SIZE="10" /><richcontent TYPE="NOTE"><html>
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>List of all diagnotic tracer variables in the ocean biogeochemistry component (derived from prognostic variables</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.diagnostic_variables</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>1.N</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.diagnostic_variables</dd>
+        <dt><b>Description</b></dt><dd>List of all diagnotic tracer variables in the ocean biogeochemistry component (derived from prognostic variables</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.diagnostic_variables</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>1.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.diagnostic_variables</dd>
     </dl>
   </body>
 </html></richcontent><richcontent TYPE="NOTE"><html>
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>List of all diagnotic tracer variables in the ocean biogeochemistry component (derived from prognostic variables</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.diagnostic_variables</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>1.N</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.diagnostic_variables</dd>
+        <dt><b>Description</b></dt><dd>List of all diagnotic tracer variables in the ocean biogeochemistry component (derived from prognostic variables</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.diagnostic_variables</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>1.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.diagnostic_variables</dd>
     </dl>
   </body>
 </html></richcontent></node><node BACKGROUND_COLOR="#C9D787" COLOR="#000000" FOLDED="true" STYLE="bubble" TEXT="damping"><font BOLD="True" NAME="courier" SIZE="10" /><richcontent TYPE="NOTE"><html>
@@ -471,14 +478,14 @@
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>Decribe transport scheme if different than that of ocean model</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.transport_scheme.use_different_scheme</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.transport_scheme.use_different_scheme</dd>
+        <dt><b>Description</b></dt><dd>Decribe transport scheme if different than that of ocean model</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.transport_scheme.use_different_scheme</dd><dt><b>Type</b></dt><dd>l-str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.transport_scheme.use_different_scheme</dd>
     </dl>
   </body>
 </html></richcontent><richcontent TYPE="NOTE"><html>
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>Decribe transport scheme if different than that of ocean model</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.transport_scheme.use_different_scheme</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.transport_scheme.use_different_scheme</dd>
+        <dt><b>Description</b></dt><dd>Decribe transport scheme if different than that of ocean model</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.transport_scheme.use_different_scheme</dd><dt><b>Type</b></dt><dd>l-str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.transport_scheme.use_different_scheme</dd>
     </dl>
   </body>
 </html></richcontent></node></node><node BACKGROUND_COLOR="#ACF0F2" COLOR="#000000" FOLDED="false" STYLE="bubble" TEXT="boundary_forcing"><font BOLD="True" NAME="courier" SIZE="12" /><richcontent TYPE="NOTE"><html>
@@ -576,28 +583,28 @@
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>List which sediments are speficied from boundary condition</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_boundary_conditions</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_boundary_conditions</dd>
+        <dt><b>Description</b></dt><dd>List which sediments are speficied from boundary condition</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_boundary_conditions</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_boundary_conditions</dd>
     </dl>
   </body>
 </html></richcontent><richcontent TYPE="NOTE"><html>
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>List which sediments are speficied from boundary condition</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_boundary_conditions</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_boundary_conditions</dd>
+        <dt><b>Description</b></dt><dd>List which sediments are speficied from boundary condition</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_boundary_conditions</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_boundary_conditions</dd>
     </dl>
   </body>
 </html></richcontent></node><node BACKGROUND_COLOR="#C9D787" COLOR="#000000" FOLDED="true" STYLE="bubble" TEXT="sediments_from_explicit_model"><font BOLD="True" NAME="courier" SIZE="10" /><richcontent TYPE="NOTE"><html>
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>List which sediments are speficied from explicit sediment model</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_explicit_model</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_explicit_model</dd>
+        <dt><b>Description</b></dt><dd>List which sediments are speficied from explicit sediment model</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_explicit_model</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_explicit_model</dd>
     </dl>
   </body>
 </html></richcontent><richcontent TYPE="NOTE"><html>
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>List which sediments are speficied from explicit sediment model</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_explicit_model</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_explicit_model</dd>
+        <dt><b>Description</b></dt><dd>List which sediments are speficied from explicit sediment model</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_explicit_model</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.boundary_forcing.sediments_from_explicit_model</dd>
     </dl>
   </body>
 </html></richcontent></node></node><node BACKGROUND_COLOR="#ACF0F2" COLOR="#000000" FOLDED="false" STYLE="bubble" TEXT="gas_exchange"><font BOLD="True" NAME="courier" SIZE="12" /><richcontent TYPE="NOTE"><html>
@@ -1010,14 +1017,14 @@
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>If NOT OMIP protocol, list carbon chemistry constants.</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP</dd>
+        <dt><b>Description</b></dt><dd>If NOT OMIP protocol, list carbon chemistry constants.</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP</dd>
     </dl>
   </body>
 </html></richcontent><richcontent TYPE="NOTE"><html>
   <head />
   <body>
     <dl>
-        <dt><b>Description</b></dt><dd>If NOT OMIP protocol, list carbon chemistry constants.</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP</dd><dt><b>Type</b></dt><dd>str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP</dd>
+        <dt><b>Description</b></dt><dd>If NOT OMIP protocol, list carbon chemistry constants.</dd><dt><b>Spec. ID</b></dt><dd>cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP</dd><dt><b>Type</b></dt><dd>cs-str</dd><dt><b>Cardinality</b></dt><dd>0.1</dd><dt><b>Specialization ID</b></dt><dd>cmip6.ocnbgchem.key_properties.carbon_chemistry.constants_if_not_OMIP</dd>
     </dl>
   </body>
 </html></richcontent></node></node></node><node BACKGROUND_COLOR="#FFFFFF" COLOR="#000000" FOLDED="false" STYLE="bubble" TEXT="tracers"><font BOLD="True" NAME="courier" SIZE="12" /><richcontent TYPE="NOTE"><html>
