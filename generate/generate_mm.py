@@ -145,7 +145,7 @@ class Generator(SpecializationParser):
         """On property parse event handler.
 
         """
-        if prop.is_cim_property:
+        if prop.was_injected:
             return
 
         self._emit_node(prop.owner, prop)

@@ -222,7 +222,6 @@ class PropertySetSpecialization(object):
 
         self.description = None
         self.id = None
-        self.was_injected = False
         self.name = None
         self.owner = None
         self.properties = []
@@ -288,6 +287,7 @@ class PropertySpecialization(object):
         self.topic = None
         self.typeof = None
         self.type_key = "property"
+        self.was_injected = False
 
 
     def __repr__(self):
@@ -295,14 +295,6 @@ class PropertySpecialization(object):
 
         """
         return self.id
-
-
-    @property
-    def is_cim_property(self):
-        """Gets flag indicating whether property is injected from CIM.
-
-        """
-        return self.owner.id.endswith('cim_properties')
 
 
     @property

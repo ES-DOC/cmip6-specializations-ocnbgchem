@@ -102,15 +102,13 @@ class Generator(SpecializationParser):
         """On property parse event handler.
 
         """
-        if prop.is_cim_property:
-            return
-
         obj = collections.OrderedDict()
         obj['id'] = prop.id
         obj['label'] = " > ".join([get_label(i) for i in prop.id.split('.')[3:]])
         obj['description'] = prop.description
         obj['cardinality'] = prop.cardinality
         obj['type'] = "enum" if prop.enum else prop.typeof
+        obj['is_cim_property'] = prop.was_injected
         if prop.enum:
             obj['enum'] = self._get_enum(prop.enum)
 

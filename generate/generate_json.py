@@ -74,6 +74,7 @@ class Generator(SpecializationParser):
         obj['id'] = prop.id
         obj['cardinality'] = prop.cardinality
         obj['type'] = "enum" if prop.enum else prop.typeof
+        obj['is_cim_property'] = prop.was_injected
 
         self._maps[prop] = obj
 
