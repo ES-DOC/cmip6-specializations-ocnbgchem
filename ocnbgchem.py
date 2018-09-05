@@ -48,7 +48,6 @@ CHANGE_HISTORY = [
         "Removed some l-str"),
     ("1.0.3", "2018-09-05", "Eric Guilyardi",
         "Spelling mistake corrected in Tracers"),
-    
     ]
 
 # --------------------------------------------------------------------
