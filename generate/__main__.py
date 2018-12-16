@@ -25,7 +25,7 @@ from utils_loader import get_short_tables_definitions
 
 
 # Name of associated project.
-_PROJECT = __file__.split('/')[-3].split('-')[0]
+_PROJECT = __file__.split('/')[-3].split('specializations')[0][0:-1]
 
 # Map of generator types to generator.
 _GENERATORS = {
