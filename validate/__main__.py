@@ -39,7 +39,7 @@ _ARGS.add_argument(
 _ARGS = _ARGS.parse_args()
 
 # Name of associated project.
-_PROJECT = __file__.split('/')[-3].split('-')[0]
+_PROJECT = __file__.split('/')[-3].split('specializations')[0][0:-1]
 
 # Report section break.
 _REPORT_BREAK = "------------------------------------------------------------------------"
