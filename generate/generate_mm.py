@@ -57,7 +57,9 @@ class _Configuration(object):
         """Instance constructor.
 
         """
-        fpath = os.path.abspath(__file__).replace(".py", ".conf")
+        print(__file__)
+        fpath = os.path.abspath(__file__).replace(".pyc", ".conf").replace(".py", ".conf")
+
         with open(fpath, 'r') as fstream:
             self._data = json.loads(fstream.read())
 
