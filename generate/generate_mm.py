@@ -11,6 +11,7 @@
 """
 import collections
 import json
+import os
 
 import xml.etree.ElementTree as ET
 
@@ -56,7 +57,7 @@ class _Configuration(object):
         """Instance constructor.
 
         """
-        fpath = "{}.conf".format(__file__.split(".")[0])
+        fpath = os.path.abspath(__file__).replace(".py", ".conf")
         with open(fpath, 'r') as fstream:
             self._data = json.loads(fstream.read())
 
